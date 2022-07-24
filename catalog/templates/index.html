@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<head>
+    <title>Financial Dataset for Researchers</title>
+    <link rel='icon' href='https://www.iconninja.com/files/303/190/562/business-ratings-icon.png' type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<link rel="stylesheet" href="../static/css/index.css">
+<body style="height:100%; overflow: hidden; background-color:#ffffff;">
+        
+    
+    
+    
+    
+
+    
+    
+    
+    <div class="container">
+        <div class="row">
+            <div style="width:auto">
+                <div class="row" style="margin-top:30vh; ">
+                    <h1 id="finbert">Fin Bert</h1>
+                </div>
+                <div id="introduction" class="row" style="margin-top:3vh; font-family: Arial, Helvetica, sans-serif;">
+                    <p>introduction for the system introduction for the system introduction for the system</p>
+                </div>    
+                <div class="row" style="margin-top:8vh;">
+                    
+                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report' %}">
+                        {% csrf_token %}
+                        <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
+                            <option value="">Report Year</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                        </select>
+
+                        
+                        <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
+                            <option value="">Company List</option>
+                            <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
+                            
+                        </select>
+                        
+                        
+                        
+                        
+                        <!--
+                            <select id="companylist" name="company" class="ui fluid search selection dropdown" style="padding: 5px 5px;">
+                            <option value="">Company List</option>
+                            <option :value="item" v-for="(item,index) in list">[[item]]</option>
+                    
+                        </select>
+                        
+                        -->
+                        
+                        
+                        
+                        <select id="itemlist" name="item" class="ui selection dropdown" style="padding: 5px 5px;">
+                            <option value="">Item</option>
+                            <option :value="item" v-for="(item,index) in list">[[item]]</option>
+                        </select>
+                        
+                        <input type="submit"  id="submit1" class="ui button"  style="margin-top:1vw;" value="Anlayse" disabled="disabled">
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+
+
+    </div>
+    
+    
+    <script>
+        /*
+        var vm = new Vue({
+            el: '#companylist',
+            delimiters: ['[[', ']]'],
+            data: {
+                list: [
+                    "abc","Apple","Netflix","cde","1417663"
+                ],
+            },
+        });
+        */
+        
+        var vm1 = new Vue({
+        el: '#companylist',
+        delimiters: ['[[', ']]'],
+        data: {
+            list: { 
+                "1417663" : {name:"company1"},
+                "1234123" : {name:"company2"}
+            }
+            ,
+        },
+        });
+        var vm = new Vue({
+                el: '#itemlist',
+                delimiters: ['[[',']]'],
+                data: {
+                    list:[
+                        "Item1","Item1A","Item1B","Item2",
+                        "Item3","Item4","Item5","Item6","Item7",
+                        "Item7A","Item8","Item9","Item9A","Item9B",
+                        "Item10","Item11","Item12","Item13","Item14",
+                        "Item15"
+                    ],
+                },
+            });
+    </script>
+    
+    
+</body>
+<!--disable sumbit if select is empty-->
+<script>
+    $(document).ready(function() {
+        $('#submit1').attr('disabled','disabled');
+        /*
+        $("#submit1").click(function(){
+            
+        })*/
+        var count = 0;
+        $('.ui.dropdown').change(function() {
+            let a = $("#yearlist").val();
+            let b = $("#companylist").val();
+            let c = $("#itemlist").val();
+            //count++;
+            //console.log(a,b=="",c)
+            if (a!="" && b!="" && c!="") {
+                //console.log("werqwerqwerqewr")
+                $("#submit1").removeAttr("disabled")
+            }
+            
+        });
+
+
+
+        $("#yearlist").change(function(){
+                saveSettings1($(this).val());
+            });
+            $("#companylist").change(function(){
+                saveSettings2($(this).val());
+                
+            });
+            $("#itemlist").change(function(){
+                saveSettings3($(this).val());
+            });
+            function saveSettings1(val) {
+                //console.log(val)
+                localStorage.setItem("yearnow",val);
+            }
+            function saveSettings2(val) {
+                //console.log(val)
+                localStorage.setItem("companynow",val);
+            }
+            function saveSettings3(val) {
+                //console.log(val)
+                localStorage.setItem("itemnow",val);
+            }
+    });
+</script>
+<script>
+    window.onload = function(){
+    $('.ui.dropdown').dropdown();
+    
+};
+</script>

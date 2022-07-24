@@ -1,0 +1,88 @@
+/** Layout */
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+
+
+
+.arrow-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+
+/***************
+ * Arrow 2
+ ***************/
+
+#arrow_2 .arrow {
+  $size: 15px;  
+  $width: 2px;
+  
+  
+  color: #28dd89;
+  cursor: pointer;
+  display: block;
+  align-items: flex-start;
+  text-transform: uppercase;
+  position: relative;
+  transition: transform 0.3s;
+    
+  span {
+    font-family: Righteous;
+    display: block;
+    //width: 3em;
+    opacity: 0;
+    transition: opacity 0.3s 0s;
+    padding: 0 0.5em;
+    font-size: 25px;
+  }
+  
+  &:hover span {
+    opacity: 1;
+    transition: opacity 0.3s 0.1s;
+  }
+  
+  &:before {
+    content: '';
+    display: block;
+    border: solid black;
+    border-width: $width $width 0 0;
+    position: absolute;
+    top: 4px;
+    width: $size;
+    height: $size;
+  }
+  
+  &.arrow--left:before {
+    
+    transform: rotate(-135deg);
+    right: 0;
+    transition: right 0.3s 0.2s;
+  }
+  &.arrow--left:hover:before {
+    right: 100%;
+    transition: right 0.3s;
+  }
+    
+  &.arrow--right {
+    
+    text-align: right;
+  }
+  &.arrow--right:before {
+    left: 0;
+    transform: rotate(45deg);
+    transition: left 0.3s 0.2s;
+  }
+  &.arrow--right:hover:before {
+    left: 100%;
+    transition: left 0.3s;
+  }
+  
+  &:hover {
+    transform: none;
+  }
+}

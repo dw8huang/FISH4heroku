@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+:root {
+  --primary-color: #28dd89;
+  --secondary-color: #d1ffea;
+}
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+          box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+  padding: 0.75rem;
+  border-radius: 99px;
+}
+
+.tabs * {
+  z-index: 2;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 25px;
+  width: 60px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 99px;
+  cursor: pointer;
+  -webkit-transition: color 0.15s ease-in;
+  transition: color 0.15s ease-in;
+  margin-bottom: 0px;
+}
+
+.notification {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  -webkit-transition: 0.15s ease-in;
+  transition: 0.15s ease-in;
+}
+
+input[type="radio"]:checked + label {
+  color: var(--primary-color);
+}
+
+input[type="radio"]:checked + label > .notification {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+input[id="radio-1"]:checked ~ .glider {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+input[id="radio-2"]:checked ~ .glider {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+#radio-3:checked ~ .glider {
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%);
+}
+
+input[id="radio-4"]:checked ~ .glider {
+  -webkit-transform: translateX(300%);
+          transform: translateX(300%);
+}
+
+#radio-5:checked ~ .glider {
+  -webkit-transform: translateX(400%);
+          transform: translateX(400%);
+}
+
+#radio-6:checked ~ .glider {
+  -webkit-transform: translateX(500%);
+          transform: translateX(500%);
+}
+
+#radio-7:checked ~ .glider {
+  -webkit-transform: translateX(600%);
+          transform: translateX(600%);
+}
+
+#radio-8:checked ~ .glider {
+  -webkit-transform: translateX(700%);
+          transform: translateX(700%);
+}
+
+#radio-9:checked ~ .glider {
+  -webkit-transform: translateX(800%);
+          transform: translateX(800%);
+}
+
+#radio-10:checked ~ .glider {
+  -webkit-transform: translateX(900%);
+          transform: translateX(900%);
+}
+
+#radio-11:checked ~ .glider {
+  -webkit-transform: translateX(1000%);
+          transform: translateX(1000%);
+}
+
+#radio-12:checked ~ .glider {
+  -webkit-transform: translateX(1100%);
+          transform: translateX(1100%);
+}
+
+#radio-13:checked ~ .glider {
+  -webkit-transform: translateX(1200%);
+          transform: translateX(1200%);
+}
+
+#radio-14:checked ~ .glider {
+  -webkit-transform: translateX(1300%);
+          transform: translateX(1300%);
+}
+
+#radio-15:checked ~ .glider {
+  -webkit-transform: translateX(1400%);
+          transform: translateX(1400%);
+}
+
+#radio-16:checked ~ .glider {
+  -webkit-transform: translateX(1500%);
+          transform: translateX(1500%);
+}
+
+#radio-17:checked ~ .glider {
+  -webkit-transform: translateX(1600%);
+          transform: translateX(1600%);
+}
+
+#radio-18:checked ~ .glider {
+  -webkit-transform: translateX(1700%);
+          transform: translateX(1700%);
+}
+
+.glider {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 25px;
+  width: 60px;
+  background-color: var(--secondary-color);
+  z-index: 1;
+  border-radius: 99px;
+  -webkit-transition: 0.25s ease-out;
+  transition: 0.25s ease-out;
+}
+
+@media (max-width: 1000px) {
+  .tabs {
+    -webkit-transform: scale(0.6);
+            transform: scale(0.6);
+  }
+}
+/*# sourceMappingURL=itemlist.css.map */

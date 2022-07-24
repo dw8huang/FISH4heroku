@@ -1,0 +1,1606 @@
+
+<!DOCTYPE html>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.css">
+    
+
+{% load static %}
+<head>
+    <title>Financial Dataset for Researchers</title>
+    <link rel='icon' href='https://www.iconninja.com/files/303/190/562/business-ratings-icon.png' type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body style="background-color:#ffffff; margin:0;padding:0;">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap" rel="stylesheet">
+        
+    <link rel="stylesheet" type="text/css" href="{% static 'css/report.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/scroll.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/submit.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/submit2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/itemlist.css' %}">
+    <script src="{% static 'js_report1/create_report_report1.js' %}"></script>
+    <script src="{% static 'js_report1/sentence_effect.js' %}"></script>
+    <script src="{% static 'js/sentence_color.js' %}"></script>
+    <script src="{% static 'js/topselect_vue.js' %}"></script>
+    <script src="{% static 'js/yearchange.js' %}"></script>
+    
+    
+    
+    
+    
+   
+    
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <a href="/catalog" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw; font-size:25px; font-weight: bold;" class="font-weight-bold">
+                Fin Bert    
+            </a>
+        </div>
+        <!--selectrow-->
+        <div class="row">
+            <div>
+                <div id=topselect class="row" style="margin-top:3vh;">
+                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report1' %}">
+                        {% csrf_token %}
+        
+                            <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
+                                <option value="">Report Year</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                            </select>
+                        
+                            <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
+                                <option value="">Company List</option>
+                                <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
+                                
+                            </select>    
+                                                        
+                            
+                            <select id="itemlist" name="item" class="ui selection dropdown" style="padding: 5px 5px;">
+                                <option value="">Item</option>
+                                <option :value="item" v-for="(item,index) in list">[[item]]</option>
+                            </select>
+                            
+                            <input type="submit"  id="submit1" class="ui button"  value="Anlayse"  ></button>
+                        
+                        
+                    </form>
+                    
+                    
+
+                </div>  
+            </div>
+            
+        </div>
+        <!--end selectrow-->
+        <div class="row" id="companyname_typebutton">
+            <div id="companyname" style="font-size:50px"></div>
+            <div id="typebutton" >
+                
+                
+                
+                
+                <div class="state active" id="button2" style="display:inline;cursor: pointer;">
+                    <svg height="15" width="15" style="align-items: center";>
+                        <circle cx="7.5" cy="7.5" r="5" fill="rgb(255, 190, 64)" />
+                    </svg> 
+                    Revised sentences
+                </div>
+                <div class="state active" id="button3" style="display:inline;cursor: pointer;">
+                    <svg height="15" width="15">
+                        <circle cx="7.5" cy="7.5" r="5" fill="rgb(243, 231, 255)" />
+                    </svg> 
+                    Highly similar sentences
+                </div>
+                <div class="state active" id="button1" style="display:inline;cursor: pointer;">
+                    <svg height="15" width="15">
+                        <circle cx="7.5" cy="7.5" r="5" fill="rgb(223, 250, 206)" />
+                    </svg> 
+                    New sentences
+                </div>
+                
+                
+                <!--
+                    <button class="state active" style="background-Color:rgb(223, 250, 206)" id="button1">
+                    show type1
+                    </button>
+                
+                -->
+                
+            </div>
+            
+            
+        </div>
+        
+
+        <div class="row" id="report_outline">
+            <div class="row" id="reportrow">
+                <div class="col-md" id="parent_leftreport">
+                    <div id="reportyear_curr"></div>
+                    <div class="row" id="itemlist_leftreport">
+                        <div id=itemlist2_curr >
+            
+                            <p class="report_itemlist_curr" :id="[item + '_curr']" onclick="reportitemfun_curr(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
+                                                
+                        
+                        </div>
+                        <div class="col-md" id="leftreport">
+                            <div id="report1"></div>
+        
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md" id="parent_rightreport">
+                    <div id="reportyear_last"></div>
+                    <div class="row" id="itemlist_rightreport">
+                        <div id=itemlist2_last >
+            
+                            <p class="report_itemlist_last" :id="[item + '_last']" onclick="reportitemfun_last(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
+                                                
+                        
+                        </div>
+                        <div class="col-md" id="rightreport">
+                            <div id="report2"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+
+        </div>
+        
+        
+        <!--last & next year buttom-->
+        <div class="row" id="year_button">
+            <form id="leftform" method="POST" action="{% url 'report1' %}" enctype="multipart/form-data" role="form">
+                {%csrf_token %}
+                <input type="hidden" id="left_year" name="year" value=''/>
+                <input type="hidden" id="left_company" name="company" value=''/>
+                <input type="hidden" id="left_item" name="item" value=''/>
+                <div style="cursor:pointer" onclick="anchor_submit_left()">
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                        <path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z"/>
+                    </svg>
+                    <!--
+                        id="arrow_2" class="arrow-wrapper"
+                        <div class="arrow arrow--left">
+                      <span id="lastyear"></span>
+                    </div>
+                    -->
+                    
+                </div>
+                
+                
+            </form>
+            <form id="rightform" method="POST" action="{% url 'report1' %}" enctype="multipart/form-data" role="form">
+                <!--onsubmit="rightsubmit()"-->
+                {%csrf_token %}
+                <input type="hidden" id="right_year" name="year" value=''/>
+                <input type="hidden" id="right_company" name="company" value=''/>
+                <input type="hidden" id="right_item" name="item" value=''/>
+                <div style="cursor:pointer" onclick="anchor_submit_right()">
+                    <svg width="24" height="24" fill-rule="evenodd" clip-rule="evenodd" stroke-width="3" >
+                        <path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"/>
+                    </svg>
+                    <!--
+                        <div class="arrow arrow--right">
+                            <span id="nextyear"></span>
+                        </div>
+                    -->
+                    
+                </div>
+                
+            </form> 
+            
+        </div>
+        
+        <!--last & next year buttom end-->
+        
+
+        
+
+
+
+    </div>
+    
+    <script>
+
+
+    </script>    
+
+
+
+    
+    <!--itemlist, vue, so on-->
+    <script>
+        $(document).ready(function(){
+            $('#topword').click(function(){
+                localStorage.clear();
+                
+            })
+
+            /*
+            var s = document.querySelectorAll(".left_itembutton")
+            var t = document.querySelectorAll(".right_itembutton")
+            for(var i=0;i<20;i++){
+                s[i].id = "left_itembutton_" + i
+                s[i].setAttribute("onclick","click_item(this)")
+                //t[i].id = "right_itembutton_" + i
+                //t[i].setAttribute("onclick","click_item(this)")
+            }*/
+        })
+
+        
+        companydic = {"1417663" : {name:"company1"},
+                    "1234123" : {name:"company2"},
+                    "26076" : {name:"company3"},
+                    "1001250": {name:"company4"},
+                    "1442145": {name:"company5"}}
+
+        var vm1 = new Vue({
+            el: '#companylist',
+            delimiters: ['[[', ']]'],
+            data(){
+                return {
+                    list: companydic
+                }
+                
+            },
+            });
+    //let company = "1417663"
+    //console.log(vm1.$data.list[company].name)
+        var vm2 = new Vue({
+            el: '#itemlist',
+            delimiters: ['[[',']]'],
+            data: {
+            list:[
+                "Item1","Item1A","Item1B","Item2",
+                "Item3","Item4","Item5","Item6","Item7",
+                "Item7A","Item8","Item9","Item9A","Item9B",
+                "Item10","Item11","Item12","Item13","Item14",
+                "Item15"
+            ],
+            },
+        });
+        new Vue({
+            el: '#itemlist1',
+            delimiters: ['[[',']]'],
+            data: {
+            list:[
+                "Item1","Item1A","Item1B","Item2",
+                "Item3","Item4","Item5","Item6","Item7",
+                "Item7A","Item8","Item9","Item9A","Item9B",
+                "Item10","Item11","Item12","Item13","Item14",
+                "Item15"
+            ],
+            },
+        });
+        var itemlist2_curr = new Vue({
+            el: '#itemlist2_curr',
+            delimiters: ['[[',']]'],
+            data: {
+                itemlist:[
+                "Item1","Item1A","Item1B","Item2",
+                "Item3","Item4","Item5","Item6","Item7",
+                "Item7A","Item8","Item9","Item9A","Item9B",
+                "Item10","Item11","Item12","Item13","Item14",
+                "Item15"
+                ],
+            },
+            computed:{
+                splitresult: function () {
+                    return this.itemlist.map(function (i) {
+                        
+                        let a = i.split("Item")[1]
+                        return a
+                    })
+                }
+            }
+            
+        });
+        var itemlist2_last = new Vue({
+            el: '#itemlist2_last',
+            delimiters: ['[[',']]'],
+            data: {
+                itemlist:[
+                "Item1","Item1A","Item1B","Item2",
+                "Item3","Item4","Item5","Item6","Item7",
+                "Item7A","Item8","Item9","Item9A","Item9B",
+                "Item10","Item11","Item12","Item13","Item14",
+                "Item15"
+                ],
+            },
+            computed:{
+                splitresult: function () {
+                    return this.itemlist.map(function (i) {
+                        
+                        let a = i.split("Item")[1]
+                        return a
+                    })
+                }
+            }
+            
+        });
+        
+
+        function reportitemfun_curr(ele1){
+            var itembutton1 = document.getElementById(ele1.id)
+            var lastclick_reportitem1 = localStorage.getItem("lastclick_reportitem_curr")
+            //console.log("curr:",lastclick_reportitem1)
+            if(lastclick_reportitem1==0){
+                itembutton1.style["-webkit-text-stroke"] = "0.75px yellow"
+                localStorage.setItem("lastclick_reportitem_curr",ele1.id)
+            }
+            else{
+                var lastitembutton1 = document.getElementById(lastclick_reportitem1)
+                lastitembutton1.style["-webkit-text-stroke"] = ""
+                itembutton1.style["-webkit-text-stroke"] = "0.75px yellow"
+                localStorage.setItem("lastclick_reportitem_curr",ele1.id)
+            }
+
+            
+            var idd1 = company+"_"+curryear.split("20")[1]+"_ITEM"+ele1.id.split("_")[0]            +"_P0_S0"
+            var firstlineb = document.getElementById(idd1)
+            scrollToElm(leftreport,firstlineb,600)
+        }
+        function reportitemfun_last(ele){
+            var itembutton = document.getElementById(ele.id)
+            var lastclick_reportitem = localStorage.getItem("lastclick_reportitem_last")
+            //console.log("last:",lastclick_reportitem)
+            if(lastclick_reportitem==0){
+                itembutton.style["-webkit-text-stroke"] = "0.75px yellow"
+                localStorage.setItem("lastclick_reportitem_last",ele.id)
+            }
+            else{
+                var lastitembutton = document.getElementById(lastclick_reportitem)
+                lastitembutton.style["-webkit-text-stroke"] = ""
+                itembutton.style["-webkit-text-stroke"] = "0.75px yellow"
+                localStorage.setItem("lastclick_reportitem_last",ele.id)
+            }
+
+            
+            var idd = company+"_"+lastyear.split("20")[1]+"_ITEM"+ele.id.split("_")[0]+"_P0_S0"
+            var firstlinea = document.getElementById(idd)
+            scrollToElm(rightreport,firstlinea,600)
+        }
+
+
+
+        $(".report_itemlist_last").css("cursor","pointer")
+        $(".report_itemlist_curr").css("cursor","pointer")
+
+
+    </script>
+
+    
+    
+    <!--get value of previous request-->
+    <script>
+        $(document).ready(function(){
+            //var input = document.getElementById('yearlist');
+
+
+            //previous page
+            //console.log(document.referrer)
+
+            $("#yearlist").change(function(){
+                saveSettings1($(this).val());
+            });
+            $("#companylist").change(function(){
+                saveSettings2($(this).val());
+                
+            });
+            $("#itemlist").change(function(){
+                saveSettings3($(this).val());
+            });
+            function saveSettings1(val) {
+                //console.log(val)
+                localStorage.setItem("yearnow",val);
+            }
+            function saveSettings2(val) {
+                //console.log(val)
+                localStorage.setItem("companynow",val);
+            }
+            function saveSettings3(val) {
+                //console.log(val)
+                localStorage.setItem("itemnow",val);
+            }
+            //console.log(parseInt(localStorage.getItem("yearnow"))+1)
+            //console.log(localStorage.getItem("companynow")
+            let rightyear = localStorage.getItem("yearnow")
+            let company = localStorage.getItem("companynow")
+            let item = localStorage.getItem("itemnow")
+            let leftyear = (parseInt(rightyear) - 1).toString()
+            //console.log(document.getElementById("leftinfo_year"))
+            /*
+            document.getElementById("leftinfo_year").innerHTML = "from " + leftyear
+            document.getElementById("leftinfo_company").innerHTML = vm1.$data.list[company].name //+ " " + "(" + company + ")"
+            document.getElementById("leftinfo_item").innerHTML = item
+            document.getElementById("rightinfo_year").innerHTML = "from " + rightyear
+            document.getElementById("rightinfo_company").innerHTML = vm1.$data.list[company].name //+ " " + "(" + company + ")"
+            //document.getElementById("rightinfo_item").innerHTML = item
+            */
+            let lastyear = parseInt(leftyear)-1
+            let nextyear = parseInt(rightyear)+1
+            /*
+            if(lastyear==2010){
+                document.getElementById("lastyear").innerHTML = "reach boundary"
+                document.getElementById("nextyear").innerHTML = rightyear + " vs " + nextyear.toString()
+            }
+            else if(nextyear==2019){
+                document.getElementById("lastyear").innerHTML = lastyear.toString() + " vs " + leftyear
+                document.getElementById("nextyear").innerHTML = "reach boundary"
+            }
+            else{
+                document.getElementById("lastyear").innerHTML = lastyear.toString() + " vs " + leftyear
+                document.getElementById("nextyear").innerHTML = rightyear + " vs " + nextyear.toString()
+            }*/
+            
+            document.getElementById("reportyear_curr").innerHTML = "from " + rightyear
+            document.getElementById("reportyear_last").innerHTML = "from " + leftyear
+            document.getElementById("companyname").innerHTML = vm1.$data.list[company].name
+        });
+    </script>
+    
+
+  
+
+</body>
+<!--testarti-->
+<script>
+    var givevalue = function (dict,myKey) {
+        return dict[myKey];
+    };
+    var senb_item = {}; //{"item1":[]}
+    var sena_item = {};
+    var sendic_a2b = {};
+    var sendic_b2a = {};
+    var score = {} //score of the words
+
+    //lastclick => sentence
+    //lastactive => button active
+    //lastclick_reportitem => reportitem
+    localStorage.setItem("lastclick",0)
+    localStorage.setItem("lastactive",0)
+    
+    var curryear = localStorage.getItem("yearnow")
+    var company = localStorage.getItem("companynow")
+    var item = localStorage.getItem("itemnow").toString()
+    var lastyear = (parseInt(curryear) - 1).toString()
+    localStorage.setItem("lastclick_reportitem_curr",item.split("Item")[1]+"_curr")
+    localStorage.setItem("lastclick_reportitem_last",item.split("Item")[1]+"_last")
+    //let a = "{{ company|safe }}"
+    //console.log("get value from view.py",a)
+    //localStorage.setItem("companynow",a)
+    //let c = localStorage.getItem(companynow)
+    //console.log("localstorage:",c)
+    testarti = "{{ testarti|safe }}";
+    sen2id = "{{ sen2id|safe }}";
+    ar = "{{ ar|safe }}";
+    //console.log(id2sen)
+    //console.log(testarti)
+    
+    testarti = testarti.replace(/'/g,"\"");
+    sen2id = sen2id.replace(/'/g,"\"");
+    ar = ar.replace(/'/g,"\"");
+    console.log(givevalue(ar,curryear))
+    const test1 = JSON.parse(testarti);
+    const textdic = JSON.parse(sen2id);
+    const arr = JSON.parse(ar);
+    //console.log(arr)
+    //console.log(textdic)
+    
+    
+    //console.log(givevalue(givevalue(test1,curryear),item))
+    result =  "{{ result|safe }}";
+    result = result.replace(/'/g,"\"");
+    const result1 = JSON.parse(result);
+    //console.log(result1)
+    ////////////////////////////////////
+    //only show given item in two years/
+    //maybe I should give "type" to any every sentence
+    ////////////////////////////////////
+    
+    
+    $(document).ready(function() {
+
+        let data1 = givevalue(test1,lastyear)
+        let data2 = givevalue(test1,curryear)
+        console.log(data1)
+        let sen2id1 = givevalue(textdic,lastyear)
+        let sen2id2 = givevalue(textdic,curryear)
+        console.log(sen2id1["1001250_11_ITEM1_P100_S4"],result1.type1[1].senA)
+        console.log(sen2id1)
+        let arr1 = givevalue(arr,lastyear)
+        let arr2 = givevalue(arr,curryear)
+        //console.log(Object.keys(sen2id1))
+        //create_reportrow()
+        
+        let id1 = "report1"
+        let id2 = "report2" 
+        var indexA = []
+        var indexB = []
+        //lastyear
+        let paragraph1 = document.getElementById(id2);
+        //curryear
+        let paragraph2 = document.getElementById(id1);
+        //console.log(arr1)
+        arr1 = arr1.replaceAll('\n', '<br>')
+        arr2 = arr2.replaceAll('\n', '<br>')
+        paragraph1.innerHTML = arr1
+        paragraph2.innerHTML = arr2
+        
+
+        
+        function createspan_4firstlineitem(id,text,para2){
+            if (para2==1){
+                //para2 for senb
+                var para2 = paragraph2.innerHTML;
+                var index = para2.indexOf(text);
+                var senb = document.createElement("span");
+                senb.id = id
+                senb.innerHTML = para2.substring(index,index+text.length)
+                para2 = para2.substring(0,index) + senb.outerHTML + para2.substring(index + text.length);
+                paragraph2.innerHTML = para2
+                return index
+            }
+            else{
+                //para1 for sena
+                var para2 = paragraph1.innerHTML;
+                var index = para2.indexOf(text);
+                var senb = document.createElement("span");
+                senb.id = id
+                senb.innerHTML = para2.substring(index,index+text.length)
+                para2 = para2.substring(0,index) + senb.outerHTML + para2.substring(index + text.length);
+                paragraph1.innerHTML = para2
+                return index
+            }
+            
+        }
+       
+        //create span and give classname
+        function createspan(id,text,para2){
+            if (para2==1){
+                var isexist = document.getElementById(id)
+                if(isexist == null){
+                    var para2 = paragraph2.innerHTML;
+                    var index = para2.indexOf(text);
+                    var senb = document.createElement("span");
+                    senb.id = id
+                    senb.className = "senB"
+                    senb.setAttribute("onclick","click_b(this)")
+                    senb.style.borderRadius = "25px"
+                    senb.style.cursor = "pointer"
+                    senb.style.padding = "0.02em 0"
+                    senb.innerHTML = para2.substring(index,index+text.length)
+                    
+                    if (index >= 0) { 
+                        para2 = para2.substring(0,index) + senb.outerHTML + para2.substring(index + text.length);
+                        paragraph2.innerHTML = para2;
+                    }
+                }
+                else{
+                    var senb = document.getElementById(id)
+                    senb.className = "senB"
+                    senb.setAttribute("onclick","click_b(this)")
+                    senb.style.borderRadius = "25px"
+                    senb.style.cursor = "pointer"
+                    senb.style.padding = "0.02em 0"
+                }
+                
+            }
+            else{
+                var isexist = document.getElementById(id)
+                if(isexist==null){
+                    var para1 = paragraph1.innerHTML;
+                    var index = para1.indexOf(text);
+                    var sena = document.createElement("span");
+                    sena.id = id
+                    sena.className = "senA"
+                    //sena.setAttribute("onclick","click_a(this)")
+                    sena.style.borderRadius = "25px"
+                    //sena.style.cursor = "pointer"
+                    sena.style.padding = "0.02em 0"
+                    sena.style.opacity = 0.5
+                    sena.innerHTML = para1.substring(index,index+text.length)
+                    
+                    if (index >= 0) { 
+                        para1 = para1.substring(0,index) + sena.outerHTML + para1.substring(index + text.length);
+                        paragraph1.innerHTML = para1;
+                    }
+                }
+                else{
+                    var sena = document.getElementById(id)
+                    sena.className = "senA"
+                    //sena.setAttribute("onclick","click_a(this)")
+                    sena.style.borderRadius = "25px"
+                    //sena.style.cursor = "pointer"
+                    sena.style.padding = "0.02em 0"
+                    sena.style.opacity = 0.5
+                }
+                
+            }
+        }
+
+        //experiment create many span
+        /*
+        var start = Date.now()
+        for(var i=0;i<1000;i++){
+            createspan(Object.keys(sen2id2)[i],sen2id2[Object.keys(sen2id2)[i]],1)
+            createspan(Object.keys(sen2id1)[i],sen2id1[Object.keys(sen2id1)[i]],0)
+        }
+        var end = Date.now() - start
+        console.log(end)
+        console.log(apple)
+        */
+        //give first line id
+        itemdis_curr = []
+        itemdis_last = []
+        itembetwdis_curr = []
+        itembetwdis_last = []
+        for(var i=0; i<20; i++){
+            id1 = company+"_"+lastyear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P0_S0"
+            id2 = company+"_"+curryear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P0_S0"
+            //console.log(sen2id1[id1],sen2id2[id2])
+            let check1 = document.getElementById(id1)
+            let check2 = document.getElementById(id2)
+            sen2id1[id1]
+            var para1 = paragraph1.innerHTML;
+            var para2 = paragraph2.innerHTML;
+            
+            itemdis_last.push( check1==null ? createspan_4firstlineitem(id1,sen2id1[id1],0) : para1.indexOf(sen2id1[id1]))
+            itemdis_curr.push( check2==null ? createspan_4firstlineitem(id2,sen2id2[id2],1) : para2.indexOf(sen2id2[id2]))
+            
+
+            
+        }
+        
+        
+        
+        /////itemlist/////
+        //distance between items
+        for(var i=0;i<19;i++){
+            /*itembetwdis_curr.push(itemdis_curr[i+1]-itemdis_curr[i])
+            itembetwdis_last.push(itemdis_last[i+1]-itemdis_last[i])*/
+            itembetwdis_curr.push(itemdis_curr[i+1]-itemdis_curr[i])
+            itembetwdis_last.push(itemdis_last[i+1]-itemdis_last[i])
+        }
+        let sum_curr=0
+        let sum_last=0
+        itembetwdis_curr.forEach(function(element) {
+            sum_curr+=element;
+        });
+        itembetwdis_last.forEach(function(element) {
+            sum_last+=element;
+        });
+
+        let report1 = document.getElementById("report1").scrollHeight
+        let report2 = document.getElementById("report2").scrollHeight
+        unitdis_curr = []
+        unitdis_last = []
+        itembetwdis_curr.forEach(function(element){
+            unitdis_curr.push(element / report1)
+        })
+        itembetwdis_last.forEach(function(element){
+            unitdis_last.push(element / report2)
+        })
+        
+        
+
+        //give marginbottom 
+        let itemlist_curr = document.getElementById("itemlist2_curr").getElementsByTagName("p")
+        let itemlist_last = document.getElementById("itemlist2_last").getElementsByTagName("p")
+        
+        function itemlistcal(unitdis){
+            var numless2 = 0
+            var numbig2sum = 0
+            for(var i=0;i<19;i++){
+                if(unitdis[i]*100 < 2){
+                    numless2++
+                }
+                else{
+                    numbig2sum+=unitdis[i]
+                }
+            }
+            return [numless2, numbig2sum]
+        }
+        function itemlist_givestyle(restheight,numbig2sum,unitdis,itemlist){
+            for(var i=0;i<19;i++){
+                if(unitdis[i]*100<2){
+                    itemlist[i].style.height = "2%"
+                }
+                else{
+                    var a = unitdis[i]/numbig2sum*restheight*0.95
+                    if(a<2){
+                        console.log(i)
+                        itemlist[i].style.height = "2%"
+                    }
+                    else{
+                        itemlist[i].style.height = a + "%"
+                    }
+                }
+            }
+        }
+        
+        itemlist_givestyle(100-itemlistcal(unitdis_curr)[0]*2,itemlistcal(unitdis_curr)[1],unitdis_curr,itemlist_curr)
+        itemlist_givestyle(100-itemlistcal(unitdis_last)[0]*2,itemlistcal(unitdis_last)[1],unitdis_last,itemlist_last)
+        
+        /////itemlist end/////
+
+
+
+        /* give id of every type + build sendic*/
+        sendic_b2a = {}
+        sendic_b2a['type1'] = {}
+        sendic_b2a['type2'] = {}
+        sendic_b2a['type3'] = {}
+        sendic_a2b = {}
+        sendic_a2b['type1'] = {}
+        sendic_a2b['type2'] = {}
+        sendic_a2b['type3'] = {}
+
+        ////type2////
+        
+       
+        for(var i=0; i<result1.type2.length;i++){
+            if (typeof(result1.type2[i].senA)=='object'){
+                for(var j=0; j<result1.type2[i].senA.length;j++){
+                    senaid = result1.type2[i].senA[j]
+                    senatext = sen2id1[senaid]
+                    //console.log(senaid,senatext)
+                    createspan(senaid,senatext,0)
+                    let a = document.getElementById(result1.type2[i].senA[j])
+                    a.className = a.className + " type2 "// + i + " " + j
+    
+                    sendic_a2b['type2'][result1.type2[i].senA[j]] = result1.type2[i].senB
+                }
+            }
+            else{
+                //console.log(result1.type2[i].senA)
+                senaid = result1.type2[i].senA
+                senatext = sen2id1[senaid]
+                createspan(senaid,senatext,0)
+                let a = document.getElementById(result1.type2[i].senA)
+                a.className = a.className + " type2 "// + i + " " + "0"
+            
+
+                sendic_a2b['type2'][result1.type2[i].senA] = result1.type2[i].senB
+            }
+            senbid = result1.type2[i].senB
+            senbtext = sen2id2[senbid]
+            createspan(senbid,senbtext,1)
+            let b = document.getElementById(result1.type2[i].senB)
+            b.className = b.className + " type2 "// + i
+
+            b.setAttribute("onmouseover","onmouse(this)")
+            b.setAttribute("onmouseout","outmouse(this)")
+
+
+            //token
+            //prob = result1.type2[i].prob
+            score[senbid] = result1.type2[i].prob
+            //type2 with type3 => onmouseover take off
+            let senbcontent = b.innerHTML
+            let brokensenb = senbcontent.split(" ");
+            
+            b.innerHTML = ''
+            brokensenb.map((part,i) => {
+                var word = document.createElement("span");
+                var space = document.createElement("span");
+                word.className = "senbwords" 
+                word.innerHTML = part
+                space.className = "senbwords" 
+                space.innerHTML = ' '
+                b.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
+            })
+            let senbword1 = document.getElementById(senbid).getElementsByClassName("senbwords")
+            
+            for(var m=0;m<(brokensenb.length*2-1);m++){
+                senbword1[m].id = senbid + "_" + m
+                //console.log(senbword1[m])
+            }
+
+
+
+            //sendic_b2a
+            sendic_b2a['type2'][result1.type2[i].senB] = result1.type2[i].senA
+            
+        
+        }
+        ////type3////
+
+        /*
+        for(var i=0; i<result1.type3.length;i++){
+            if (typeof(result1.type3[i].senA)=='object'){
+                for(var j=0; j<result1.type3[i].senA.length;j++){
+                    senaid = result1.type3[i].senA[j]
+                    let check1 = document.getElementById(senaid)
+                    if (check1==null){
+                        senatext = sen2id1[senaid]
+                        createspan(senaid,senatext,0)
+                    }
+                    let a = document.getElementById(senaid)
+                    a.className = a.className + " type3 "// + i + " " + j
+                    
+
+                    sendic_a2b['type3'][result1.type3[i].senA[j]] = result1.type3[i].senB
+                }
+            }
+            else{
+                senaid = result1.type3[i].senA
+                let check1 = document.getElementById(senaid)
+                if (check1==null){
+                    senatext = sen2id1[senaid]
+                    //console.log(senaid,senatext)
+                    createspan(senaid,senatext,0)  
+                }
+                let a = document.getElementById(senaid)
+                a.className = a.className + " type3 "// + i + " " + j
+
+                sendic_a2b['type3'][result1.type3[i].senA] = result1.type3[i].senB
+            }
+            senbid = result1.type3[i].senB
+            let check2 = document.getElementById(senbid)
+            if (check2==null){
+                senbtext = sen2id2[senbid]
+                createspan(senbid,senbtext,1)  
+            }
+            let b = document.getElementById(senbid)
+            b.className = b.className + " type3 "// + i
+            
+            sendic_b2a['type3'][result1.type3[i].senB] = result1.type3[i].senA
+        }*/
+        ////type1////
+        for(var i=0; i<result1.type1.length;i++){
+            /*
+            if (typeof(result1.type1[i].senA)=='object'){
+                for(var j=0; j<result1.type1[i].senA.length;j++){
+                    senaid = result1.type1[i].senA[j]
+                    let check1 = document.getElementById(senaid)
+                    if (check1==null){
+                        senatext = sen2id1[senaid]
+                        createspan(senaid,senatext,0)
+                    }
+                    let a = document.getElementById(senaid)
+                    a.className = a.className + " type1 "// + i + " " + j
+                    
+
+                    sendic_a2b['type1'][result1.type1[i].senA[j]] = result1.type1[i].senB
+                }
+            }
+            else{
+                senaid = result1.type1[i].senA
+                let check1 = document.getElementById(senaid)
+                if (check1==null){
+                    senatext = sen2id1[senaid]
+                    //console.log(senaid,senatext)
+                    createspan(senaid,senatext,0)  
+                }
+                let a = document.getElementById(senaid)
+                a.className = a.className + " type1 "// + i + " " + j
+
+                sendic_a2b['type1'][result1.type1[i].senA] = result1.type1[i].senB
+            }*/
+            senbid = result1.type1[i].senB
+            let check2 = document.getElementById(senbid)
+            if (check2==null){
+                senbtext = sen2id2[senbid]
+                createspan(senbid,senbtext,1)  
+            }
+            let b1 = document.getElementById(senbid)
+            b1.className = b1.className + " type1 "// + i
+            
+            sendic_b2a['type1'][result1.type1[i].senB] = result1.type1[i].senA
+
+            ////
+
+            
+        }   
+        
+        
+        
+        //give first line of item id
+
+        
+        
+        
+        
+        
+         
+
+        
+        //////////////////////////////////
+
+        
+        $(".type3").css('backgroundColor', "#f3e7ff")
+        $(".type3").css('opacity', 0.25)
+        $(".type2").css('backgroundColor', "#ffbe40")
+        $(".type1").css('backgroundColor', "#dfface")
+
+
+        /////////remove onclick effect ??? senB or senA/////
+        let type1color = "rgb(223, 250, 206)"
+        let type2color = "rgb(255, 190, 64)"
+        let type3color = "rgb(243, 231, 255)"
+        let nocolor = "rgba(0, 0, 0, 0)"
+        /*
+        $('.senB.type2').hover(
+            function(){
+                $(".type2").css("transition-duration","0.3s");
+                $(".type2").css("box-shadow","1px 5px 15px 0px rgba(0,0,0,0.25)");
+            },
+            function(){
+                $(".type2").css("box-shadow","");
+            
+            })
+        $('.senB.type2').hover(
+        */
+        $('#button1').on('click', function(){
+            //console.log($(".type1").css('backgroundColor'))
+            
+
+            let state1 = $('#button1').hasClass("active")
+            let state2 = $('#button2').hasClass("active")
+            let state3 = $('#button3').hasClass("active")
+            if(state1==true & state2==true & state==true){
+                //active
+                
+                $('#button1').css("opacity", 1)
+                $('#button1').addClass("active")
+                $(".type1").css('backgroundColor', type1color)
+                $('.senA.type1').css("opacity",0.5)
+                
+                //$(".senA.type1").attr('onclick','click_a(this)')
+                $(".senB.type1").attr('onclick','click_b(this)')
+                
+                $(".type1").css('cursor',"pointer")
+            }
+            else{
+                //active
+                //$('#button1').css('backgroundColor', nocolor)
+                $('#button1').css("opacity", 0.3)
+                $('#button1').removeClass("active")
+                $(".type1").css('backgroundColor', nocolor)
+                $('.senA.type1').css("opacity",1)
+                $(".type1").removeAttr('onclick')
+                $(".type1").css('cursor','default')
+                //senb.style.cursor = "pointer"
+                
+            }
+            
+            //console.log($('.type1'))
+            //let color = $(".type1").css('backgroundColor')=="rgba(0, 0, 0, 0)" ? "rgb(223, 250, 206)" : "rgba(0, 0, 0, 0)"
+            //$(".type1").css('backgroundColor', color)
+
+        })
+        $('#button2').on('click', function(){
+            
+            //console.log($(".type2").css('backgroundColor'))
+            let state2 = $('#button2').hasClass("active")
+            let state3 = $('#button3').hasClass("active")
+            if (state2==true & state3==true){
+                //type2 type3 show -> click type2 -> type2 disappear & some type3 show their color
+                $('#button2').removeClass("active")
+                $('#button2').css("opacity", 0.3)
+                //$('#button2').css('backgroundColor', nocolor)
+                $(".type2").css('backgroundColor', nocolor)
+                
+                $(".type2.type3").css('backgroundColor', type3color) //type3 color
+
+                $('.senA.type2').css("opacity",1)
+                $('.senA.type2.type3').css("opacity",0.5)
+
+                $(".type2").removeAttr('onclick')
+                
+                $(".senB.type2").removeAttr('onmouseover')
+                
+                $(".senB.type2.type3").attr('onclick','click_b(this)')
+
+                $(".type2").css('cursor','default')
+                $(".type2.type3").css('cursor',"pointer")
+
+            }
+            else if(state2==true & state3==false){
+                //type2 show, type3 non show -> click type2 -> type2 disappear
+                $('#button2').removeClass("active")
+                $('#button2').css("opacity", 0.3)
+                //$('#button2').css('backgroundColor', nocolor)
+                $(".type2").css('backgroundColor', nocolor)
+                $('.senA.type2').css("opacity",1)
+                
+                $(".type2").removeAttr('onclick')
+                $(".senB.type2").removeAttr('onmouseover')
+                
+
+                $(".type2").css('cursor','default')
+                
+            }
+            else if(state2==false & state3==true){
+                //type2 no show, type3 show -> click type2 -> some type3 disapear, type2 show
+                $('#button2').addClass("active")
+                $('#button2').css("opacity", 1)
+                //$('#button2').css('backgroundColor', type2color)
+                $(".type2.type3").css('backgroundColor', type2color)
+                $(".type2").css('backgroundColor', type2color)
+
+                
+                $('.senA.type2.type3').css("opacity",0.5)
+                $('.senA.type2').css("opacity",0.5)
+
+                //$(".senA.type2").attr('onclick','click_a(this)')
+                $(".senB.type2").attr('onclick','click_b(this)')
+                
+                $('.senB.type2').attr('onmouseover',"onmouse(this)")
+                $('.senB.type2').attr('onmouseout',"outmouse(this)")
+
+                $(".type2").css('cursor',"pointer")
+            }
+            else{
+                $('#button2').addClass("active")
+                $('#button2').css("opacity", 1)
+                //$('#button2').css('backgroundColor', type2color)
+                $(".type2").css('backgroundColor', type2color)
+                
+                $('.senA.type2').css("opacity",0.5)
+
+                //$(".senA.type2").attr('onclick','click_a(this)')
+                $(".senB.type2").attr('onclick','click_b(this)')
+                $('.senB.type2').attr('onmouseover',"onmouse(this)")
+                $('.senB.type2').attr('onmouseout',"outmouse(this)")
+
+                $(".type2").css('cursor',"pointer")
+            }
+
+
+            /*
+
+            let color = $(".type2").css('backgroundColor')
+            if (color=="rgba(0, 0, 0, 0)" | color=="rgb(243, 231, 255)"){
+                color = "rgb(255, 190, 64)"
+            }
+            else{
+                color = "rgba(0, 0, 0, 0)"
+            }
+            $(".type2").css('backgroundColor', color)
+            $(".type2.type3").css('backgroundColor', color)*/
+        })
+        $('#button3').on('click', function(){
+            
+            let state2 = $('#button2').hasClass("active")
+            let state3 = $('#button3').hasClass("active")
+            
+            if (state2==true & state3==true){
+                //type2 type3 show -> click type3 -> type3 disappear & some type3 show type2 color
+                $('#button3').removeClass("active")
+                $('#button3').css("opacity", 0.3)
+                //$('#button3').css('backgroundColor', nocolor)
+                $(".type3").css('backgroundColor', nocolor)
+                $(".type2.type3").css('backgroundColor', type2color) //type2 color
+
+                $('.senA.type3').css("opacity",1)
+                $('.senA.type2.type3').css("opacity",0.5)
+
+
+                $(".type3").removeAttr('onclick')
+                //$(".senA.type2.type3").attr('onclick','click_a(this)')
+                $(".senB.type2.type3").attr('onclick','click_b(this)')
+
+                $(".type3").css('cursor','default')
+                $(".type2.type3").css('cursor',"pointer")
+            }
+            else if(state2==true & state3==false){
+                $('#button3').css("opacity", 1)
+                //type2 show, type3 non show -> click type3 -> type3 show some type3 show type2 color
+                $('#button3').addClass("active")
+                //$('#button3').css('backgroundColor', type3color)
+                $(".type3").css('backgroundColor', type3color)
+                $(".type2.type3").css('backgroundColor', type2color) //type2 color
+
+                $('.senA.type3').css("opacity",0.5)
+                $('.senA.type2.type3').css("opacity",0.5)
+
+
+                //$(".senA.type3").attr('onclick','click_a(this)')
+                $(".senB.type3").attr('onclick','click_b(this)')
+
+                $(".type3").css('cursor',"pointer")
+            }
+            else if(state2==false & state3==true){
+                $('#button3').css("opacity", 0.3)
+                //type2 no show, type3 show -> click type3 -> all type3 disapear
+                $('#button3').removeClass("active")
+                //$('#button3').css('backgroundColor', nocolor)
+                $(".type3").css('backgroundColor', nocolor)
+
+                
+                $('.senA.type3').css("opacity",1)
+
+
+                $(".type3").removeAttr('onclick')
+                $(".type3").css('cursor','default')
+            }
+            else{
+                $('#button3').addClass("active")
+                $('#button3').css("opacity", 1)
+                //$('#button3').css('backgroundColor', type3color)
+                $(".type3").css('backgroundColor', type3color)
+                
+                $('.senA.type3').css("opacity",0.5)
+
+
+                //$(".senA.type3").attr('onclick','click_a(this)')
+                $(".senB.type3").attr('onclick','click_b(this)')
+
+                $(".type3").css('cursor',"pointer")
+            }
+
+            /*
+            let color = $(".type3").css('backgroundColor')
+            if (color=="rgba(0, 0, 0, 0)" | color=="rgb(255, 190, 64)"){
+                color = "rgb(243, 231, 255)"
+            }
+            else{
+                color = "rgba(0, 0, 0, 0)"
+            }
+            
+            $(".type3").css('backgroundColor', color)
+            $(".type2.type3").css('backgroundColor', color)*/
+        })
+
+        
+        //token
+
+        
+
+
+
+        //scroll to first line of item
+        let firstlineaid = company+"_"+lastyear.split("20")[1]+"_"+item.toUpperCase()+"_P0_S0"
+        let firstlinebid = company+"_"+curryear.split("20")[1]+"_"+item.toUpperCase()+"_P0_S0"
+        let firstlinea = document.getElementById(firstlineaid)
+        let firstlineb = document.getElementById(firstlinebid)
+        scrollToElm(rightreport,firstlinea,600)
+        scrollToElm(leftreport,firstlineb,600)
+
+        var item_submit1 = item.split("Item")[1] + "_curr"
+        var item_submit2 = item.split("Item")[1] + "_last"
+        let itembutton1 = document.getElementById(item_submit1)
+        let itembutton2 = document.getElementById(item_submit2)
+        itembutton1.style["-webkit-text-stroke"] = "0.75px yellow"
+        itembutton2.style["-webkit-text-stroke"] = "0.75px yellow"
+        
+        
+
+        //calculate the distance of each item
+        
+
+
+
+
+
+
+
+
+
+
+        /*
+       
+        
+            
+        if(result==null){
+            let id1 = "report1_" + item
+            let id2 = "report2_" + item
+            var indexA = []
+            var indexB = []
+            let paragraph1 = document.getElementById(id1);
+            let paragraph2 = document.getElementById(id2);
+            //console.log(paragraph1)
+            data1.map((part,i) => {
+                
+                paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
+            
+            })
+            data2.map((part,i) => {
+
+                paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
+            
+            
+            })
+        }
+        else{
+            let id2 = "report1_" + item
+            let id1 = "report2_" + item
+            var indexA = []
+            var indexB = []
+
+            //collect all of highlight sentence's index
+            for (var j=0; j < result.length;j++){
+                let label = result[j].prob;
+                
+                id = "senb_" + item + "_" + j
+                score[id] = label
+                
+                let senA = result[j].senA
+                let senB = result[j].senB
+                //console.log(senA,senB)
+                //console.log(data1)
+                indexA.push(data1.indexOf(senA))
+                indexB.push(data2.indexOf(senB))
+                
+            }
+            //console.log(indexA,indexB)
+            let paragraph1 = document.getElementById(id1);
+            let paragraph2 = document.getElementById(id2);
+            //console.log(paragraph1)
+            data1.map((part,i) => {
+                if (indexA.includes(i)){
+                    var sena = document.createElement("span");
+                    
+                    sena.className = "senA_" + item
+                    sena.setAttribute("onclick","click_a(this)")
+                    
+                    sena.innerHTML = part
+                    sena.style.backgroundColor = "#FFFF66"
+                    sena.style.borderRadius = "25px"
+                    sena.style.cursor = "pointer"
+                    sena.style.padding = "0.25em 0"
+                    paragraph1.innerHTML += sena.outerHTML
+                }else{
+                    paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
+                }
+            })
+            
+            data2.map((part,i) => {
+
+                if (indexB.includes(i)){
+                    var senb = document.createElement("span");
+                    senb.className = "senB_" + item
+                    senb.setAttribute("onclick","click_b(this)")
+                    senb.setAttribute("onmouseover","onmouse(this)")
+                    senb.setAttribute("onmouseout","outmouse(this)")
+                
+                    senb.innerHTML = part
+                    senb.style.backgroundColor = "#FFFF66"
+                    senb.style.borderRadius = "25px"
+                    senb.style.cursor = "pointer"
+                    senb.style.padding = "0.25em 0"
+                    paragraph2.innerHTML += senb.outerHTML
+                }else{
+                    paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
+                }	
+            
+            })
+            
+            
+            
+            senaid = "senA_" + item
+            senbid = "senB_" + item
+            var senb = document.getElementsByClassName(senbid);
+            var sena = document.getElementsByClassName(senaid);
+            //console.log(sena[1])
+            
+            
+            senb_item[item] = []
+            sena_item[item] = []
+            
+            sendic_b2a[item] = {}
+            sendic_a2b[item] = {}
+            //highlight words in sen
+            for (var n= 0; n < result.length; n++) {
+                senb[n].id = "senb_" + item + "_" + n;
+                sena[n].id = "sena_" + item + "_" + n;
+                
+                
+                
+                senbword = document.getElementById(senb[n].id)
+                let senbcontent = senbword.innerHTML
+                let brokensenb = senbcontent.split(" ");
+                
+                senbword.innerHTML = ''
+                brokensenb.map((part,i) => {
+                    var word = document.createElement("span");
+                    var space = document.createElement("span");
+                    word.className = "senbwords_" + item
+                    word.innerHTML = part
+                    space.className = "senbwords_" + item
+                    space.innerHTML = ' '
+                    //console.log(word)
+                    senbword.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
+                })
+                
+                for(var m=0;m<(brokensenb.length*2-1);m++){
+                    let senbword1 = document.querySelectorAll('#'+senb[n].id+ ' .senbwords_' + item)
+                    
+                    senbword1[m].id = senb[n].id + "_" + m
+                    //console.log(senbword1[m])
+                }
+
+                
+                senb_item[item].push(senb[n].id)
+                
+                sena_item[item].push(sena[n].id)
+                
+                //adjust
+                
+                sendic_b2a[item][senb[n].id] = sena[n].id;
+                sendic_a2b[item][sena[n].id] = senb[n].id;
+            }
+            let name = ".senB_" + item
+            
+            $(name).hover(function(){
+                $(name).css("transition-duration","0.3s");
+                $(name).css("opacity","1")
+                //$(name).css("fontSize","18.075px")
+                $(name).css("box-shadow","0 5px 15px 0px rgba(0,0,0,0.125)")
+            },function(){
+                
+                $(name).css("opacity","1")
+                //$(name).css("fontSize","18")
+                $(name).css("box-shadow","0 0 0 0 rgba(0,0,0,0)")
+            })
+        }*/
+
+        //all of item in two years
+        /*
+        for (var jj=0;jj<20;jj++){
+            let data1 = givevalue(givevalue(test1,lastyear),vm2.$data.list[ii])
+            let data2 = givevalue(givevalue(test1,curryear),vm2.$data.list[ii])
+            create_reportrow(vm2.$data.list[jj])
+            
+            if(vm2.$data.list[jj]==item){
+                curritemid = "reportrow_" + item
+                curr = document.getElementById(curritemid)
+                curr.style.display = "flex"
+            }
+        }
+        for (var ii=0; ii < 20;ii++){
+            let data1 = givevalue(givevalue(test1,lastyear),vm2.$data.list[ii])
+            let data2 = givevalue(givevalue(test1,curryear),vm2.$data.list[ii])
+            
+            
+            
+            //writereport(data1,data2,vm2.$data.list[i])
+            //console.log(ii,vm2.$data.list[ii])
+
+
+            //every item's highlight sentence
+            result = givevalue(givevalue(result1,curryear),vm2.$data.list[ii])
+            console.log(result==null)
+            //if result==null : create report only
+            if(result==null){
+                let id1 = "report1_" + vm2.$data.list[ii]
+                let id2 = "report2_" + vm2.$data.list[ii]
+                var indexA = []
+                var indexB = []
+                let paragraph1 = document.getElementById(id1);
+                let paragraph2 = document.getElementById(id2);
+                //console.log(paragraph1)
+                data1.map((part,i) => {
+                    
+                    paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
+                
+                })
+                data2.map((part,i) => {
+
+                    paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
+                
+                
+                })
+            }
+            else{
+                let id1 = "report1_" + vm2.$data.list[ii]
+                let id2 = "report2_" + vm2.$data.list[ii]
+                var indexA = []
+                var indexB = []
+
+                //collect all of highlight sentence's index
+                for (var j=0; j < result.length;j++){
+                    let label = result[j].labels;
+                    
+                    id = "senb_" + vm2.$data.list[ii] + "_" + j
+                    score[id] = label
+                    
+                    let senA = result[j].senA
+                    let senB = result[j].senB
+                    //console.log(senA,senB)
+                    //console.log(data1)
+                    indexA.push(data1.indexOf(senA))
+                    indexB.push(data2.indexOf(senB))
+                    
+                }
+                //console.log(indexA,indexB)
+                let paragraph1 = document.getElementById(id1);
+                let paragraph2 = document.getElementById(id2);
+                //console.log(paragraph1)
+                data1.map((part,i) => {
+                    if (indexA.includes(i)){
+                        var sena = document.createElement("span");
+                        
+                        sena.className = "senA_" + vm2.$data.list[ii]
+                        sena.setAttribute("onclick","click_a(this)")
+                        
+                        sena.innerHTML = part
+                        sena.style.backgroundColor = "#FFFF66"
+                        sena.style.borderRadius = "25px"
+                        sena.style.cursor = "pointer"
+                        sena.style.padding = "0.25em 0"
+                        paragraph1.innerHTML += sena.outerHTML
+                    }else{
+                        paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
+                    }
+                })
+                data2.map((part,i) => {
+
+                    if (indexB.includes(i)){
+                        var senb = document.createElement("span");
+                        senb.className = "senB_" + vm2.$data.list[ii]
+                        senb.setAttribute("onclick","click_b(this)")
+                        senb.setAttribute("onmouseover","onmouse(this)")
+                        senb.setAttribute("onmouseout","outmouse(this)")
+                    
+                        senb.innerHTML = part
+                        senb.style.backgroundColor = "#FFFF66"
+                        senb.style.borderRadius = "25px"
+                        senb.style.cursor = "pointer"
+                        senb.style.padding = "0.25em 0"
+                        paragraph2.innerHTML += senb.outerHTML
+                    }else{
+                        paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
+                    }	
+                
+                })
+                
+                
+                
+                senaid = "senA_" + vm2.$data.list[ii]
+                senbid = "senB_" + vm2.$data.list[ii]
+                var senb = document.getElementsByClassName(senbid);
+                var sena = document.getElementsByClassName(senaid);
+                //console.log(sena[1])
+                
+                
+                senb_item[vm2.$data.list[ii]] = []
+                sena_item[vm2.$data.list[ii]] = []
+                
+                sendic_b2a[vm2.$data.list[ii]] = {}
+                sendic_a2b[vm2.$data.list[ii]] = {}
+                //highlight words in sen
+                for (var n= 0; n < result.length; n++) {
+                    senb[n].id = "senb_" + vm2.$data.list[ii] + "_" + n;
+                    sena[n].id = "sena_" + vm2.$data.list[ii] + "_" + n;
+                    
+                    
+                    
+                    senbword = document.getElementById(senb[n].id)
+                    let senbcontent = senbword.innerHTML
+                    let brokensenb = senbcontent.split(" ");
+                    
+                    senbword.innerHTML = ''
+                    brokensenb.map((part,i) => {
+                        var word = document.createElement("span");
+                        var space = document.createElement("span");
+                        word.className = "senbwords_" + vm2.$data.list[ii]
+                        word.innerHTML = part
+                        space.className = "senbwords_" + vm2.$data.list[ii]
+                        space.innerHTML = ' '
+                        //console.log(word)
+                        senbword.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
+                    })
+                    
+                    for(var m=0;m<(brokensenb.length*2-1);m++){
+                        let senbword1 = document.querySelectorAll('#'+senb[n].id+ ' .senbwords_' + vm2.$data.list[ii])
+                        
+                        senbword1[m].id = senb[n].id + "_" + m
+                        //console.log(senbword1[m])
+                    }
+
+                    
+                    senb_item[vm2.$data.list[ii]].push(senb[n].id)
+                    
+                    sena_item[vm2.$data.list[ii]].push(sena[n].id)
+                    
+                    //adjust
+                    
+                    sendic_b2a[vm2.$data.list[ii]][senb[n].id] = sena[n].id;
+                    sendic_a2b[vm2.$data.list[ii]][sena[n].id] = senb[n].id;
+                }
+                let name = ".senB_" + vm2.$data.list[ii]
+                
+                $(name).hover(function(){
+                    $(name).css("transition-duration","0.3s");
+                    $(name).css("opacity","1")
+                    $(name).css("fontSize","18.075px")
+                    $(name).css("box-shadow","0 5px 15px 0px rgba(0,0,0,0.125)")
+                },function(){
+                    
+                    $(name).css("opacity","1")
+                    $(name).css("fontSize","18")
+                    $(name).css("box-shadow","0 0 0 0 rgba(0,0,0,0)")
+                })
+            }
+            
+        }*/
+    });
+   
+
+
+
+</script>
+
+<!--end testarti-->
+
+
+
+
+
+
+<!--disable sumbit if select is empty-->
+<script>
+    
+    $(document).ready(function(){
+        $('#submit1').attr('disabled','disabled');
+        /*
+        $("#submit1").click(function(){
+            
+        })*/
+        var count = 0;
+        $('.ui.dropdown').change(function() {
+            let a = $("#yearlist").val();
+            let b = $("#companylist").val();
+            let c = $("#itemlist").val();
+            //count++;
+            //console.log(a,b=="",c)
+            if (a!="" && b!="" && c!="") {
+                //console.log("werqwerqwerqewr")
+                $("#submit1").removeAttr("disabled")
+            }
+            
+        });
+        
+
+        
+    });
+    window.onload = function(){
+        $('.ui.dropdown').dropdown();  
+        
+    }
+    window.onunload = function(){
+        alert("unload is work");
+    }
+</script>
+<!--
+<script>
+     <div id="loading">
+        <img id="loading-image" src="{% static 'pic&gif/loading1.gif' %}" alt="Loading..." />
+    </div>
+    $(window).on('load', function () {
+      $('#loading').hide();
+    }) 
+</script>
+-->
+

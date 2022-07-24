@@ -1,0 +1,93 @@
+/** Layout */
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+.arrow-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/***************
+ * Arrow 2
+ ***************/
+#arrow_2 .arrow {
+  color: #28dd89;
+  cursor: pointer;
+  display: block;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  text-transform: uppercase;
+  position: relative;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+#arrow_2 .arrow span {
+  font-family: Righteous;
+  display: block;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s 0s;
+  transition: opacity 0.3s 0s;
+  padding: 0 0.5em;
+  font-size: 25px;
+}
+
+#arrow_2 .arrow:hover span {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s 0.1s;
+  transition: opacity 0.3s 0.1s;
+}
+
+#arrow_2 .arrow:before {
+  content: '';
+  display: block;
+  border: solid black;
+  border-width: 2px 2px 0 0;
+  position: absolute;
+  top: 4px;
+  width: 15px;
+  height: 15px;
+}
+
+#arrow_2 .arrow.arrow--left:before {
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+  right: 0;
+  -webkit-transition: right 0.3s 0.2s;
+  transition: right 0.3s 0.2s;
+}
+
+#arrow_2 .arrow.arrow--left:hover:before {
+  right: 100%;
+  -webkit-transition: right 0.3s;
+  transition: right 0.3s;
+}
+
+#arrow_2 .arrow.arrow--right {
+  text-align: right;
+}
+
+#arrow_2 .arrow.arrow--right:before {
+  left: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: left 0.3s 0.2s;
+  transition: left 0.3s 0.2s;
+}
+
+#arrow_2 .arrow.arrow--right:hover:before {
+  left: 100%;
+  -webkit-transition: left 0.3s;
+  transition: left 0.3s;
+}
+
+#arrow_2 .arrow:hover {
+  -webkit-transform: none;
+          transform: none;
+}
+/*# sourceMappingURL=submit2.css.map */

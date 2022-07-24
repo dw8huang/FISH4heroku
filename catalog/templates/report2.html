@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.css">
+    
+
+{% load static %}
+<head>
+    <title>Financial Dataset for Researchers</title>
+    <link rel='icon' href='https://www.iconninja.com/files/303/190/562/business-ratings-icon.png' type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body style="background-color:#ffffff; margin:0;padding:0;">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap" rel="stylesheet">
+        
+    <link rel="stylesheet" type="text/css" href="{% static 'css/report.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/scroll.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/submit.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/submit2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/itemlist.css' %}">
+    <script src="{% static 'js/create_report copy.js' %}"></script>
+    <script src="{% static 'js/sentence_effect copy.js' %}"></script>
+    <script src="{% static 'js/sentence_color.js' %}"></script>
+    <script src="{% static 'js/topselect_vue.js' %}"></script>
+
+    
+    <style>
+        
+    </style>
+    
+    
+    
+   
+    
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <a href="/catalog" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw; font-size:25px; font-weight: bold;" class="font-weight-bold">
+                Fin Bert    
+            </a>
+        </div>
+        <!--selectrow-->
+        <div class="row">
+            <div>
+                <div id=topselect class="row" style="margin-top:3vh;">
+                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report2' %}">
+                        {% csrf_token %}
+        
+                            <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
+                                <option value="">Report Year</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                            </select>
+                        
+                            <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
+                                <option value="">Company List</option>
+                                <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
+                                
+                            </select>    
+                                                        
+                            
+                            <select id="itemlist" name="item" class="ui selection dropdown" style="padding: 5px 5px;">
+                                <option value="">Item</option>
+                                <option :value="item" v-for="(item,index) in list">[[item]]</option>
+                            </select>
+                            
+                            <input type="submit"  id="submit1" class="ui button"  value="Anlayse"  ></button>
+                        
+                        
+                    </form>
+                    
+                    
+
+                </div>  
+            </div>
+            
+        </div>
+        <!--end selectrow-->
+        
+
+        <!--itemlist row-->
+        <div class="row">
+            <div class="tabs">
+                <input class=leftbutton type="radio" id="radio-1" name="tabs" checked />
+                <label class="tab" for="radio-1">Item1</label>
+                
+                <input class=leftbutton type="radio" id="radio-2" name="tabs" />
+                <label class="tab" for="radio-2">Item1A</label>
+                <input type="radio" id="radio-3" name="tabs" />
+                <label class="tab" for="radio-3">Item1B</label>
+                <input type="radio" id="radio-4" name="tabs" />
+                <label class="tab" for="radio-4">Item2</label>
+                <input type="radio" id="radio-5" name="tabs" />
+                <label class="tab" for="radio-5">Item3</label>
+                
+                <input type="radio" id="radio-6" name="tabs" />
+                <label class="tab" for="radio-6">Item4</label>
+                
+                <input type="radio" id="radio-7" name="tabs" />
+                <label class="tab" for="radio-7">Item5</label>
+                
+                <input type="radio" id="radio-8" name="tabs" />
+                <label class="tab" for="radio-8">Item6</label>
+                
+                <input type="radio" id="radio-9" name="tabs" />
+                <label class="tab" for="radio-9">Item7</label>
+                
+                <input type="radio" id="radio-10" name="tabs" />
+                <label class="tab" for="radio-10">Item7A</label>
+                
+                <input type="radio" id="radio-11" name="tabs" />
+                <label class="tab" for="radio-11">Item8</label>
+                
+                <input type="radio" id="radio-12" name="tabs" />
+                <label class="tab" for="radio-12">Item9</label>
+                
+                <input type="radio" id="radio-13" name="tabs" />
+                <label class="tab" for="radio-13">Item10</label>
+                <input type="radio" id="radio-14" name="tabs" />
+                <label class="tab" for="radio-14">Item11</label>
+                <input type="radio" id="radio-15" name="tabs" />
+                <label class="tab" for="radio-15">Item12</label>
+                <input type="radio" id="radio-16" name="tabs" />
+                <label class="tab" for="radio-16">Item13</label>
+                <input type="radio" id="radio-17" name="tabs" />
+                <label class="tab" for="radio-17">Item14</label>
+                <input type="radio" id="radio-18" name="tabs" />
+                <label class="tab" for="radio-18">Item15</label>
+                <span class="glider"></span>
+            </div>
+        </div>
+
+        <div class="header">Item</div>
+        <div id="leftinfo_item"></div>
+        <div class=itembutton id="itemlist1">
+            
+            <button class="left_itembutton" :value="item" v-for="(item,index) in list" >
+                [[item]]
+            </button>
+        </div>
+
+
+        <!--info row-->
+        <div class="row" style="margin-bottom:50px"
+        >
+            <div class="col-sm">
+                <div class="ui list" id="leftinfo">
+                    <div class="item">
+                        <div class="header" id="leftinfo_company" style="font-size:40px; margin-bottom:10px"></div>
+                    </div>
+                    
+                    <div class="item">
+                      <div id="leftinfo_year"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="ui list" id="rightinfo">
+                    <div class="item">
+                        <div class="header" id="rightinfo_company" style="font-size:40px;margin-bottom:10px"></div>
+                    </div>
+                    <div class="item">
+                      <div id="rightinfo_year"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!--info row end-->
+        
+        <div class="row" id="report_outline">
+
+
+        </div>
+
+        <!--last & next year buttom-->
+        <div class="row" id="year_button">
+            <form id="leftform" method="POST" action="{% url 'report2' %}" enctype="multipart/form-data" role="form">
+                {%csrf_token %}
+                <input type="hidden" id="left_year" name="year" value=''/>
+                <input type="hidden" id="left_company" name="company" value=''/>
+                <input type="hidden" id="left_item" name="item" value=''/>
+                <div id="arrow_2" class="arrow-wrapper" onclick="anchor_submit_left()">
+                    <div class="arrow arrow--left">
+                      <span id="lastyear"></span>
+                    </div>
+                </div>
+                <!--
+                    <input type="submit" id="year_submit"  style="margin-top:1vw;" value="<" />
+                -->
+                
+            </form>
+            <form id="rightform" method="POST" action="{% url 'report2' %}" enctype="multipart/form-data" role="form">
+                <!--onsubmit="rightsubmit()"-->
+                {%csrf_token %}
+                <input type="hidden" id="right_year" name="year" value=''/>
+                <input type="hidden" id="right_company" name="company" value=''/>
+                <input type="hidden" id="right_item" name="item" value=''/>
+                <div id="arrow_2" class="arrow-wrapper" onclick="anchor_submit_right()">
+                    <div class="arrow arrow--right">
+                      <span id="nextyear"></span>
+                    </div>
+                </div>
+                
+            </form> 
+            
+        </div>
+        <!--last & next year buttom end-->
+        
+
+        
+
+
+
+    </div>
+    
+    
+    
+    <script>
+        $(document).ready(function(){
+            $('#topword').click(function(){
+                localStorage.clear();
+                
+            })
+
+
+            var s = document.querySelectorAll(".left_itembutton")
+            var t = document.querySelectorAll(".right_itembutton")
+            for(var i=0;i<20;i++){
+                s[i].id = "left_itembutton_" + i
+                s[i].setAttribute("onclick","click_item(this)")
+                //t[i].id = "right_itembutton_" + i
+                //t[i].setAttribute("onclick","click_item(this)")
+            }
+        })
+        function anchor_submit_left(){
+            //leftsubmit()
+            var curryear = localStorage.getItem("yearnow")
+            var company = localStorage.getItem("companynow")
+            var item = localStorage.getItem("itemnow")
+            var year = (parseInt(curryear) - 1).toString()
+            if (curryear=="2012"|curryear==null){
+                //alert("AFDSFASDF")
+                event.preventDefault();
+            }
+            else{
+                document.getElementById("left_year").setAttribute('value',year); 
+                document.getElementById("left_company").setAttribute('value',company); 
+                document.getElementById("left_item").setAttribute('value',item); 
+                //localstorage has to change
+                localStorage.setItem("yearnow",year)    
+                document.getElementById("leftinfo_item").innerHTML = item
+                //document.getElementById("rightinfo_item").innerHTML = item
+                //submit
+                document.getElementById("leftform").setAttribute('method',"post");
+                document.getElementById("leftform").submit();
+            }
+            
+
+        }
+        function anchor_submit_right(){
+            //rightsubmit()
+            var curryear = localStorage.getItem("yearnow")
+            var company = localStorage.getItem("companynow")
+            var item = localStorage.getItem("itemnow")
+            var year = (parseInt(curryear) + 1).toString()
+            //console.log("hereeeeeee")
+            if (curryear=="2018" | curryear==null){
+                event.preventDefault();
+            }
+            else{
+                document.getElementById("right_year").setAttribute('value',year); 
+                document.getElementById("right_company").setAttribute('value',company); 
+                document.getElementById("right_item").setAttribute('value',item); 
+                //localstorage has to change
+                localStorage.setItem("yearnow",year)
+                document.getElementById("leftinfo_item").innerHTML = item
+                //document.getElementById("rightinfo_item").innerHTML = item
+                //submit
+                document.getElementById("rightform").setAttribute('method',"post");
+                document.getElementById("rightform").submit();
+        
+                //console.log(document.getElementById("right_item"))
+                //return True;
+            }
+            
+            
+            
+        }
+
+        function click_item(ele){
+            let item = localStorage.getItem("itemnow")
+            //console.log(item)
+            curritemid = "reportrow_" + item
+            //console.log(curritemid)
+            curritem = document.getElementById(curritemid)
+            //console.log(curritem)
+            curritem.style.display = "none"
+            
+            localStorage.setItem("itemnow",$("#"+ele.id).val())
+            
+            let item1 = localStorage.getItem("itemnow")
+            document.getElementById("leftinfo_item").innerHTML = item1
+            //document.getElementById("rightinfo_item").innerHTML = item1
+            curritemid = "reportrow_" + item1
+            curritem = document.getElementById(curritemid)
+            curritem.style.display = "flex"
+            
+                       
+        }
+        
+        
+        function leftsubmit(){
+            var curryear = localStorage.getItem("yearnow")
+            var company = localStorage.getItem("companynow")
+            var item = localStorage.getItem("itemnow")
+            var year = (parseInt(curryear) - 1).toString()
+            //alert(curryear)
+            if (curryear=="2012"|curryear==null){
+                alert("AFDSFASDF")
+                event.preventDefault();
+            }
+            else{
+                document.getElementById("left_year").setAttribute('value',year); 
+                document.getElementById("left_company").setAttribute('value',company); 
+                document.getElementById("left_item").setAttribute('value',item); 
+                //localstorage has to change
+                localStorage.setItem("yearnow",year)    
+                return True;
+            }
+            document.getElementById("leftinfo_item").innerHTML = item
+            //document.getElementById("rightinfo_item").innerHTML = item
+            
+        }
+        function rightsubmit(){
+            var curryear = localStorage.getItem("yearnow")
+            var company = localStorage.getItem("companynow")
+            var item = localStorage.getItem("itemnow")
+            var year = (parseInt(curryear) + 1).toString()
+            console.log("hereeeeeee")
+            if (curryear=="2018" | curryear==null){
+                event.preventDefault();
+            }
+            else{
+                document.getElementById("right_year").setAttribute('value',year); 
+                document.getElementById("right_company").setAttribute('value',company); 
+                document.getElementById("right_item").setAttribute('value',item); 
+                //localstorage has to change
+                localStorage.setItem("yearnow",year)
+                //console.log(document.getElementById("right_item"))
+                //return True;
+            }
+            document.getElementById("leftinfo_item").innerHTML = item
+            //document.getElementById("rightinfo_item").innerHTML = item
+        }
+        
+        //console.log(localStorage.getItem("yearnow"))
+        
+        var vm1 = new Vue({
+            el: '#companylist',
+            delimiters: ['[[', ']]'],
+            data: {
+                list: { 
+                    "1417663" : {name:"company1"},
+                    "1234123" : {name:"company2"},
+                    "1001250" : {name:"company3"}
+                }
+                ,
+            },
+            });
+    //let company = "1417663"
+    //console.log(vm1.$data.list[company].name)
+        var vm2 = new Vue({
+            el: '#itemlist',
+            delimiters: ['[[',']]'],
+            data: {
+            list:[
+                "Item1","Item1A","Item1B","Item2",
+                "Item3","Item4","Item5","Item6","Item7",
+                "Item7A","Item8","Item9","Item9A","Item9B",
+                "Item10","Item11","Item12","Item13","Item14",
+                "Item15"
+            ],
+            },
+        });
+        new Vue({
+            el: '#itemlist1',
+            delimiters: ['[[',']]'],
+            data: {
+            list:[
+                "Item1","Item1A","Item1B","Item2",
+                "Item3","Item4","Item5","Item6","Item7",
+                "Item7A","Item8","Item9","Item9A","Item9B",
+                "Item10","Item11","Item12","Item13","Item14",
+                "Item15"
+            ],
+            },
+        });
+        new Vue({
+            el: '#itemlist2',
+            delimiters: ['[[',']]'],
+            data: {
+            list:[
+            "Item1","Item1A","Item1B","Item2",
+            "Item3","Item4","Item5","Item6","Item7",
+            "Item7A","Item8","Item9","Item9A","Item9B",
+            "Item10","Item11","Item12","Item13","Item14",
+            "Item15"
+            ],
+            },
+        });
+    </script>
+
+    
+    
+    <!--get value of previous request-->
+    <script>
+        $(document).ready(function(){
+            //var input = document.getElementById('yearlist');
+
+
+            //previous page
+            //console.log(document.referrer)
+
+            $("#yearlist").change(function(){
+                saveSettings1($(this).val());
+            });
+            $("#companylist").change(function(){
+                saveSettings2($(this).val());
+                
+            });
+            $("#itemlist").change(function(){
+                saveSettings3($(this).val());
+            });
+            function saveSettings1(val) {
+                //console.log(val)
+                localStorage.setItem("yearnow",val);
+            }
+            function saveSettings2(val) {
+                //console.log(val)
+                localStorage.setItem("companynow",val);
+            }
+            function saveSettings3(val) {
+                //console.log(val)
+                localStorage.setItem("itemnow",val);
+            }
+            //console.log(parseInt(localStorage.getItem("yearnow"))+1)
+            //console.log(localStorage.getItem("companynow")
+            let rightyear = localStorage.getItem("yearnow")
+            let company = localStorage.getItem("companynow")
+            let item = localStorage.getItem("itemnow")
+            let leftyear = (parseInt(rightyear) - 1).toString()
+            //console.log(document.getElementById("leftinfo_year"))
+            document.getElementById("leftinfo_year").innerHTML = "from " + leftyear
+            document.getElementById("leftinfo_company").innerHTML = vm1.$data.list[company].name //+ " " + "(" + company + ")"
+            document.getElementById("leftinfo_item").innerHTML = item
+            document.getElementById("rightinfo_year").innerHTML = "from " + rightyear
+            document.getElementById("rightinfo_company").innerHTML = vm1.$data.list[company].name //+ " " + "(" + company + ")"
+            //document.getElementById("rightinfo_item").innerHTML = item
+            let lastyear = parseInt(leftyear)-1
+            let nextyear = parseInt(rightyear)+1
+            document.getElementById("lastyear").innerHTML = lastyear.toString() + " vs " + leftyear
+            document.getElementById("nextyear").innerHTML = rightyear + " vs " + nextyear.toString()
+            
+        });
+    </script>
+    
+
+  
+
+</body>
+<!--testarti-->
+<script>
+    var givevalue = function (dict,myKey) {
+        return dict[myKey];
+    };
+    var senb_item = {}; //{"item1":[]}
+    var sena_item = {};
+    var sendic_a2b = {};
+    var sendic_b2a = {};
+    var score = {}
+    localStorage.setItem("lastclick",0)
+    
+    let a = "{{ company|safe }}"
+    console.log("get value from view.py",a)
+    //localStorage.setItem("companynow",a)
+    //let c = localStorage.getItem(companynow)
+    //console.log("localstorage:",c)
+
+    $(document).ready(function() {
+        testarti = "{{ testarti|safe }}";
+        //console.log(testarti)
+        testarti = testarti.replace(/'/g,"\"");
+        const test1 = JSON.parse(testarti);
+        
+        /*
+        var curryear = "{{ curryear }}"
+        var company = "{{ company }}"
+        var item = "{{ item }}"
+        */
+
+        //get  2011 all item
+        
+        var curryear = localStorage.getItem("yearnow")
+        var company = localStorage.getItem("companynow")
+        //console.log(company,curryear)
+        
+        var item = localStorage.getItem("itemnow").toString()
+    
+
+
+        var lastyear = (parseInt(curryear) - 1).toString()
+        //console.log(givevalue(givevalue(test1,curryear),item))
+        result =  "{{ result|safe }}";
+        result = result.replace(/'/g,"\"");
+        const result1 = JSON.parse(result)
+        
+        
+        //all of item in two years
+        for (var jj=0;jj<20;jj++){
+            let data1 = givevalue(givevalue(test1,lastyear),vm2.$data.list[ii])
+            let data2 = givevalue(givevalue(test1,curryear),vm2.$data.list[ii])
+            create_reportrow(vm2.$data.list[jj])
+            
+            if(vm2.$data.list[jj]==item){
+                curritemid = "reportrow_" + item
+                curr = document.getElementById(curritemid)
+                curr.style.display = "flex"
+            }
+        }
+        for (var ii=0; ii < 20;ii++){
+            let data1 = givevalue(givevalue(test1,lastyear),vm2.$data.list[ii])
+            let data2 = givevalue(givevalue(test1,curryear),vm2.$data.list[ii])
+            
+            
+            
+            //writereport(data1,data2,vm2.$data.list[i])
+            //console.log(ii,vm2.$data.list[ii])
+
+
+            //every item's highlight sentence
+            result = givevalue(givevalue(result1,curryear),vm2.$data.list[ii])
+            console.log(result==null)
+            //if result==null : create report only
+            if(result==null){
+                let id1 = "report1_" + vm2.$data.list[ii]
+                let id2 = "report2_" + vm2.$data.list[ii]
+                var indexA = []
+                var indexB = []
+                let paragraph1 = document.getElementById(id1);
+                let paragraph2 = document.getElementById(id2);
+                //console.log(paragraph1)
+                data1.map((part,i) => {
+                    
+                    paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
+                
+                })
+                data2.map((part,i) => {
+
+                    paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
+                
+                
+                })
+            }
+            else{
+                let id1 = "report1_" + vm2.$data.list[ii]
+                let id2 = "report2_" + vm2.$data.list[ii]
+                var indexA = []
+                var indexB = []
+
+                //collect all of highlight sentence's index
+                for (var j=0; j < result.length;j++){
+                    let label = result[j].prob;
+                    
+                    id = "senb_" + vm2.$data.list[ii] + "_" + j
+                    score[id] = label
+                    
+                    let senA = result[j].senA
+                    let senB = result[j].senB
+                    //console.log(senA,senB)
+                    //console.log(data1)
+                    indexA.push(data1.indexOf(senA))
+                    indexB.push(data2.indexOf(senB))
+                    
+                }
+                //console.log(indexA,indexB)
+                let paragraph1 = document.getElementById(id1);
+                let paragraph2 = document.getElementById(id2);
+                //console.log(paragraph1)
+                data1.map((part,i) => {
+                    if (indexA.includes(i)){
+                        var sena = document.createElement("span");
+                        
+                        sena.className = "senA_" + vm2.$data.list[ii]
+                        sena.setAttribute("onclick","click_a(this)")
+                        
+                        sena.innerHTML = part
+                        sena.style.backgroundColor = "#FFFF66"
+                        sena.style.borderRadius = "25px"
+                        sena.style.cursor = "pointer"
+                        sena.style.padding = "0.25em 0"
+                        paragraph1.innerHTML += sena.outerHTML
+                    }else{
+                        paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
+                    }
+                })
+                data2.map((part,i) => {
+
+                    if (indexB.includes(i)){
+                        var senb = document.createElement("span");
+                        senb.className = "senB_" + vm2.$data.list[ii]
+                        senb.setAttribute("onclick","click_b(this)")
+                        senb.setAttribute("onmouseover","onmouse(this)")
+                        senb.setAttribute("onmouseout","outmouse(this)")
+                    
+                        senb.innerHTML = part
+                        senb.style.backgroundColor = "#FFFF66"
+                        senb.style.borderRadius = "25px"
+                        senb.style.cursor = "pointer"
+                        senb.style.padding = "0.25em 0"
+                        paragraph2.innerHTML += senb.outerHTML
+                    }else{
+                        paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
+                    }	
+                
+                })
+                
+                
+                
+                senaid = "senA_" + vm2.$data.list[ii]
+                senbid = "senB_" + vm2.$data.list[ii]
+                var senb = document.getElementsByClassName(senbid);
+                var sena = document.getElementsByClassName(senaid);
+                //console.log(sena[1])
+                
+                
+                senb_item[vm2.$data.list[ii]] = []
+                sena_item[vm2.$data.list[ii]] = []
+                
+                sendic_b2a[vm2.$data.list[ii]] = {}
+                sendic_a2b[vm2.$data.list[ii]] = {}
+                //highlight words in sen
+                for (var n= 0; n < result.length; n++) {
+                    senb[n].id = "senb_" + vm2.$data.list[ii] + "_" + n;
+                    sena[n].id = "sena_" + vm2.$data.list[ii] + "_" + n;
+                    
+                    
+                    
+                    senbword = document.getElementById(senb[n].id)
+                    let senbcontent = senbword.innerHTML
+                    let brokensenb = senbcontent.split(" ");
+                    
+                    senbword.innerHTML = ''
+                    brokensenb.map((part,i) => {
+                        var word = document.createElement("span");
+                        var space = document.createElement("span");
+                        word.className = "senbwords_" + vm2.$data.list[ii]
+                        word.innerHTML = part
+                        space.className = "senbwords_" + vm2.$data.list[ii]
+                        space.innerHTML = ' '
+                        //console.log(word)
+                        senbword.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
+                    })
+                    
+                    for(var m=0;m<(brokensenb.length*2-1);m++){
+                        let senbword1 = document.querySelectorAll('#'+senb[n].id+ ' .senbwords_' + vm2.$data.list[ii])
+                        
+                        senbword1[m].id = senb[n].id + "_" + m
+                        //console.log(senbword1[m])
+                    }
+
+                    
+                    senb_item[vm2.$data.list[ii]].push(senb[n].id)
+                    
+                    sena_item[vm2.$data.list[ii]].push(sena[n].id)
+                    
+                    //adjust
+                    
+                    sendic_b2a[vm2.$data.list[ii]][senb[n].id] = sena[n].id;
+                    sendic_a2b[vm2.$data.list[ii]][sena[n].id] = senb[n].id;
+                }
+                let name = ".senB_" + vm2.$data.list[ii]
+                
+                $(name).hover(function(){
+                    $(name).css("transition-duration","0.3s");
+                    $(name).css("opacity","1")
+                    $(name).css("fontSize","18.075px")
+                    $(name).css("box-shadow","0 5px 15px 0px rgba(0,0,0,0.125)")
+                },function(){
+                    
+                    $(name).css("opacity","1")
+                    $(name).css("fontSize","18")
+                    $(name).css("box-shadow","0 0 0 0 rgba(0,0,0,0)")
+                })
+            }
+            
+        }
+    });
+   
+
+
+
+</script>
+
+<!--end testarti-->
+
+
+
+
+
+
+<!--disable sumbit if select is empty-->
+<script>
+    
+    $(document).ready(function(){
+        $('#submit1').attr('disabled','disabled');
+        /*
+        $("#submit1").click(function(){
+            
+        })*/
+        var count = 0;
+        $('.ui.dropdown').change(function() {
+            let a = $("#yearlist").val();
+            let b = $("#companylist").val();
+            let c = $("#itemlist").val();
+            //count++;
+            //console.log(a,b=="",c)
+            if (a!="" && b!="" && c!="") {
+                //console.log("werqwerqwerqewr")
+                $("#submit1").removeAttr("disabled")
+            }
+            
+        });
+        
+
+        
+    });
+    window.onload = function(){
+        $('.ui.dropdown').dropdown();  
+        
+    }
+    window.onunload = function(){
+        alert("unload is work");
+    }
+</script>
+<!--
+<script>
+     <div id="loading">
+        <img id="loading-image" src="{% static 'pic&gif/loading1.gif' %}" alt="Loading..." />
+    </div>
+    $(window).on('load', function () {
+      $('#loading').hide();
+    }) 
+</script>
+-->

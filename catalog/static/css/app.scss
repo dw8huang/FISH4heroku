@@ -1,0 +1,51 @@
+#app {
+    position: relative;
+    display: block;
+    padding: 1rem;
+    font-size: 1rem;
+    
+    > div {
+      display: block;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      height: 120px;
+    }
+  }
+  
+  button {
+    font-size: 1rem;
+  }
+  
+  .wrap {
+    display: block;
+    width: 150px;
+    height: 100px;
+    overflow: hidden;
+    float: left;
+    margin-right: 1.5rem;
+  }
+  
+  .block {
+    display: block;
+    width: 150px;
+    height: 100px;
+    padding: 20px 0;
+    text-align: center;
+    line-height: 1.75;
+    background-color: #0f0;
+  }
+  
+  .slide-leave-active,
+  .slide-enter-active {
+    transition: all .9s ease;
+  }
+  
+  .slide-enter-from {
+    transform: translateX(-100%);
+  }
+  
+  .slide-leave-to {
+    transform: translateX(100%);
+  }
+  
+  

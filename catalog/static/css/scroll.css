@@ -1,0 +1,32 @@
+p {
+    font-size: 24px;
+    color: #000;
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+    }
+
+    h1 {
+    font-size: 72px;
+    
+    }
+
+    .fp-slide{
+        position:relative;
+    }
+
+    .caption {
+    display: none;
+    }
+
+    .fp-controlArrow.fp-prev {
+    left: 10px;
+    border-width: 24px 20px 24px 0;
+    border-color: transparent #000 transparent transparent;
+    }
+
+    .fp-controlArrow.fp-next {
+    right: 10px;
+    border-width: 24px 0 24px 20px;
+    border-color: transparent transparent transparent #000;
+    }
