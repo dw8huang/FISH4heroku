@@ -196,33 +196,44 @@ def report_revised(request):
         item = request.POST.get("item")
         
         
-
+        
         textdic = buildtextdic(company)
 
 
         testarti = {}
         sen2id = {}
         ar = {}
-        for year in range(year1,year2+1):
-            testarti[str(year)] = " ".join(read_allitem_function.read_allitem_fun(textdic,company,str(year))[0])
-            sen2id[str(year)] = read_allitem_function.read_allitem_fun(textdic,company,str(year))[1]
-            ar[str(year)] = read_allitem_function.read_allitem_fun(textdic,company,str(year))[2]
         
+        testarti[str(year1)] = " ".join(read_allitem_function_ar.read_allitem_fun(textdic,company,str(year1),1)[0])
+        sen2id[str(year1)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year1),1)[1]
+        ar[str(year1)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year1),1)[2]
+
+        testarti[str(year2)] = " ".join(read_allitem_function_ar.read_allitem_fun(textdic,company,str(year2),0)[0])
+        sen2id[str(year2)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year2),0)[1]
+        ar[str(year2)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year2),0)[2]
+        sendic = read_allitem_function_ar.sendic()
         
         #testarti[str(year)] = readitem7fun(textdic, company, year, "item7")[0]
         #print(testarti)
         #highlight
-        result1 = result(year,company)
+        result1 = result(year2,company)
         #senA = result['senA']
         #senB = result['senB']
         #keywordsB = result['keywordsB']
         #labels = result['labels']
         #'senA':senA, 'senB':senB, 'keywordsB':keywordsB,'labels':labels
         #'arti':arti
-
-        
-        
-        context = {'result':result1, 'testarti' :testarti, 'sen2id':sen2id, 'ar':ar}
+        '''
+        a = "&lt;span id=\&quot;108\&quot; style=\&quot;background-color:yellow\&quot;&gt;Net sales of skin care products increased 12%, or $341.1 million, to $3,227.1 million, primarily reflecting our strategic focus on growing this category through creativity and innovation, particularly high growth segments, such as products that address the visible signs of aging.&lt;/span&gt;"
+        x = ''
+        y = ''
+        for i in range(0,3000):
+            x = x + a
+            y = y + a
+        ar['2011'] = x
+        ar['2012'] = y
+        '''
+        context = {'result':result1, 'testarti' :testarti, 'sen2id':sen2id, 'ar':ar, 'sendic':sendic}
         return render(request, 'report1.html',context)
     
     return render(request, 'report1.html')

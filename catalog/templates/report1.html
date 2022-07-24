@@ -49,7 +49,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <a href="/" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw; font-size:25px; font-weight: bold;" class="font-weight-bold">
+            <a href="/catalog" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw; font-size:25px; font-weight: bold;" class="font-weight-bold">
                 Fin Bert    
             </a>
         </div>
@@ -140,12 +140,15 @@
                 <div class="col-md" id="parent_leftreport">
                     <div id="reportyear_curr"></div>
                     <div class="row" id="itemlist_leftreport">
+                        
+                        
                         <div id=itemlist2_curr >
             
                             <p class="report_itemlist_curr" :id="[item + '_curr']" onclick="reportitemfun_curr(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
                                                 
                         
                         </div>
+                        
                         <div class="col-md" id="leftreport">
                             <div id="report1"></div>
         
@@ -156,12 +159,14 @@
                 <div class="col-md" id="parent_rightreport">
                     <div id="reportyear_last"></div>
                     <div class="row" id="itemlist_rightreport">
+                        
                         <div id=itemlist2_last >
             
                             <p class="report_itemlist_last" :id="[item + '_last']" onclick="reportitemfun_last(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
                                                 
                         
                         </div>
+                        
                         <div class="col-md" id="rightreport">
                             <div id="report2"></div>
                         </div>
@@ -256,9 +261,9 @@
         })
 
         
-        companydic = {"1417663" : {name:"company1"},
-                    "1234123" : {name:"company2"},
-                    "26076" : {name:"company3"},
+        companydic = {"1469317" : {name:"company1"},
+                    "1468174" : {name:"company2"},
+                    "1467373" : {name:"company3"},
                     "1001250": {name:"company4"},
                     "1442145": {name:"company5"}}
 
@@ -300,6 +305,7 @@
             ],
             },
         });
+    
         var itemlist2_curr = new Vue({
             el: '#itemlist2_curr',
             delimiters: ['[[',']]'],
@@ -391,9 +397,9 @@
 
 
 
-        $(".report_itemlist_last").css("cursor","pointer")
+        //$(".report_itemlist_last").css("cursor","pointer")
         $(".report_itemlist_curr").css("cursor","pointer")
-
+        
 
     </script>
 
@@ -502,16 +508,22 @@
     testarti = "{{ testarti|safe }}";
     sen2id = "{{ sen2id|safe }}";
     ar = "{{ ar|safe }}";
+    sendic = "{{ sendic|safe }}";
+    
+    ar = ar.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\&quot;/g,'"');
+    console.log(ar)
     //console.log(id2sen)
     //console.log(testarti)
     
     testarti = testarti.replace(/'/g,"\"");
     sen2id = sen2id.replace(/'/g,"\"");
     ar = ar.replace(/'/g,"\"");
-    console.log(givevalue(ar,curryear))
+    sendic = sendic.replace(/'/g,"\"");
+    //console.log(givevalue(ar,curryear))
     const test1 = JSON.parse(testarti);
     const textdic = JSON.parse(sen2id);
     const arr = JSON.parse(ar);
+    sendic_b2a = JSON.parse(sendic);
     //console.log(arr)
     //console.log(textdic)
     
@@ -520,7 +532,7 @@
     result =  "{{ result|safe }}";
     result = result.replace(/'/g,"\"");
     const result1 = JSON.parse(result);
-    //console.log(result1)
+    console.log(result1)
     ////////////////////////////////////
     //only show given item in two years/
     //maybe I should give "type" to any every sentence
@@ -531,11 +543,11 @@
 
         let data1 = givevalue(test1,lastyear)
         let data2 = givevalue(test1,curryear)
-        console.log(data1)
+        //console.log(data1)
         let sen2id1 = givevalue(textdic,lastyear)
         let sen2id2 = givevalue(textdic,curryear)
-        console.log(sen2id1["1001250_11_ITEM1_P100_S4"],result1.type1[1].senA)
-        console.log(sen2id1)
+        //console.log(sen2id1["1001250_11_ITEM1_P100_S4"],result1.type1[1].senA)
+        //console.log(sen2id1)
         let arr1 = givevalue(arr,lastyear)
         let arr2 = givevalue(arr,curryear)
         //console.log(Object.keys(sen2id1))
@@ -648,17 +660,17 @@
         }
 
         //experiment create many span
+        
         /*
-        var start = Date.now()
-        for(var i=0;i<1000;i++){
+        for(var i=0;i<50;i++){
             createspan(Object.keys(sen2id2)[i],sen2id2[Object.keys(sen2id2)[i]],1)
             createspan(Object.keys(sen2id1)[i],sen2id1[Object.keys(sen2id1)[i]],0)
         }
-        var end = Date.now() - start
-        console.log(end)
-        console.log(apple)
         */
+
+
         //give first line id
+        
         itemdis_curr = []
         itemdis_last = []
         itembetwdis_curr = []
@@ -669,7 +681,7 @@
             //console.log(sen2id1[id1],sen2id2[id2])
             let check1 = document.getElementById(id1)
             let check2 = document.getElementById(id2)
-            sen2id1[id1]
+            /sen2id1[id1]
             var para1 = paragraph1.innerHTML;
             var para2 = paragraph2.innerHTML;
             
@@ -679,17 +691,18 @@
 
             
         }
+        //give first line id end
         
         
         
-        /////itemlist/////
         //distance between items
+        
         for(var i=0;i<19;i++){
-            /*itembetwdis_curr.push(itemdis_curr[i+1]-itemdis_curr[i])
-            itembetwdis_last.push(itemdis_last[i+1]-itemdis_last[i])*/
+            //itembetwdis_curr.push(itemdis_curr[i+1]-itemdis_curr[i])
+            //itembetwdis_last.push(itemdis_last[i+1]-itemdis_last[i])
             itembetwdis_curr.push(itemdis_curr[i+1]-itemdis_curr[i])
             itembetwdis_last.push(itemdis_last[i+1]-itemdis_last[i])
-        }
+        } 
         let sum_curr=0
         let sum_last=0
         itembetwdis_curr.forEach(function(element) {
@@ -698,6 +711,7 @@
         itembetwdis_last.forEach(function(element) {
             sum_last+=element;
         });
+      
 
         let report1 = document.getElementById("report1").scrollHeight
         let report2 = document.getElementById("report2").scrollHeight
@@ -709,7 +723,6 @@
         itembetwdis_last.forEach(function(element){
             unitdis_last.push(element / report2)
         })
-        
         
 
         //give marginbottom 
@@ -750,11 +763,43 @@
         itemlist_givestyle(100-itemlistcal(unitdis_curr)[0]*2,itemlistcal(unitdis_curr)[1],unitdis_curr,itemlist_curr)
         itemlist_givestyle(100-itemlistcal(unitdis_last)[0]*2,itemlistcal(unitdis_last)[1],unitdis_last,itemlist_last)
         
-        /////itemlist end/////
-
-
-
-        /* give id of every type + build sendic*/
+        for(var i=0; i<result1.type2.length;i++){
+            senbid = result1.type2[i].senB
+            score[senbid] = result1.type2[i].prob
+            //console.log(score)
+            //type2 with type3 => onmouseover take off
+            let b = document.getElementById(senbid)
+            let senbcontent = b.innerHTML
+            let brokensenb = senbcontent.split(" ");
+            
+            b.innerHTML = ''
+            brokensenb.map((part,i) => {
+                var word = document.createElement("span");
+                var space = document.createElement("span");
+                word.className = "senbwords" 
+                word.innerHTML = part
+                space.className = "senbwords" 
+                space.innerHTML = ' '
+                b.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
+            })
+            let senbword1 = document.getElementById(senbid).getElementsByClassName("senbwords")
+            
+            for(var m=0;m<(brokensenb.length*2-1);m++){
+                senbword1[m].id = senbid + "_" + m
+                //console.log(senbword1[m])
+            }
+        }   
+        /*
+        let sena = document.getElementsByClassName("senA")
+        let senb = document.getElementsByClassName("senB")
+        senb.style.borderRadius = "25px"
+        senb.style.padding = "0.02em 0"
+        
+        sena.style.borderRadius = "25px"
+        sena.style.padding = "0.02em 0"
+        sena.style.opacity = 0.5
+        */
+        /* give id of every type + build sendic
         sendic_b2a = {}
         sendic_b2a['type1'] = {}
         sendic_b2a['type2'] = {}
@@ -763,14 +808,17 @@
         sendic_a2b['type1'] = {}
         sendic_a2b['type2'] = {}
         sendic_a2b['type3'] = {}
-
+        */
         ////type2////
         
-       
+       /*
         for(var i=0; i<result1.type2.length;i++){
             if (typeof(result1.type2[i].senA)=='object'){
                 for(var j=0; j<result1.type2[i].senA.length;j++){
                     senaid = result1.type2[i].senA[j]
+                    if(senaid=='1001250_11_ITEM7_P117_S0'){
+                        console.log('here',sen2id1[senaid])
+                    }
                     senatext = sen2id1[senaid]
                     //console.log(senaid,senatext)
                     createspan(senaid,senatext,0)
@@ -794,7 +842,7 @@
             senbid = result1.type2[i].senB
             senbtext = sen2id2[senbid]
             createspan(senbid,senbtext,1)
-            let b = document.getElementById(result1.type2[i].senB)
+            let b = document.getElementById(senbid)
             b.className = b.className + " type2 "// + i
 
             b.setAttribute("onmouseover","onmouse(this)")
@@ -803,7 +851,9 @@
 
             //token
             //prob = result1.type2[i].prob
+            //console.log(result1.type2[i].prob)
             score[senbid] = result1.type2[i].prob
+            //console.log(score)
             //type2 with type3 => onmouseover take off
             let senbcontent = b.innerHTML
             let brokensenb = senbcontent.split(" ");
@@ -833,8 +883,7 @@
         
         }
         ////type3////
-
-        
+        /*
         for(var i=0; i<result1.type3.length;i++){
             if (typeof(result1.type3[i].senA)=='object'){
                 for(var j=0; j<result1.type3[i].senA.length;j++){
@@ -875,6 +924,7 @@
             
             sendic_b2a['type3'][result1.type3[i].senB] = result1.type3[i].senA
         }
+        
         ////type1////
         for(var i=0; i<result1.type1.length;i++){
             /*
@@ -905,24 +955,32 @@
                 a.className = a.className + " type1 "// + i + " " + j
 
                 sendic_a2b['type1'][result1.type1[i].senA] = result1.type1[i].senB
-            }*/
+            }
             senbid = result1.type1[i].senB
             let check2 = document.getElementById(senbid)
             if (check2==null){
                 senbtext = sen2id2[senbid]
-                createspan(senbid,senbtext,1)  
+                createspan(senbid,senbtext,1)
+                var b1 = document.getElementById(senbid)
+                b1.className = b1.className + " type1 "// + i  
             }
-            let b1 = document.getElementById(senbid)
-            b1.className = b1.className + " type1 "// + i
+            else{
+                var b1 = document.getElementById(senbid)
+                if(b1.className.includes('type1')==false){
+                    b1.className = b1.className + " type1 "// + i
+                }
+                
+            }
             
-            sendic_b2a['type1'][result1.type1[i].senB] = result1.type1[i].senA
+            
+            //sendic_b2a['type1'][result1.type1[i].senB] = result1.type1[i].senA
 
             ////
 
             
         }   
         
-        
+        */
         
         //give first line of item id
 
@@ -938,9 +996,11 @@
 
         
         $(".type3").css('backgroundColor', "#f3e7ff")
-        $(".type3").css('opacity', 0.25)
-        $(".type2").css('backgroundColor', "#ffbe40")
+        
         $(".type1").css('backgroundColor', "#dfface")
+        $(".senA.type1").css('backgroundColor', "")
+        $(".type2").css('backgroundColor', "#ffbe40")
+        
 
 
         /////////remove onclick effect ??? senB or senA/////
@@ -1208,343 +1268,6 @@
 
 
 
-        /*
-       
-        
-            
-        if(result==null){
-            let id1 = "report1_" + item
-            let id2 = "report2_" + item
-            var indexA = []
-            var indexB = []
-            let paragraph1 = document.getElementById(id1);
-            let paragraph2 = document.getElementById(id2);
-            //console.log(paragraph1)
-            data1.map((part,i) => {
-                
-                paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
-            
-            })
-            data2.map((part,i) => {
-
-                paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
-            
-            
-            })
-        }
-        else{
-            let id2 = "report1_" + item
-            let id1 = "report2_" + item
-            var indexA = []
-            var indexB = []
-
-            //collect all of highlight sentence's index
-            for (var j=0; j < result.length;j++){
-                let label = result[j].prob;
-                
-                id = "senb_" + item + "_" + j
-                score[id] = label
-                
-                let senA = result[j].senA
-                let senB = result[j].senB
-                //console.log(senA,senB)
-                //console.log(data1)
-                indexA.push(data1.indexOf(senA))
-                indexB.push(data2.indexOf(senB))
-                
-            }
-            //console.log(indexA,indexB)
-            let paragraph1 = document.getElementById(id1);
-            let paragraph2 = document.getElementById(id2);
-            //console.log(paragraph1)
-            data1.map((part,i) => {
-                if (indexA.includes(i)){
-                    var sena = document.createElement("span");
-                    
-                    sena.className = "senA_" + item
-                    sena.setAttribute("onclick","click_a(this)")
-                    
-                    sena.innerHTML = part
-                    sena.style.backgroundColor = "#FFFF66"
-                    sena.style.borderRadius = "25px"
-                    sena.style.cursor = "pointer"
-                    sena.style.padding = "0.25em 0"
-                    paragraph1.innerHTML += sena.outerHTML
-                }else{
-                    paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
-                }
-            })
-            
-            data2.map((part,i) => {
-
-                if (indexB.includes(i)){
-                    var senb = document.createElement("span");
-                    senb.className = "senB_" + item
-                    senb.setAttribute("onclick","click_b(this)")
-                    senb.setAttribute("onmouseover","onmouse(this)")
-                    senb.setAttribute("onmouseout","outmouse(this)")
-                
-                    senb.innerHTML = part
-                    senb.style.backgroundColor = "#FFFF66"
-                    senb.style.borderRadius = "25px"
-                    senb.style.cursor = "pointer"
-                    senb.style.padding = "0.25em 0"
-                    paragraph2.innerHTML += senb.outerHTML
-                }else{
-                    paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
-                }	
-            
-            })
-            
-            
-            
-            senaid = "senA_" + item
-            senbid = "senB_" + item
-            var senb = document.getElementsByClassName(senbid);
-            var sena = document.getElementsByClassName(senaid);
-            //console.log(sena[1])
-            
-            
-            senb_item[item] = []
-            sena_item[item] = []
-            
-            sendic_b2a[item] = {}
-            sendic_a2b[item] = {}
-            //highlight words in sen
-            for (var n= 0; n < result.length; n++) {
-                senb[n].id = "senb_" + item + "_" + n;
-                sena[n].id = "sena_" + item + "_" + n;
-                
-                
-                
-                senbword = document.getElementById(senb[n].id)
-                let senbcontent = senbword.innerHTML
-                let brokensenb = senbcontent.split(" ");
-                
-                senbword.innerHTML = ''
-                brokensenb.map((part,i) => {
-                    var word = document.createElement("span");
-                    var space = document.createElement("span");
-                    word.className = "senbwords_" + item
-                    word.innerHTML = part
-                    space.className = "senbwords_" + item
-                    space.innerHTML = ' '
-                    //console.log(word)
-                    senbword.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
-                })
-                
-                for(var m=0;m<(brokensenb.length*2-1);m++){
-                    let senbword1 = document.querySelectorAll('#'+senb[n].id+ ' .senbwords_' + item)
-                    
-                    senbword1[m].id = senb[n].id + "_" + m
-                    //console.log(senbword1[m])
-                }
-
-                
-                senb_item[item].push(senb[n].id)
-                
-                sena_item[item].push(sena[n].id)
-                
-                //adjust
-                
-                sendic_b2a[item][senb[n].id] = sena[n].id;
-                sendic_a2b[item][sena[n].id] = senb[n].id;
-            }
-            let name = ".senB_" + item
-            
-            $(name).hover(function(){
-                $(name).css("transition-duration","0.3s");
-                $(name).css("opacity","1")
-                //$(name).css("fontSize","18.075px")
-                $(name).css("box-shadow","0 5px 15px 0px rgba(0,0,0,0.125)")
-            },function(){
-                
-                $(name).css("opacity","1")
-                //$(name).css("fontSize","18")
-                $(name).css("box-shadow","0 0 0 0 rgba(0,0,0,0)")
-            })
-        }*/
-
-        //all of item in two years
-        /*
-        for (var jj=0;jj<20;jj++){
-            let data1 = givevalue(givevalue(test1,lastyear),vm2.$data.list[ii])
-            let data2 = givevalue(givevalue(test1,curryear),vm2.$data.list[ii])
-            create_reportrow(vm2.$data.list[jj])
-            
-            if(vm2.$data.list[jj]==item){
-                curritemid = "reportrow_" + item
-                curr = document.getElementById(curritemid)
-                curr.style.display = "flex"
-            }
-        }
-        for (var ii=0; ii < 20;ii++){
-            let data1 = givevalue(givevalue(test1,lastyear),vm2.$data.list[ii])
-            let data2 = givevalue(givevalue(test1,curryear),vm2.$data.list[ii])
-            
-            
-            
-            //writereport(data1,data2,vm2.$data.list[i])
-            //console.log(ii,vm2.$data.list[ii])
-
-
-            //every item's highlight sentence
-            result = givevalue(givevalue(result1,curryear),vm2.$data.list[ii])
-            console.log(result==null)
-            //if result==null : create report only
-            if(result==null){
-                let id1 = "report1_" + vm2.$data.list[ii]
-                let id2 = "report2_" + vm2.$data.list[ii]
-                var indexA = []
-                var indexB = []
-                let paragraph1 = document.getElementById(id1);
-                let paragraph2 = document.getElementById(id2);
-                //console.log(paragraph1)
-                data1.map((part,i) => {
-                    
-                    paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
-                
-                })
-                data2.map((part,i) => {
-
-                    paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
-                
-                
-                })
-            }
-            else{
-                let id1 = "report1_" + vm2.$data.list[ii]
-                let id2 = "report2_" + vm2.$data.list[ii]
-                var indexA = []
-                var indexB = []
-
-                //collect all of highlight sentence's index
-                for (var j=0; j < result.length;j++){
-                    let label = result[j].labels;
-                    
-                    id = "senb_" + vm2.$data.list[ii] + "_" + j
-                    score[id] = label
-                    
-                    let senA = result[j].senA
-                    let senB = result[j].senB
-                    //console.log(senA,senB)
-                    //console.log(data1)
-                    indexA.push(data1.indexOf(senA))
-                    indexB.push(data2.indexOf(senB))
-                    
-                }
-                //console.log(indexA,indexB)
-                let paragraph1 = document.getElementById(id1);
-                let paragraph2 = document.getElementById(id2);
-                //console.log(paragraph1)
-                data1.map((part,i) => {
-                    if (indexA.includes(i)){
-                        var sena = document.createElement("span");
-                        
-                        sena.className = "senA_" + vm2.$data.list[ii]
-                        sena.setAttribute("onclick","click_a(this)")
-                        
-                        sena.innerHTML = part
-                        sena.style.backgroundColor = "#FFFF66"
-                        sena.style.borderRadius = "25px"
-                        sena.style.cursor = "pointer"
-                        sena.style.padding = "0.25em 0"
-                        paragraph1.innerHTML += sena.outerHTML
-                    }else{
-                        paragraph1.innerHTML += part == "\n" ? '<br>' : part + ' '
-                    }
-                })
-                data2.map((part,i) => {
-
-                    if (indexB.includes(i)){
-                        var senb = document.createElement("span");
-                        senb.className = "senB_" + vm2.$data.list[ii]
-                        senb.setAttribute("onclick","click_b(this)")
-                        senb.setAttribute("onmouseover","onmouse(this)")
-                        senb.setAttribute("onmouseout","outmouse(this)")
-                    
-                        senb.innerHTML = part
-                        senb.style.backgroundColor = "#FFFF66"
-                        senb.style.borderRadius = "25px"
-                        senb.style.cursor = "pointer"
-                        senb.style.padding = "0.25em 0"
-                        paragraph2.innerHTML += senb.outerHTML
-                    }else{
-                        paragraph2.innerHTML += part == "\n" ? '<br>' : part + ' '
-                    }	
-                
-                })
-                
-                
-                
-                senaid = "senA_" + vm2.$data.list[ii]
-                senbid = "senB_" + vm2.$data.list[ii]
-                var senb = document.getElementsByClassName(senbid);
-                var sena = document.getElementsByClassName(senaid);
-                //console.log(sena[1])
-                
-                
-                senb_item[vm2.$data.list[ii]] = []
-                sena_item[vm2.$data.list[ii]] = []
-                
-                sendic_b2a[vm2.$data.list[ii]] = {}
-                sendic_a2b[vm2.$data.list[ii]] = {}
-                //highlight words in sen
-                for (var n= 0; n < result.length; n++) {
-                    senb[n].id = "senb_" + vm2.$data.list[ii] + "_" + n;
-                    sena[n].id = "sena_" + vm2.$data.list[ii] + "_" + n;
-                    
-                    
-                    
-                    senbword = document.getElementById(senb[n].id)
-                    let senbcontent = senbword.innerHTML
-                    let brokensenb = senbcontent.split(" ");
-                    
-                    senbword.innerHTML = ''
-                    brokensenb.map((part,i) => {
-                        var word = document.createElement("span");
-                        var space = document.createElement("span");
-                        word.className = "senbwords_" + vm2.$data.list[ii]
-                        word.innerHTML = part
-                        space.className = "senbwords_" + vm2.$data.list[ii]
-                        space.innerHTML = ' '
-                        //console.log(word)
-                        senbword.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
-                    })
-                    
-                    for(var m=0;m<(brokensenb.length*2-1);m++){
-                        let senbword1 = document.querySelectorAll('#'+senb[n].id+ ' .senbwords_' + vm2.$data.list[ii])
-                        
-                        senbword1[m].id = senb[n].id + "_" + m
-                        //console.log(senbword1[m])
-                    }
-
-                    
-                    senb_item[vm2.$data.list[ii]].push(senb[n].id)
-                    
-                    sena_item[vm2.$data.list[ii]].push(sena[n].id)
-                    
-                    //adjust
-                    
-                    sendic_b2a[vm2.$data.list[ii]][senb[n].id] = sena[n].id;
-                    sendic_a2b[vm2.$data.list[ii]][sena[n].id] = senb[n].id;
-                }
-                let name = ".senB_" + vm2.$data.list[ii]
-                
-                $(name).hover(function(){
-                    $(name).css("transition-duration","0.3s");
-                    $(name).css("opacity","1")
-                    $(name).css("fontSize","18.075px")
-                    $(name).css("box-shadow","0 5px 15px 0px rgba(0,0,0,0.125)")
-                },function(){
-                    
-                    $(name).css("opacity","1")
-                    $(name).css("fontSize","18")
-                    $(name).css("box-shadow","0 0 0 0 rgba(0,0,0,0)")
-                })
-            }
-            
-        }*/
     });
    
 
