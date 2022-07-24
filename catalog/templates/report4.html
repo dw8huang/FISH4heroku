@@ -57,7 +57,7 @@
         <div class="row">
             <div>
                 <div id=topselect class="row" style="margin-top:3vh;">
-                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report1' %}">
+                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report4' %}">
                         {% csrf_token %}
         
                             <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
@@ -141,14 +141,14 @@
                     <div id="reportyear_curr"></div>
                     <div class="row" id="itemlist_leftreport">
                         
-                        <!--
+                        
                         <div id=itemlist2_curr >
             
                             <p class="report_itemlist_curr" :id="[item + '_curr']" onclick="reportitemfun_curr(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
                                                 
                         
                         </div>
-                        -->
+                        
                         <div class="col-md" id="leftreport">
                             <div id="report1"></div>
         
@@ -159,14 +159,14 @@
                 <div class="col-md" id="parent_rightreport">
                     <div id="reportyear_last"></div>
                     <div class="row" id="itemlist_rightreport">
-                        <!--
+                        
                         <div id=itemlist2_last >
             
                             <p class="report_itemlist_last" :id="[item + '_last']" onclick="reportitemfun_last(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
                                                 
                         
                         </div>
-                        -->
+                        
                         <div class="col-md" id="rightreport">
                             <div id="report2"></div>
                         </div>
@@ -182,7 +182,7 @@
         
         <!--last & next year buttom-->
         <div class="row" id="year_button">
-            <form id="leftform" method="POST" action="{% url 'report1' %}" enctype="multipart/form-data" role="form">
+            <form id="leftform" method="POST" action="{% url 'report4' %}" enctype="multipart/form-data" role="form">
                 {%csrf_token %}
                 <input type="hidden" id="left_year" name="year" value=''/>
                 <input type="hidden" id="left_company" name="company" value=''/>
@@ -305,7 +305,7 @@
             ],
             },
         });
-        /*
+    
         var itemlist2_curr = new Vue({
             el: '#itemlist2_curr',
             delimiters: ['[[',']]'],
@@ -397,9 +397,9 @@
 
 
 
-        $(".report_itemlist_last").css("cursor","pointer")
+        //$(".report_itemlist_last").css("cursor","pointer")
         $(".report_itemlist_curr").css("cursor","pointer")
-        */
+        
 
     </script>
 
@@ -508,16 +508,22 @@
     testarti = "{{ testarti|safe }}";
     sen2id = "{{ sen2id|safe }}";
     ar = "{{ ar|safe }}";
+    sendic = "{{ sendic|safe }}";
+    
+    ar = ar.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\&quot;/g,'"');
+    console.log(ar)
     //console.log(id2sen)
     //console.log(testarti)
     
     testarti = testarti.replace(/'/g,"\"");
     sen2id = sen2id.replace(/'/g,"\"");
     ar = ar.replace(/'/g,"\"");
-    console.log(givevalue(ar,curryear))
+    sendic = sendic.replace(/'/g,"\"");
+    //console.log(givevalue(ar,curryear))
     const test1 = JSON.parse(testarti);
     const textdic = JSON.parse(sen2id);
     const arr = JSON.parse(ar);
+    sendic_b2a = JSON.parse(sendic);
     //console.log(arr)
     //console.log(textdic)
     
@@ -526,7 +532,7 @@
     result =  "{{ result|safe }}";
     result = result.replace(/'/g,"\"");
     const result1 = JSON.parse(result);
-    //console.log(result1)
+    console.log(result1)
     ////////////////////////////////////
     //only show given item in two years/
     //maybe I should give "type" to any every sentence
@@ -664,7 +670,7 @@
 
 
         //give first line id
-        /*
+        
         itemdis_curr = []
         itemdis_last = []
         itembetwdis_curr = []
@@ -675,7 +681,7 @@
             //console.log(sen2id1[id1],sen2id2[id2])
             let check1 = document.getElementById(id1)
             let check2 = document.getElementById(id2)
-            sen2id1[id1]
+            /sen2id1[id1]
             var para1 = paragraph1.innerHTML;
             var para2 = paragraph2.innerHTML;
             
@@ -686,11 +692,11 @@
             
         }
         //give first line id end
-        */
+        
         
         
         //distance between items
-        /*
+        
         for(var i=0;i<19;i++){
             //itembetwdis_curr.push(itemdis_curr[i+1]-itemdis_curr[i])
             //itembetwdis_last.push(itemdis_last[i+1]-itemdis_last[i])
@@ -756,13 +762,13 @@
         
         itemlist_givestyle(100-itemlistcal(unitdis_curr)[0]*2,itemlistcal(unitdis_curr)[1],unitdis_curr,itemlist_curr)
         itemlist_givestyle(100-itemlistcal(unitdis_last)[0]*2,itemlistcal(unitdis_last)[1],unitdis_last,itemlist_last)
-        */
+        
         
 
 
 
 
-        /* give id of every type + build sendic*/
+        /* give id of every type + build sendic
         sendic_b2a = {}
         sendic_b2a['type1'] = {}
         sendic_b2a['type2'] = {}
@@ -771,14 +777,17 @@
         sendic_a2b['type1'] = {}
         sendic_a2b['type2'] = {}
         sendic_a2b['type3'] = {}
-
+        */
         ////type2////
         
-       
+       /*
         for(var i=0; i<result1.type2.length;i++){
             if (typeof(result1.type2[i].senA)=='object'){
                 for(var j=0; j<result1.type2[i].senA.length;j++){
                     senaid = result1.type2[i].senA[j]
+                    if(senaid=='1001250_11_ITEM7_P117_S0'){
+                        console.log('here',sen2id1[senaid])
+                    }
                     senatext = sen2id1[senaid]
                     //console.log(senaid,senatext)
                     createspan(senaid,senatext,0)
@@ -811,7 +820,9 @@
 
             //token
             //prob = result1.type2[i].prob
+            //console.log(result1.type2[i].prob)
             score[senbid] = result1.type2[i].prob
+            //console.log(score)
             //type2 with type3 => onmouseover take off
             let senbcontent = b.innerHTML
             let brokensenb = senbcontent.split(" ");
@@ -841,6 +852,7 @@
         
         }
         ////type3////
+        /*
         for(var i=0; i<result1.type3.length;i++){
             if (typeof(result1.type3[i].senA)=='object'){
                 for(var j=0; j<result1.type3[i].senA.length;j++){
@@ -881,8 +893,10 @@
             
             sendic_b2a['type3'][result1.type3[i].senB] = result1.type3[i].senA
         }
+        
         ////type1////
         for(var i=0; i<result1.type1.length;i++){
+            /*
             if (typeof(result1.type1[i].senA)=='object'){
                 for(var j=0; j<result1.type1[i].senA.length;j++){
                     senaid = result1.type1[i].senA[j]
@@ -915,19 +929,27 @@
             let check2 = document.getElementById(senbid)
             if (check2==null){
                 senbtext = sen2id2[senbid]
-                createspan(senbid,senbtext,1)  
+                createspan(senbid,senbtext,1)
+                var b1 = document.getElementById(senbid)
+                b1.className = b1.className + " type1 "// + i  
             }
-            let b1 = document.getElementById(senbid)
-            b1.className = b1.className + " type1 "// + i
+            else{
+                var b1 = document.getElementById(senbid)
+                if(b1.className.includes('type1')==false){
+                    b1.className = b1.className + " type1 "// + i
+                }
+                
+            }
             
-            sendic_b2a['type1'][result1.type1[i].senB] = result1.type1[i].senA
+            
+            //sendic_b2a['type1'][result1.type1[i].senB] = result1.type1[i].senA
 
             ////
 
             
         }   
         
-        
+        */
         
         //give first line of item id
 
@@ -943,9 +965,9 @@
 
         
         $(".type3").css('backgroundColor', "#f3e7ff")
-        $(".type3").css('opacity', 0.25)
-        $(".type2").css('backgroundColor', "#ffbe40")
         $(".type1").css('backgroundColor', "#dfface")
+        $(".type2").css('backgroundColor', "#ffbe40")
+        
 
 
         /////////remove onclick effect ??? senB or senA/////

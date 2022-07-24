@@ -63,8 +63,11 @@ function generateColor(colorStart,colorEnd,colorCount){
 //function to return color index according to score
 function score2color(score){
     //generate color
+    //console.log(typeof(score))
+    s = score*100 
+    //console.log("score:",s)
     var tmp = generateColor('#ed4264','#ffedbc',101);
-    //console.log(tmp)
-    var scorecolor = tmp[score*100]
+    //console.log(tmp[57])
+    var scorecolor = tmp[parseInt(s)]
     return(scorecolor)
 }

@@ -201,8 +201,11 @@ function changecolor(eleid){
     let color = []
     //console.log(score[eleid])
     for(var j=0; j<Object.keys(score[eleid]).length;j++){
+        //console.log(score[eleid][j])
         c = score2color(score[eleid][j])
+        console.log(c)
         color.push(c)
+        
     }
     //console.log(color)
     
