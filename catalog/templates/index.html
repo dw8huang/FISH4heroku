@@ -33,7 +33,7 @@
                 </div>    
                 <div class="row" style="margin-top:8vh;">
                     
-                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report' %}">
+                    <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report1' %}">
                         {% csrf_token %}
                         <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
                             <option value="">Report Year</option>
@@ -102,7 +102,9 @@
         data: {
             list: { 
                 "1417663" : {name:"company1"},
-                "1234123" : {name:"company2"}
+                "1234123" : {name:"company2"},
+                "1001250": {name:"company4"},
+                "1442145": {name:"company5"}
             }
             ,
         },
