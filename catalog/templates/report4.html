@@ -140,12 +140,15 @@
                 <div class="col-md" id="parent_leftreport">
                     <div id="reportyear_curr"></div>
                     <div class="row" id="itemlist_leftreport">
+                        
+                        <!--
                         <div id=itemlist2_curr >
             
                             <p class="report_itemlist_curr" :id="[item + '_curr']" onclick="reportitemfun_curr(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
                                                 
                         
                         </div>
+                        -->
                         <div class="col-md" id="leftreport">
                             <div id="report1"></div>
         
@@ -156,12 +159,14 @@
                 <div class="col-md" id="parent_rightreport">
                     <div id="reportyear_last"></div>
                     <div class="row" id="itemlist_rightreport">
+                        <!--
                         <div id=itemlist2_last >
             
                             <p class="report_itemlist_last" :id="[item + '_last']" onclick="reportitemfun_last(this)" v-for="(item,index,key) in splitresult">[[item]]</p>
                                                 
                         
                         </div>
+                        -->
                         <div class="col-md" id="rightreport">
                             <div id="report2"></div>
                         </div>
@@ -300,6 +305,7 @@
             ],
             },
         });
+        /*
         var itemlist2_curr = new Vue({
             el: '#itemlist2_curr',
             delimiters: ['[[',']]'],
@@ -393,7 +399,7 @@
 
         $(".report_itemlist_last").css("cursor","pointer")
         $(".report_itemlist_curr").css("cursor","pointer")
-
+        */
 
     </script>
 
@@ -531,11 +537,11 @@
 
         let data1 = givevalue(test1,lastyear)
         let data2 = givevalue(test1,curryear)
-        console.log(data1)
+        //console.log(data1)
         let sen2id1 = givevalue(textdic,lastyear)
         let sen2id2 = givevalue(textdic,curryear)
-        console.log(sen2id1["1001250_11_ITEM1_P100_S4"],result1.type1[1].senA)
-        console.log(sen2id1)
+        //console.log(sen2id1["1001250_11_ITEM1_P100_S4"],result1.type1[1].senA)
+        //console.log(sen2id1)
         let arr1 = givevalue(arr,lastyear)
         let arr2 = givevalue(arr,curryear)
         //console.log(Object.keys(sen2id1))
@@ -796,7 +802,7 @@
             senbid = result1.type2[i].senB
             senbtext = sen2id2[senbid]
             createspan(senbid,senbtext,1)
-            let b = document.getElementById(result1.type2[i].senB)
+            let b = document.getElementById(senbid)
             b.className = b.className + " type2 "// + i
 
             b.setAttribute("onmouseover","onmouse(this)")

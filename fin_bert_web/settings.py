@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-)e!*mai0(fp(yb(a!*5n4f!hb=hz6f4wabd6m@%+#!r=3*-$rc
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'fish4heroku.herokuapp.com'
+    'fish4heroku.herokuapp.com',
+    '127.0.0.1'
 ]
 
 
