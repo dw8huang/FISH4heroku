@@ -50,7 +50,7 @@
     <div class="container-fluid">
         <div class="row">
             <a href="/catalog" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw; font-size:25px; font-weight: bold;" class="font-weight-bold">
-                Fin Bert    
+                FISH   
             </a>
         </div>
         <!--selectrow-->
@@ -60,6 +60,13 @@
                     <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report1' %}">
                         {% csrf_token %}
         
+                            
+                        
+                            <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
+                                <option value="">Company List</option>
+                                <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
+                                
+                            </select>    
                             <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
                                 <option value="">Report Year</option>
                                 <option value="2012">2012</option>
@@ -69,14 +76,7 @@
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
-                            </select>
-                        
-                            <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
-                                <option value="">Company List</option>
-                                <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
-                                
-                            </select>    
-                                                        
+                            </select>                 
                             
                             <select id="itemlist" name="item" class="ui selection dropdown" style="padding: 5px 5px;">
                                 <option value="">Item</option>
@@ -249,15 +249,6 @@
                 
             })
 
-            /*
-            var s = document.querySelectorAll(".left_itembutton")
-            var t = document.querySelectorAll(".right_itembutton")
-            for(var i=0;i<20;i++){
-                s[i].id = "left_itembutton_" + i
-                s[i].setAttribute("onclick","click_item(this)")
-                //t[i].id = "right_itembutton_" + i
-                //t[i].setAttribute("onclick","click_item(this)")
-            }*/
         })
 
         
@@ -397,7 +388,7 @@
 
 
 
-        //$(".report_itemlist_last").css("cursor","pointer")
+        $(".report_itemlist_last").css("cursor","pointer")
         $(".report_itemlist_curr").css("cursor","pointer")
         
 
@@ -443,14 +434,7 @@
             let item = localStorage.getItem("itemnow")
             let leftyear = (parseInt(rightyear) - 1).toString()
             //console.log(document.getElementById("leftinfo_year"))
-            /*
-            document.getElementById("leftinfo_year").innerHTML = "from " + leftyear
-            document.getElementById("leftinfo_company").innerHTML = vm1.$data.list[company].name //+ " " + "(" + company + ")"
-            document.getElementById("leftinfo_item").innerHTML = item
-            document.getElementById("rightinfo_year").innerHTML = "from " + rightyear
-            document.getElementById("rightinfo_company").innerHTML = vm1.$data.list[company].name //+ " " + "(" + company + ")"
-            //document.getElementById("rightinfo_item").innerHTML = item
-            */
+           
             let lastyear = parseInt(leftyear)-1
             let nextyear = parseInt(rightyear)+1
             /*
@@ -511,7 +495,7 @@
     sendic = "{{ sendic|safe }}";
     
     ar = ar.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\&quot;/g,'"');
-    console.log(ar)
+    //console.log(ar)
     //console.log(id2sen)
     //console.log(testarti)
     
@@ -532,7 +516,7 @@
     result =  "{{ result|safe }}";
     result = result.replace(/'/g,"\"");
     const result1 = JSON.parse(result);
-    console.log(result1)
+    //console.log(result1)
     ////////////////////////////////////
     //only show given item in two years/
     //maybe I should give "type" to any every sentence
@@ -595,78 +579,7 @@
             
         }
        
-        //create span and give classname
-        function createspan(id,text,para2){
-            if (para2==1){
-                var isexist = document.getElementById(id)
-                if(isexist == null){
-                    var para2 = paragraph2.innerHTML;
-                    var index = para2.indexOf(text);
-                    var senb = document.createElement("span");
-                    senb.id = id
-                    senb.className = "senB"
-                    senb.setAttribute("onclick","click_b(this)")
-                    senb.style.borderRadius = "25px"
-                    senb.style.cursor = "pointer"
-                    senb.style.padding = "0.02em 0"
-                    senb.innerHTML = para2.substring(index,index+text.length)
-                    
-                    if (index >= 0) { 
-                        para2 = para2.substring(0,index) + senb.outerHTML + para2.substring(index + text.length);
-                        paragraph2.innerHTML = para2;
-                    }
-                }
-                else{
-                    var senb = document.getElementById(id)
-                    senb.className = "senB"
-                    senb.setAttribute("onclick","click_b(this)")
-                    senb.style.borderRadius = "25px"
-                    senb.style.cursor = "pointer"
-                    senb.style.padding = "0.02em 0"
-                }
-                
-            }
-            else{
-                var isexist = document.getElementById(id)
-                if(isexist==null){
-                    var para1 = paragraph1.innerHTML;
-                    var index = para1.indexOf(text);
-                    var sena = document.createElement("span");
-                    sena.id = id
-                    sena.className = "senA"
-                    //sena.setAttribute("onclick","click_a(this)")
-                    sena.style.borderRadius = "25px"
-                    //sena.style.cursor = "pointer"
-                    sena.style.padding = "0.02em 0"
-                    sena.style.opacity = 0.5
-                    sena.innerHTML = para1.substring(index,index+text.length)
-                    
-                    if (index >= 0) { 
-                        para1 = para1.substring(0,index) + sena.outerHTML + para1.substring(index + text.length);
-                        paragraph1.innerHTML = para1;
-                    }
-                }
-                else{
-                    var sena = document.getElementById(id)
-                    sena.className = "senA"
-                    //sena.setAttribute("onclick","click_a(this)")
-                    sena.style.borderRadius = "25px"
-                    //sena.style.cursor = "pointer"
-                    sena.style.padding = "0.02em 0"
-                    sena.style.opacity = 0.5
-                }
-                
-            }
-        }
 
-        //experiment create many span
-        
-        /*
-        for(var i=0;i<50;i++){
-            createspan(Object.keys(sen2id2)[i],sen2id2[Object.keys(sen2id2)[i]],1)
-            createspan(Object.keys(sen2id1)[i],sen2id1[Object.keys(sen2id1)[i]],0)
-        }
-        */
 
 
         //give first line id
@@ -750,7 +663,7 @@
                 else{
                     var a = unitdis[i]/numbig2sum*restheight*0.95
                     if(a<2){
-                        console.log(i)
+                        //console.log(i)
                         itemlist[i].style.height = "2%"
                     }
                     else{
@@ -763,6 +676,8 @@
         itemlist_givestyle(100-itemlistcal(unitdis_curr)[0]*2,itemlistcal(unitdis_curr)[1],unitdis_curr,itemlist_curr)
         itemlist_givestyle(100-itemlistcal(unitdis_last)[0]*2,itemlistcal(unitdis_last)[1],unitdis_last,itemlist_last)
         
+
+        ///type2 token highlight
         for(var i=0; i<result1.type2.length;i++){
             senbid = result1.type2[i].senB
             score[senbid] = result1.type2[i].prob
@@ -789,216 +704,20 @@
                 //console.log(senbword1[m])
             }
         }   
-        /*
-        let sena = document.getElementsByClassName("senA")
-        let senb = document.getElementsByClassName("senB")
-        senb.style.borderRadius = "25px"
-        senb.style.padding = "0.02em 0"
         
-        sena.style.borderRadius = "25px"
-        sena.style.padding = "0.02em 0"
-        sena.style.opacity = 0.5
-        */
-        /* give id of every type + build sendic
-        sendic_b2a = {}
-        sendic_b2a['type1'] = {}
-        sendic_b2a['type2'] = {}
-        sendic_b2a['type3'] = {}
-        sendic_a2b = {}
-        sendic_a2b['type1'] = {}
-        sendic_a2b['type2'] = {}
-        sendic_a2b['type3'] = {}
-        */
-        ////type2////
         
-       /*
-        for(var i=0; i<result1.type2.length;i++){
-            if (typeof(result1.type2[i].senA)=='object'){
-                for(var j=0; j<result1.type2[i].senA.length;j++){
-                    senaid = result1.type2[i].senA[j]
-                    if(senaid=='1001250_11_ITEM7_P117_S0'){
-                        console.log('here',sen2id1[senaid])
-                    }
-                    senatext = sen2id1[senaid]
-                    //console.log(senaid,senatext)
-                    createspan(senaid,senatext,0)
-                    let a = document.getElementById(result1.type2[i].senA[j])
-                    a.className = a.className + " type2 "// + i + " " + j
     
-                    sendic_a2b['type2'][result1.type2[i].senA[j]] = result1.type2[i].senB
-                }
-            }
-            else{
-                //console.log(result1.type2[i].senA)
-                senaid = result1.type2[i].senA
-                senatext = sen2id1[senaid]
-                createspan(senaid,senatext,0)
-                let a = document.getElementById(result1.type2[i].senA)
-                a.className = a.className + " type2 "// + i + " " + "0"
-            
-
-                sendic_a2b['type2'][result1.type2[i].senA] = result1.type2[i].senB
-            }
-            senbid = result1.type2[i].senB
-            senbtext = sen2id2[senbid]
-            createspan(senbid,senbtext,1)
-            let b = document.getElementById(senbid)
-            b.className = b.className + " type2 "// + i
-
-            b.setAttribute("onmouseover","onmouse(this)")
-            b.setAttribute("onmouseout","outmouse(this)")
-
-
-            //token
-            //prob = result1.type2[i].prob
-            //console.log(result1.type2[i].prob)
-            score[senbid] = result1.type2[i].prob
-            //console.log(score)
-            //type2 with type3 => onmouseover take off
-            let senbcontent = b.innerHTML
-            let brokensenb = senbcontent.split(" ");
-            
-            b.innerHTML = ''
-            brokensenb.map((part,i) => {
-                var word = document.createElement("span");
-                var space = document.createElement("span");
-                word.className = "senbwords" 
-                word.innerHTML = part
-                space.className = "senbwords" 
-                space.innerHTML = ' '
-                b.innerHTML += i+1==brokensenb.length ? word.outerHTML : word.outerHTML + space.outerHTML
-            })
-            let senbword1 = document.getElementById(senbid).getElementsByClassName("senbwords")
-            
-            for(var m=0;m<(brokensenb.length*2-1);m++){
-                senbword1[m].id = senbid + "_" + m
-                //console.log(senbword1[m])
-            }
-
-
-
-            //sendic_b2a
-            sendic_b2a['type2'][result1.type2[i].senB] = result1.type2[i].senA
-            
-        
-        }
-        ////type3////
-        /*
-        for(var i=0; i<result1.type3.length;i++){
-            if (typeof(result1.type3[i].senA)=='object'){
-                for(var j=0; j<result1.type3[i].senA.length;j++){
-                    senaid = result1.type3[i].senA[j]
-                    let check1 = document.getElementById(senaid)
-                    if (check1==null){
-                        senatext = sen2id1[senaid]
-                        createspan(senaid,senatext,0)
-                    }
-                    let a = document.getElementById(senaid)
-                    a.className = a.className + " type3 "// + i + " " + j
-                    
-
-                    sendic_a2b['type3'][result1.type3[i].senA[j]] = result1.type3[i].senB
-                }
-            }
-            else{
-                senaid = result1.type3[i].senA
-                let check1 = document.getElementById(senaid)
-                if (check1==null){
-                    senatext = sen2id1[senaid]
-                    //console.log(senaid,senatext)
-                    createspan(senaid,senatext,0)  
-                }
-                let a = document.getElementById(senaid)
-                a.className = a.className + " type3 "// + i + " " + j
-
-                sendic_a2b['type3'][result1.type3[i].senA] = result1.type3[i].senB
-            }
-            senbid = result1.type3[i].senB
-            let check2 = document.getElementById(senbid)
-            if (check2==null){
-                senbtext = sen2id2[senbid]
-                createspan(senbid,senbtext,1)  
-            }
-            let b = document.getElementById(senbid)
-            b.className = b.className + " type3 "// + i
-            
-            sendic_b2a['type3'][result1.type3[i].senB] = result1.type3[i].senA
-        }
-        
-        ////type1////
-        for(var i=0; i<result1.type1.length;i++){
-            /*
-            if (typeof(result1.type1[i].senA)=='object'){
-                for(var j=0; j<result1.type1[i].senA.length;j++){
-                    senaid = result1.type1[i].senA[j]
-                    let check1 = document.getElementById(senaid)
-                    if (check1==null){
-                        senatext = sen2id1[senaid]
-                        createspan(senaid,senatext,0)
-                    }
-                    let a = document.getElementById(senaid)
-                    a.className = a.className + " type1 "// + i + " " + j
-                    
-
-                    sendic_a2b['type1'][result1.type1[i].senA[j]] = result1.type1[i].senB
-                }
-            }
-            else{
-                senaid = result1.type1[i].senA
-                let check1 = document.getElementById(senaid)
-                if (check1==null){
-                    senatext = sen2id1[senaid]
-                    //console.log(senaid,senatext)
-                    createspan(senaid,senatext,0)  
-                }
-                let a = document.getElementById(senaid)
-                a.className = a.className + " type1 "// + i + " " + j
-
-                sendic_a2b['type1'][result1.type1[i].senA] = result1.type1[i].senB
-            }
-            senbid = result1.type1[i].senB
-            let check2 = document.getElementById(senbid)
-            if (check2==null){
-                senbtext = sen2id2[senbid]
-                createspan(senbid,senbtext,1)
-                var b1 = document.getElementById(senbid)
-                b1.className = b1.className + " type1 "// + i  
-            }
-            else{
-                var b1 = document.getElementById(senbid)
-                if(b1.className.includes('type1')==false){
-                    b1.className = b1.className + " type1 "// + i
-                }
-                
-            }
-            
-            
-            //sendic_b2a['type1'][result1.type1[i].senB] = result1.type1[i].senA
-
-            ////
-
-            
-        }   
-        
-        */
         
         //give first line of item id
 
-        
-        
-        
-        
-        
-         
 
         
         //////////////////////////////////
 
-        
-        $(".type3").css('backgroundColor', "#f3e7ff")
-        
         $(".type1").css('backgroundColor', "#dfface")
-        $(".senA.type1").css('backgroundColor', "")
+        $(".senA.type2").css('opacity', 0.5)
+        $(".senA.type3").css('opacity', 0.5)
+        $(".type3").css('backgroundColor', "#f3e7ff")
         $(".type2").css('backgroundColor', "#ffbe40")
         
 
@@ -1022,45 +741,25 @@
         */
         $('#button1').on('click', function(){
             //console.log($(".type1").css('backgroundColor'))
-            
-
             let state1 = $('#button1').hasClass("active")
-            let state2 = $('#button2').hasClass("active")
-            let state3 = $('#button3').hasClass("active")
-            if(state1==true & state2==true & state==true){
-                //active
+            
+            if (state1 == true){
+                $('#button1').css("opacity", 0.3)
+                $('#button1').removeClass("active")
+                $(".type1").css('backgroundColor', nocolor)
+            }
+            else{
                 
                 $('#button1').css("opacity", 1)
                 $('#button1').addClass("active")
                 $(".type1").css('backgroundColor', type1color)
-                $('.senA.type1').css("opacity",0.5)
-                
-                //$(".senA.type1").attr('onclick','click_a(this)')
-                $(".senB.type1").attr('onclick','click_b(this)')
-                
-                $(".type1").css('cursor',"pointer")
-            }
-            else{
-                //active
-                //$('#button1').css('backgroundColor', nocolor)
-                $('#button1').css("opacity", 0.3)
-                $('#button1').removeClass("active")
-                $(".type1").css('backgroundColor', nocolor)
-                $('.senA.type1').css("opacity",1)
-                $(".type1").removeAttr('onclick')
-                $(".type1").css('cursor','default')
-                //senb.style.cursor = "pointer"
-                
+
             }
             
-            //console.log($('.type1'))
-            //let color = $(".type1").css('backgroundColor')=="rgba(0, 0, 0, 0)" ? "rgb(223, 250, 206)" : "rgba(0, 0, 0, 0)"
-            //$(".type1").css('backgroundColor', color)
-
         })
         $('#button2').on('click', function(){
             
-            //console.log($(".type2").css('backgroundColor'))
+            
             let state2 = $('#button2').hasClass("active")
             let state3 = $('#button3').hasClass("active")
             if (state2==true & state3==true){
@@ -1072,8 +771,7 @@
                 
                 $(".type2.type3").css('backgroundColor', type3color) //type3 color
 
-                $('.senA.type2').css("opacity",1)
-                $('.senA.type2.type3').css("opacity",0.5)
+               
 
                 $(".type2").removeAttr('onclick')
                 
@@ -1091,7 +789,7 @@
                 $('#button2').css("opacity", 0.3)
                 //$('#button2').css('backgroundColor', nocolor)
                 $(".type2").css('backgroundColor', nocolor)
-                $('.senA.type2').css("opacity",1)
+                
                 
                 $(".type2").removeAttr('onclick')
                 $(".senB.type2").removeAttr('onmouseover')
@@ -1109,8 +807,7 @@
                 $(".type2").css('backgroundColor', type2color)
 
                 
-                $('.senA.type2.type3').css("opacity",0.5)
-                $('.senA.type2').css("opacity",0.5)
+                
 
                 //$(".senA.type2").attr('onclick','click_a(this)')
                 $(".senB.type2").attr('onclick','click_b(this)')
@@ -1126,7 +823,7 @@
                 //$('#button2').css('backgroundColor', type2color)
                 $(".type2").css('backgroundColor', type2color)
                 
-                $('.senA.type2').css("opacity",0.5)
+                
 
                 //$(".senA.type2").attr('onclick','click_a(this)')
                 $(".senB.type2").attr('onclick','click_b(this)')
@@ -1162,8 +859,6 @@
                 $(".type3").css('backgroundColor', nocolor)
                 $(".type2.type3").css('backgroundColor', type2color) //type2 color
 
-                $('.senA.type3').css("opacity",1)
-                $('.senA.type2.type3').css("opacity",0.5)
 
 
                 $(".type3").removeAttr('onclick')
@@ -1181,9 +876,6 @@
                 $(".type3").css('backgroundColor', type3color)
                 $(".type2.type3").css('backgroundColor', type2color) //type2 color
 
-                $('.senA.type3').css("opacity",0.5)
-                $('.senA.type2.type3').css("opacity",0.5)
-
 
                 //$(".senA.type3").attr('onclick','click_a(this)')
                 $(".senB.type3").attr('onclick','click_b(this)')
@@ -1197,8 +889,7 @@
                 //$('#button3').css('backgroundColor', nocolor)
                 $(".type3").css('backgroundColor', nocolor)
 
-                
-                $('.senA.type3').css("opacity",1)
+            
 
 
                 $(".type3").removeAttr('onclick')
@@ -1209,8 +900,6 @@
                 $('#button3').css("opacity", 1)
                 //$('#button3').css('backgroundColor', type3color)
                 $(".type3").css('backgroundColor', type3color)
-                
-                $('.senA.type3').css("opacity",0.5)
 
 
                 //$(".senA.type3").attr('onclick','click_a(this)')

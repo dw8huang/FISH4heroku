@@ -209,10 +209,17 @@ def classstr(articleid,lastyear):
 
         if articleid in type2sena:
             classname = classname + 'type2 '
-        if articleid in type1sena:
-            classname = classname + 'type1 '
         if articleid in type3sena:
-            classname = classname + 'type3 '
+            classname = classname + 'type3 '    
+
+        '''if articleid in type1sena:
+            if 'type2' in classname:
+                classname = classname + ''
+            elif 'type3' in classname:
+                classname = classname + ''
+            else:
+                classname = classname + 'type1 '''
+        
         classname = 'senA ' + classname
         style = 'style = \&quot;border-radius: 25px;padding:0.02em 0;\&quot;'
     else:
@@ -221,11 +228,17 @@ def classstr(articleid,lastyear):
             classname = classname + 'type2 '
             click = 'onclick = \&quot; click_b(this) \&quot;'
             mouse = 'onmouseover = \&quot; onmouse(this) \&quot; onmouseout = \&quot; outmouse(this) \&quot;'
-        if articleid in type1senb:
-            classname = classname + 'type1 '
+        
         if articleid in type3senb:
             classname = classname + 'type3 '
             click = 'onclick = \&quot; click_b(this) \&quot;'
+        if articleid in type1senb:
+            if 'type2' in classname:
+                classname = classname + ''
+            elif 'type3' in classname:
+                classname = classname + ''
+            else:
+                classname = classname + 'type1 '
         classname = 'senB ' + classname
         style = 'style= \&quot; cursor:pointer;border-radius: 25px;padding:0.02em 0;\&quot;'
 

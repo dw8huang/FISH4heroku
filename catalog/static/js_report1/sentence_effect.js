@@ -126,7 +126,13 @@ function click_b(ele){
             localStorage.setItem("lastactive",$('#button2').hasClass('active'))
         }
         else{
-            if(sendic_b2a[senbtype][ele.id].includes(lastclick) & lastactive=='true'){
+            if (lastclick == sendic_b2a[senbtype][ele.id][0] & sendic_b2a[senbtype][ele.id].length==1){
+                console.log('hereeeeeeee')
+                localStorage.setItem("lastclick",sendic_b2a[senbtype][ele.id][0])
+                localStorage.setItem("lastactive",$('#button2').hasClass('active'))
+                
+            }
+            else if(sendic_b2a[senbtype][ele.id].includes(lastclick) & lastactive=='true'){
                 console.log("here")
                 let idx = sendic_b2a[senbtype][ele.id].indexOf(lastclick)
                 idxx = idx==(sendic_b2a[senbtype][ele.id].length-1) ? 0 : idx+1
@@ -161,6 +167,7 @@ function click_b(ele){
             sena.style.opacity = 1
         }
         else if(lastclick == sendic_b2a[senbtype][ele.id]){
+            console.log('sherqerqwerqwe')
             sena = document.getElementById(sendic_b2a[senbtype][ele.id]); // <-- Scroll to here within ".box"
             localStorage.setItem("lastclick",sendic_b2a[senbtype][ele.id])
             localStorage.setItem("lastactive",$('#button2').hasClass('active'))
@@ -203,7 +210,7 @@ function changecolor(eleid){
     for(var j=0; j<Object.keys(score[eleid]).length;j++){
         //console.log(score[eleid][j])
         c = score2color(score[eleid][j])
-        console.log(c)
+        //console.log(c)
         color.push(c)
         
     }
