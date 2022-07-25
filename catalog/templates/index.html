@@ -26,15 +26,24 @@
         <div class="row">
             <div style="width:auto">
                 <div class="row" style="margin-top:30vh; ">
-                    <h1 id="finbert">Fin Bert</h1>
+                    <h1 id="finbert">FISH</h1>
                 </div>
                 <div id="introduction" class="row" style="margin-top:3vh; font-family: Arial, Helvetica, sans-serif;">
-                    <p>introduction for the system introduction for the system introduction for the system</p>
+                    <p>Financial Interactive System for Signal Highlighting</p>
                 </div>    
                 <div class="row" style="margin-top:8vh;">
                     
                     <form role="form" name="myform" method="POST" enctype="multipart/form-data" action="{% url 'report1' %}">
                         {% csrf_token %}
+                        
+
+                        
+                        <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
+                            <option value="">Company List</option>
+                            <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
+                            
+                        </select>
+                        
                         <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
                             <option value="">Report Year</option>
                             <option value="2012">2012</option>
@@ -45,15 +54,6 @@
                             <option value="2017">2017</option>
                             <option value="2018">2018</option>
                         </select>
-
-                        
-                        <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
-                            <option value="">Company List</option>
-                            <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
-                            
-                        </select>
-                        
-                        
                         
                         
                         <!--
@@ -95,20 +95,24 @@
             },
         });
         */
-        
+        companydic = {"1469317" : {name:"company1"},
+                    "1468174" : {name:"company2"},
+                    "1467373" : {name:"company3"},
+                    "1001250": {name:"company4"},
+                    "1442145": {name:"company5"}}
+
         var vm1 = new Vue({
-        el: '#companylist',
-        delimiters: ['[[', ']]'],
-        data: {
-            list: { 
-                "1417663" : {name:"company1"},
-                "1234123" : {name:"company2"},
-                "1001250": {name:"company4"},
-                "1442145": {name:"company5"}
-            }
-            ,
-        },
-        });
+            el: '#companylist',
+            delimiters: ['[[', ']]'],
+            data(){
+                return {
+                    list: companydic
+                }
+                
+            },
+            });
+        
+        
         var vm = new Vue({
                 el: '#itemlist',
                 delimiters: ['[[',']]'],
