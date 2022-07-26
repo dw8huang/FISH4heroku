@@ -5,6 +5,65 @@ body {
     
     
 }*/
+
+@media (max-width: 1400px) {
+    #parent_rightreport{
+        width:640px;
+    }
+    #parent_leftreport{
+        width:640px;
+    }
+    #typebutton{
+        left:505px !important;
+    }
+}
+@media (max-width: 1300px) {
+    #parent_rightreport{
+        width:565px;
+    }
+    #parent_leftreport{
+        width:565px;
+    }
+    #typebutton{
+        left:342px !important;
+    }
+}
+@media (max-width: 1100px) {
+    #parent_rightreport{
+        width:470px;
+    }
+    #parent_leftreport{
+        width:470px;
+    }
+    #typebutton{
+        left:150px !important;
+    }
+}
+@media (min-width: 1600px) {
+    #parent_rightreport{
+        width:800px;
+    }
+    #parent_leftreport{
+        width:800px;
+    }
+    #typebutton{
+        left:811px !important;
+    }
+}*/
+
+
+.ui.search.dropdown.selection{
+    font-size:18px
+}
+.ui.selection.dropdown {
+    font-size:18px;
+}
+
+div > .item{
+    font-size:18px
+}
+
+
 #topselect {
     position: relative;
     left: 60px;
@@ -26,11 +85,21 @@ body {
 }
 
 #typebutton{
+    
     width: 700px;
     position: relative;
-    left:30px;
+    left:639px ;
+}
+#button1{
+    font-size:18px;
+}
+#button2{
+    font-size:18px;
 }
 
+#button3{
+    font-size:18px;
+}
 
 
 #report_outline{
@@ -46,13 +115,10 @@ body {
     
 }
 
-#parent_leftreport{
-    height: 700px;
-    width:700px;
-}
+
 #reportyear_curr{
     margin-bottom:25px;
-    font-size: 20px;
+    font-size: 18px;
     margin-left:13px
 }
 #itemlist_leftreport{
@@ -85,13 +151,10 @@ body {
 
 /* /////// */
 
-#parent_rightreport{
-    height: 700px;
-    width:700px;
-}
+
 #reportyear_last {
     margin-bottom: 25px;
-    font-size: 20px;
+    font-size: 18px;
     margin-left: 35px;
 }
 #itemlist_rightreport{
@@ -162,7 +225,7 @@ body {
 }
 #rightform {
     position: absolute;
-    right: 8px;
+    right: 0px;
     bottom:440px;
     z-index: 2;
 }

@@ -15,8 +15,8 @@
 
 {% load static %}
 <head>
-    <title>Financial Dataset for Researchers</title>
-    <link rel='icon' href='https://www.iconninja.com/files/303/190/562/business-ratings-icon.png' type="image/png">
+    <title>FISH</title>
+    <link rel='icon' href="{% static 'pic&gif/fish2.png' %}" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,7 +83,7 @@
                                 <option :value="item" v-for="(item,index) in list">[[item]]</option>
                             </select>
                             
-                            <input type="submit"  id="submit1" class="ui button"  value="Anlayse"  ></button>
+                            <input type="submit"  id="submit1" class="ui button"  value="Anlayse" style="font-size:18px" ></button>
                         
                         
                     </form>
