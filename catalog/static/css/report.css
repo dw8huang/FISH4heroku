@@ -24,8 +24,19 @@ body {
         width:565px;
     }
     #typebutton{
-        left:718px !important;
+        left:801px !important;
     }
+    #button1{
+        font-size:14px !important;
+    }
+    #button2{
+        font-size:14px !important;
+    }
+    
+    #button3{
+        font-size:14px !important;
+    }
+
 }
 
 @media (max-width: 1100px) {
@@ -36,7 +47,10 @@ body {
         width:470px;
     }
     #typebutton{
-        left:514px !important;
+        left:622px !important;
+    }
+    #companyname{
+        font-size:35px !important;
     }
 }
 @media (max-width: 1000px) {
@@ -47,21 +61,31 @@ body {
         width:430px;
     }
     #typebutton{
-        left:375px !important;
+        left:565px !important;
+    }
+    #button1{
+        font-size:10px !important;
+    }
+    #button2{
+        font-size:10px !important;
+    }
+    
+    #button3{
+        font-size:10px !important;
     }
 }
-/*
-@media (min-width: 1600px) {
+
+@media (min-width: 1800px) {
     #parent_rightreport{
-        width:800px;
+        width:850px;
     }
     #parent_leftreport{
-        width:800px;
+        width:850px;
     }
     #typebutton{
-        left:811px !important;
+        left:1307px !important;
     }
-}*/
+}
 
 
 .ui.search.dropdown.selection{

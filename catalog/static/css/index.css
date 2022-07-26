@@ -12,3 +12,9 @@ body {
     color: #28dd89; 
 }
 
+.ui.search.dropdown.selection{
+    font-size:18px
+}
+.ui.selection.dropdown {
+    font-size:18px;
+}
