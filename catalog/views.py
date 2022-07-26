@@ -23,37 +23,7 @@ itemlist = ["Item1","Item1A","Item1B","Item2",
             "Item10","Item11","Item12","Item13","Item14",
             "Item15"]
 
-def teammate():
-    sen = {
-    "2012":
-    {
-    "Item1":
-    [
-        {"senA":"Item 1 . We are an emerging global regenerative medicine company focused on the development and commercialization of non-invasive, biological response activating devices for the repair and regeneration of tissue, musculoskeletal and vascular structures.","senB":"Item 1 . We are an emerging global regenerative medicine company focused on the development and commercialization of noninvasive, biological response activating devices for the repair and regeneration of tissue, musculoskeletal and vascular structures.","keywordsA":[],"keywordsB":["structures"],"prob":[0,0,0,1]},
-        {"senA":"The Company was incorporated on May 6, 2004.","senB":"The patients in the study were followed for a total of 24 weeks.","keywordsA":[],"keywordsB":["patients","weeks"],"prob":[0,0,0,1,0,0.67,0.5,0,1,0,0,0,0]},
-        {"senA":"Of these 28 full-time employees, 12 were engaged in research and development, including clinical, regulatory and quality. None of our employees are represented by a labor union or covered by a collective bargaining agreement. We believe our relationship with our employees is good.","senB":"Treatment with dermaPACE increased the proportion of diabetic foot ulcers that closed within 12 weeks by 36%, although the rate of complete wound closure between dermaPACE and Sham-control at 12 weeks in the Intent-to-Treat ( ITT ) population was not statistically significant at the 95% confidence level used throughout the study (p=0.363).","prob":[0,0,0,0.5,0.3,0.4,0.8,0.9,0.1,0.5,0.3,0.4,0.8,0.9,0.1,0.5,0.3,0.4,0.8,0.9,0.1,0.5,0.3,0.4,0.8,0.9,0.1,0.3,0.4,0.8,0.9,0.1,0.3,0.4,0.8,0.9,0.1,0.3,0.4,0.8,0.9,0.1,0.9,0.1,0.3,0.4,0.8,0.9,0.1,0.3,0.4,0.8]},
-        {"senA":"However, we cannot predict the impact and costs those future statutes, regulations and policies will have on our business.","senB":"Some of these statutes and regulations impose strict liability for the costs of cleaning up, and for damages resulting from, sites of spills, disposals, or other releases of contaminants, hazardous substances and other materials and for the investigation and remediation of environmental contamination at properties leased or operated by us and at off-site locations where we have arranged for the disposal of hazardous substances.","prob":[1,0,0,0.4,0.3]}
-    ],
-    "Item1A":
-    [
-        {"senA":"Current economic conditions could adversely affect our operations.","senB":"Current economic conditions could adversely affect our operations.","prob":[0,0,0,0,1,1,0.5,1]}
-    ],
-    "Item1B":
-    [
-        {"senA":"there is no Item1B in 2011","senB":"there is no Item1B in 2012","prob":[0,0,0,0,1,1]}
-    ]},
 
-    "2013":
-    {
-        "Item1":
-    [
-        {"senA":"Item 1 . We are an emerging global regenerative medicine company focused on the development and commercialization of noninvasive, biological response activating devices for the repair and regeneration of tissue, musculoskeletal and vascular structures.","senB":"Item 1 . We are a shockwave technology company using noninvasive, high-energy, acoustic shockwaves for regenerative medicine and other applications.","prob":[1,0,0,0,1]}
-    ]
-    }
-    
-    }
-    
-    return sen
 module_dir = os.path.dirname(__file__)
 def buildtextdic(company):
     
@@ -142,48 +112,6 @@ def filecontent(textdic,company,year,item):
         return article
 
 
-def report(request):
-    if request.method == "POST":
-        module_dir = os.path.dirname(__file__)
-        company = request.POST.get("company")
-        print(company)
-        #print(type(company))
-        year2 = int(request.POST.get("year"))
-        year1 = year2-1
-        item = request.POST.get("item")
-        print(year2,item)
-        
-        #article1 = filecontent(module_dir,company,year1,item)
-        #article2 = filecontent(module_dir,company,year2,item)
-        #2011~2018
-        #arti = {}
-        #for year in range(2011,2012):
-        #    arti["year"+str(year)] = filecontent(module_dir, company, year, item)
-        testarti = {}
-        for year in range(year1,year2+1):
-            testarti[str(year)] = {}
-            testarti[str(year)][item] = filecontent(textdic, company, year, item)
-        #print(testarti)
-        #filename = company + '.txt'
-        #file_path1 = os.path.join(module_dir,"dataset",str(year1),filename)   #full path to text.
-        #file_path2 = os.path.join(module_dir,"dataset",str(year2),filename)
-        #data_file1 = open(file_path1,'r')
-        #data_file2 = open(file_path2,'r')
-        #data1 = data_file1.read() #selected year-1
-        #data2 = data_file2.read() #selected year 
-
-        #highlight
-        result = teammate()
-        #senA = result['senA']
-        #senB = result['senB']
-        #keywordsB = result['keywordsB']
-        #labels = result['labels']
-        #'senA':senA, 'senB':senB, 'keywordsB':keywordsB,'labels':labels
-        #'arti':arti
-        context = {'result':result, 'testarti' :testarti, 'curryear':year2, 'company':company, 'item':item}
-        return render(request, 'report.html',context)
-    
-    return render(request, 'report.html')
 
 def report_revised(request):
     if request.method == "POST":
@@ -238,100 +166,4 @@ def report_revised(request):
     
     return render(request, 'report1.html')
 
-def report4(request):
-    if request.method == "POST":
-        module_dir = os.path.dirname(__file__)
-        company = request.POST.get("company")
-        #print(company)
-        #print(type(company))
-        year2 = int(request.POST.get("year"))
-        year1 = year2-1
-        item = request.POST.get("item")
-        
-        
-        
-        textdic = buildtextdic(company)
 
-
-        testarti = {}
-        sen2id = {}
-        ar = {}
-        
-        testarti[str(year1)] = " ".join(read_allitem_function_ar.read_allitem_fun(textdic,company,str(year1),1)[0])
-        sen2id[str(year1)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year1),1)[1]
-        ar[str(year1)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year1),1)[2]
-
-        testarti[str(year2)] = " ".join(read_allitem_function_ar.read_allitem_fun(textdic,company,str(year2),0)[0])
-        sen2id[str(year2)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year2),0)[1]
-        ar[str(year2)] = read_allitem_function_ar.read_allitem_fun(textdic,company,str(year2),0)[2]
-        sendic = read_allitem_function_ar.sendic()
-        
-        #testarti[str(year)] = readitem7fun(textdic, company, year, "item7")[0]
-        #print(testarti)
-        #highlight
-        result1 = result(year2,company)
-        #senA = result['senA']
-        #senB = result['senB']
-        #keywordsB = result['keywordsB']
-        #labels = result['labels']
-        #'senA':senA, 'senB':senB, 'keywordsB':keywordsB,'labels':labels
-        #'arti':arti
-        '''
-        a = "&lt;span id=\&quot;108\&quot; style=\&quot;background-color:yellow\&quot;&gt;Net sales of skin care products increased 12%, or $341.1 million, to $3,227.1 million, primarily reflecting our strategic focus on growing this category through creativity and innovation, particularly high growth segments, such as products that address the visible signs of aging.&lt;/span&gt;"
-        x = ''
-        y = ''
-        for i in range(0,3000):
-            x = x + a
-            y = y + a
-        ar['2011'] = x
-        ar['2012'] = y
-        '''
-        context = {'result':result1, 'testarti' :testarti, 'sen2id':sen2id, 'ar':ar, 'sendic':sendic}
-        return render(request, 'report4.html',context)
-    
-    return render(request, 'report4.html')
-
-def report_switch_between_items(request):
-    if request.method == "POST":
-        module_dir = os.path.dirname(__file__)
-        company = request.POST.get("company")
-        #print(company)
-        #print(type(company))
-        year2 = int(request.POST.get("year"))
-        year1 = year2-1
-        item = request.POST.get("item")
-        #print(year2,item)
-        
-        #article1 = filecontent(module_dir,company,year1,item)
-        #article2 = filecontent(module_dir,company,year2,item)
-        #2011~2018
-        #arti = {}
-        #for year in range(2011,2012):
-        #    arti["year"+str(year)] = filecontent(module_dir, company, year, item)
-        testarti = {}
-        for year in range(year1,year2+1):
-            testarti[str(year)] = {}
-            for item in itemlist:
-                testarti[str(year)][item] = filecontent(textdic, company, year, item)
-        #print(testarti)
-        #print(testarti)
-        #filename = company + '.txt'
-        #file_path1 = os.path.join(module_dir,"dataset",str(year1),filename)   #full path to text.
-        #file_path2 = os.path.join(module_dir,"dataset",str(year2),filename)
-        #data_file1 = open(file_path1,'r')
-        #data_file2 = open(file_path2,'r')
-        #data1 = data_file1.read() #selected year-1
-        #data2 = data_file2.read() #selected year 
-
-        #highlight
-        result = teammate()
-        #senA = result['senA']
-        #senB = result['senB']
-        #keywordsB = result['keywordsB']
-        #labels = result['labels']
-        #'senA':senA, 'senB':senB, 'keywordsB':keywordsB,'labels':labels
-        #'arti':arti
-        context = {'result':result, 'testarti' :testarti, 'curryear':year2, 'company':company, 'item':item}
-        return render(request, 'report2.html',context)
-    
-    return render(request, 'report2.html')

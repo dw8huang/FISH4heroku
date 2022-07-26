@@ -5,18 +5,17 @@ body {
     
     
 }*/
-
-@media (max-width: 1400px) {
-    #parent_rightreport{
-        width:640px;
-    }
-    #parent_leftreport{
-        width:640px;
-    }
+@media (max-width: 1800px) {
     #typebutton{
-        left:505px !important;
+        left:1078px !important;
     }
 }
+@media (max-width: 1600px) {
+    #typebutton{
+        left:966px !important;
+    }
+}
+
 @media (max-width: 1300px) {
     #parent_rightreport{
         width:565px;
@@ -25,9 +24,10 @@ body {
         width:565px;
     }
     #typebutton{
-        left:342px !important;
+        left:718px !important;
     }
 }
+
 @media (max-width: 1100px) {
     #parent_rightreport{
         width:470px;
@@ -36,9 +36,21 @@ body {
         width:470px;
     }
     #typebutton{
-        left:150px !important;
+        left:514px !important;
     }
 }
+@media (max-width: 1000px) {
+    #parent_rightreport{
+        width:430px;
+    }
+    #parent_leftreport{
+        width:430px;
+    }
+    #typebutton{
+        left:375px !important;
+    }
+}
+/*
 @media (min-width: 1600px) {
     #parent_rightreport{
         width:800px;
@@ -76,19 +88,24 @@ div > .item{
 
 #companyname_typebutton{
     position: relative;
-    top: 20px;
-    left:60px;
+    top: 30px;
+    left:35px;
 }
 
-#companyname_typebutton div{
+#companyname_typebutton{
+    height: 50px;
     margin:5px;
 }
-
+#typebutoutline{
+    height: 30px;
+}
 #typebutton{
     
     width: 700px;
     position: relative;
-    left:639px ;
+    left:1160px ;
+    
+
 }
 #button1{
     font-size:18px;
@@ -105,7 +122,8 @@ div > .item{
 #report_outline{
     justify-content: center;
     align-items: center;
-    margin-top:50px;
+    margin-top: 30px;
+    margin-bottom: 100px;
 }
 
 #reportrow {
