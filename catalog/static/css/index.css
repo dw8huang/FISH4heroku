@@ -1,5 +1,22 @@
 body {
     background-image: url("../pic&gif/indexhtml_background.jpg");
+    background-size: 1753px;
+    
+}
+@media (min-width: 1800px) {
+    body{
+        background-size: 1937px !important;
+    }
+    
+}
+@media (max-width: 1300px) {
+    body{
+        background-size: 1366px !important;
+    }
+    
+}
+body img{
+    transform: rotate(90deg);
     
 }
 
@@ -8,7 +25,7 @@ body {
 }
 
 #finbert {
-    font-size: 60px;
+    font-size: 70px;
     color: #28dd89; 
 }
 
@@ -17,4 +34,10 @@ body {
 }
 .ui.selection.dropdown {
     font-size:18px;
+}
+
+#introduction{
+    position:relative;
+    left:4px;
+    font-size:16px
 }

@@ -11,9 +11,6 @@ import json
 from os.path import exists
 
 # Create your views here.
-def index(request):
-    names = ["abc", "dan", "jack", "lizzy", "susan"]
-    return render(request, 'index.html', {'names':names})
 
 
 #from . import test
@@ -37,11 +34,17 @@ def buildtextdic(company):
         line1 = line.split("\t")
         textdic[line1[0]] = line1[1]
     return textdic
-'''
-with open(file_path) as d:
-    textdic = json.load(d)
-print(textdic)
-'''
+
+def companydicfun():
+    
+    file_path = os.path.join(module_dir,"dataset","companydic.json")
+    with open(file_path) as d:
+        companydic = json.load(d)
+    #print(companydic)
+    #a = {'type1': [{'senA': '1001250_11_ITEM1_P0_S0', 'senB': '1001250_12_ITEM1_P0_S0', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}], 'type2': [{'senA': '1001250_11_ITEM1_P1_S0', 'senB': '1001250_12_ITEM1_P1_S0', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}, {'senA': ['1001250_11_ITEM1_P0_S2', '1001250_11_ITEM1_P0_S1'], 'senB': '1001250_12_ITEM1_P0_S2', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0.9, 0.7, 0.4, 0.5, 1, 0.6, 0.7, 1, 0.6, 1, 0.4, 1, 0.1, 1, 1, 0.6,0.5,0.4]}],'type3': [{'senA': '1001250_11_ITEM1A_P1_S1', 'senB': '1001250_12_ITEM1A_P1_S1', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]},{'senA': '1001250_11_ITEM1A_P1_S2', 'senB': '1001250_12_ITEM1A_P1_S2', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]},{'senA': '1001250_11_ITEM1_P0_S0', 'senB': '1001250_12_ITEM1_P0_S0', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}]}
+    return companydic
+#print(type(companydicfun()))
+
 def result(year,company):
     filename = str(year)+".json"
     file_path = os.path.join(module_dir,"dataset","resultparse",company,filename)
@@ -49,6 +52,7 @@ def result(year,company):
         dictData = json.load(d)
     #a = {'type1': [{'senA': '1001250_11_ITEM1_P0_S0', 'senB': '1001250_12_ITEM1_P0_S0', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}], 'type2': [{'senA': '1001250_11_ITEM1_P1_S0', 'senB': '1001250_12_ITEM1_P1_S0', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}, {'senA': ['1001250_11_ITEM1_P0_S2', '1001250_11_ITEM1_P0_S1'], 'senB': '1001250_12_ITEM1_P0_S2', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 0.9, 0.7, 0.4, 0.5, 1, 0.6, 0.7, 1, 0.6, 1, 0.4, 1, 0.1, 1, 1, 0.6,0.5,0.4]}],'type3': [{'senA': '1001250_11_ITEM1A_P1_S1', 'senB': '1001250_12_ITEM1A_P1_S1', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]},{'senA': '1001250_11_ITEM1A_P1_S2', 'senB': '1001250_12_ITEM1A_P1_S2', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]},{'senA': '1001250_11_ITEM1_P0_S0', 'senB': '1001250_12_ITEM1_P0_S0', 'prob': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}]}
     return dictData
+#print(type(result(2012,'1001250')))
 # create test article
 
 
@@ -111,6 +115,9 @@ def filecontent(textdic,company,year,item):
             
         return article
 
+def index(request):
+    
+    return render(request, 'index.html', {'companydic':companydicfun()})
 
 
 def report_revised(request):
@@ -126,7 +133,7 @@ def report_revised(request):
         
         
         textdic = buildtextdic(company)
-
+        cpdic = companydicfun()
 
         testarti = {}
         sen2id = {}
@@ -161,7 +168,7 @@ def report_revised(request):
         ar['2011'] = x
         ar['2012'] = y
         '''
-        context = {'result':result1, 'testarti' :testarti, 'sen2id':sen2id, 'ar':ar, 'sendic':sendic}
+        context = {'result':result1, 'testarti' :testarti, 'sen2id':sen2id, 'ar':ar, 'sendic':sendic, 'companydic':cpdic}
         return render(request, 'report1.html',context)
     
     return render(request, 'report1.html')

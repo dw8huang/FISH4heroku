@@ -109,19 +109,19 @@
                     <svg height="15" width="15" style="align-items: center";>
                         <circle cx="7.5" cy="7.5" r="5" fill="rgb(255, 190, 64)" />
                     </svg> 
-                    Revised sentences
+                    Revised segments
                 </div>
                 <div class="state active" id="button3" style="display:inline;cursor: pointer;">
                     <svg height="15" width="15">
                         <circle cx="7.5" cy="7.5" r="5" fill="rgb(243, 231, 255)" />
                     </svg> 
-                    Highly similar sentences
+                    Highly similar segments
                 </div>
                 <div class="state active" id="button1" style="display:inline;cursor: pointer;">
                     <svg height="15" width="15">
                         <circle cx="7.5" cy="7.5" r="5" fill="rgb(223, 250, 206)" />
                     </svg> 
-                    New sentences
+                    New segments
                 </div>
                 
                 
@@ -252,13 +252,18 @@
             })
 
         })
+        cpdic = "{{ companydic|safe }}";
+        cpdic1 = cpdic.replace(/'/g,"\"");
 
+
+        companydic = JSON.parse(cpdic1)
         
+        /*
         companydic = {"1469317" : {name:"company1"},
                     "1468174" : {name:"company2"},
                     "1467373" : {name:"company3"},
                     "1001250": {name:"Estee Lauder Companies Inc"},
-                    "1442145": {name:"company5"}}
+                    "1442145": {name:"company5"}}*/
 
         var vm1 = new Vue({
             el: '#companylist',
@@ -403,7 +408,7 @@
         $(document).ready(function(){
             //var input = document.getElementById('yearlist');
 
-
+            
             //previous page
             //console.log(document.referrer)
 
@@ -491,11 +496,17 @@
     //localStorage.setItem("companynow",a)
     //let c = localStorage.getItem(companynow)
     //console.log("localstorage:",c)
+    
     testarti = "{{ testarti|safe }}";
     sen2id = "{{ sen2id|safe }}";
     ar = "{{ ar|safe }}";
     sendic = "{{ sendic|safe }}";
+    /*
+    cpdic = "{{ companydic|safe }}";
+    cpdic1 = cpdic.replace(/'/g,"\"");
     
+    
+    companydic = JSON.parse(cpdic1);*/
     ar = ar.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\&quot;/g,'"');
     //console.log(ar)
     //console.log(id2sen)
