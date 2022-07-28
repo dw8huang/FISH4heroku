@@ -93,12 +93,41 @@ function click_a(ele){
 
 }
 
+function itemlistlight(senaid, senbid){
+    var curritemid = senbid.split('_')[2].split('ITEM')[1]+"_curr"
+    ////
+    var lastitemid = senaid.split('_')[2].split('ITEM')[1]+"_last"
+    var curritem = document.getElementById(curritemid)
+    var lastitem = document.getElementById(lastitemid)
+    console.log(curritem,lastitem)
+    //last
+    var lastclick_reportitem = localStorage.getItem("lastclick_reportitem_last")
+    var lastitembutton = document.getElementById(lastclick_reportitem)
+    lastitembutton.style["-webkit-text-stroke"] = ""
+    lastitem.style["-webkit-text-stroke"] = "0.75px yellow"
+    localStorage.setItem("lastclick_reportitem_last",lastitemid)
+
+
+
+    //curr
+    var lastclick_reportitem1 = localStorage.getItem("lastclick_reportitem_curr")
+    var lastitembutton1 = document.getElementById(lastclick_reportitem1)
+    lastitembutton1.style["-webkit-text-stroke"] = ""
+    curritem.style["-webkit-text-stroke"] = "0.75px yellow"
+    localStorage.setItem("lastclick_reportitem_curr",curritemid)
+}
+
 
 function click_b(ele){
 
     /* --------------------------------------------*/
     /* jump to corresponding senA if clicking senB */
     //console.log(ele)
+
+    //change itemlist
+    //console.log(ele.id.split('_')[2].split('ITEM')[1])
+    
+
     var item = localStorage.getItem("itemnow").toString()
     let leftreportid = '#leftreport'
     let rightreportid = '#rightreport'
@@ -127,13 +156,13 @@ function click_b(ele){
         }
         else{
             if (lastclick == sendic_b2a[senbtype][ele.id][0] & sendic_b2a[senbtype][ele.id].length==1){
-                console.log('hereeeeeeee')
+                //console.log('hereeeeeeee')
                 localStorage.setItem("lastclick",sendic_b2a[senbtype][ele.id][0])
                 localStorage.setItem("lastactive",$('#button2').hasClass('active'))
                 
             }
             else if(sendic_b2a[senbtype][ele.id].includes(lastclick) & lastactive=='true'){
-                console.log("here")
+                //console.log("here")
                 let idx = sendic_b2a[senbtype][ele.id].indexOf(lastclick)
                 idxx = idx==(sendic_b2a[senbtype][ele.id].length-1) ? 0 : idx+1
                 sena = document.getElementById(sendic_b2a[senbtype][ele.id][idxx])
@@ -184,7 +213,8 @@ function click_b(ele){
          
         
     }
-
+    console.log(sena.id)
+    itemlistlight(sena.id,senb.id)
     //scrollToElm(leftreport,senb,600)
     scrollToElm1(rightreport,sena,senb,600);  
     
