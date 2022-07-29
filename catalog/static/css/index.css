@@ -27,6 +27,7 @@ body img{
 #finbert {
     font-size: 70px;
     color: #28dd89; 
+    font-weight: 750;
 }
 
 .ui.search.dropdown.selection{
@@ -39,5 +40,6 @@ body img{
 #introduction{
     position:relative;
     left:4px;
-    font-size:16px
+    font-size:16px;
+    color: #9c9c9c;
 }

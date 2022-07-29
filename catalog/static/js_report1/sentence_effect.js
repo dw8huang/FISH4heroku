@@ -99,7 +99,7 @@ function itemlistlight(senaid, senbid){
     var lastitemid = senaid.split('_')[2].split('ITEM')[1]+"_last"
     var curritem = document.getElementById(curritemid)
     var lastitem = document.getElementById(lastitemid)
-    console.log(curritem,lastitem)
+    //console.log(curritem,lastitem)
     //last
     var lastclick_reportitem = localStorage.getItem("lastclick_reportitem_last")
     var lastitembutton = document.getElementById(lastclick_reportitem)
@@ -213,7 +213,7 @@ function click_b(ele){
          
         
     }
-    console.log(sena.id)
+    //console.log(sena.id)
     itemlistlight(sena.id,senb.id)
     //scrollToElm(leftreport,senb,600)
     scrollToElm1(rightreport,sena,senb,600);  
