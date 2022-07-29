@@ -69,7 +69,7 @@
                         
                         <select id="itemlist" name="item" class="ui selection dropdown" style="padding: 5px 5px;">
                             <option value="">Item</option>
-                            <option :value="item" v-for="(item,index) in list">[[item]]</option>
+                            <option :value="['Item' + item]" v-for="(item,index,key) in splitresult1">[[item]]</option>
                         </select>
                         
                         <input type="submit"  id="submit1" class="ui button"  style="margin-top:1vw;font-size:18px" value="Anlayse" disabled="disabled">
@@ -126,7 +126,16 @@
                         "Item15"
                     ],
                 },
-            });
+                computed:{
+                    splitresult1: function () {
+                        return this.list.map(function (i) {
+                            
+                            let a = i.split("Item")[1]
+                            return a
+                        })
+                    }
+                }
+                });
     </script>
     
     
