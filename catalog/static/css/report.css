@@ -295,13 +295,13 @@ div > .item{
 #leftform {
     position: absolute;
     left: 8px;
-    bottom:440px;
+    bottom:539px;
     z-index: 2;
 }
 #rightform {
     position: absolute;
     right: 0px;
-    bottom:440px;
+    bottom:539px;
     z-index: 2;
 }
 
