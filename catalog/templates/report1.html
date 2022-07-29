@@ -700,6 +700,8 @@
         
 
         ///type2 token highlight
+        let savelist = []
+        //console.log(savelist.includes("af"))
         for(var i=0; i<result1.type2.length;i++){
             senbid = result1.type2[i].senB
             score[senbid] = result1.type2[i].prob
@@ -725,6 +727,8 @@
                 senbword1[m].id = senbid + "_" + m
                 //console.log(senbword1[m])
             }
+            
+            
         }   
         
         
