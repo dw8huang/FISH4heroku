@@ -83,7 +83,7 @@
                                 <option :value="['Item' + item]" v-for="(item,index,key) in splitresult1">[[item]]</option>
                             </select>
                             
-                            <input type="submit"  id="submit1" class="ui button"  value="Anlayse" style="font-size:18px" ></button>
+                            <input type="submit"  id="submit1" class="ui button"  value="Anlayze" style="font-size:18px" ></button>
                         
                         
                     </form>
@@ -467,8 +467,8 @@
                 document.getElementById("nextyear").innerHTML = rightyear + " vs " + nextyear.toString()
             }*/
             
-            document.getElementById("reportyear_curr").innerHTML = "from " + rightyear
-            document.getElementById("reportyear_last").innerHTML = "from " + leftyear
+            document.getElementById("reportyear_curr").innerHTML = "From " + rightyear
+            document.getElementById("reportyear_last").innerHTML = "From " + leftyear
             document.getElementById("companyname").innerHTML = vm1.$data.list[company].name
         });
     </script>
