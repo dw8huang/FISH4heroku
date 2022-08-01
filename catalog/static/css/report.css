@@ -1,3 +1,8 @@
+/* introcss */
+
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap');
 /*
 body {
@@ -194,7 +199,10 @@ div > .item{
 #reportyear_curr{
     margin-bottom:25px;
     font-size: 16px;
-    margin-left:13px
+    margin-left:13px;
+    
+    border-bottom: 3px solid rgb(220, 220, 220);
+    width: 78px
 }
 #itemlist_leftreport{
     position:relative;
@@ -231,6 +239,9 @@ div > .item{
     margin-bottom: 25px;
     font-size: 16px;
     margin-left: 35px;
+    border-bottom: 3px solid rgb(220, 220, 220);
+    width: 78px
+
 }
 #itemlist_rightreport{
     position:relative;
