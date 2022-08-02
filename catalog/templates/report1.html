@@ -573,7 +573,7 @@
     //let c = localStorage.getItem(companynow)
     //console.log("localstorage:",c)
     
-    testarti = "{{ testarti|safe }}";
+    //testarti = "{{ testarti|safe }}";
     sen2id = "{{ sen2id|safe }}";
     ar = "{{ ar|safe }}";
     sendic = "{{ sendic|safe }}";
@@ -584,16 +584,17 @@
     
     companydic = JSON.parse(cpdic1);*/
     ar = ar.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\&quot;/g,'"');
+    sen2id = sen2id.replace(/\&quot;/g,'"')
     //console.log(ar)
     //console.log(id2sen)
     //console.log(testarti)
     
-    testarti = testarti.replace(/'/g,"\"");
+    //testarti = testarti.replace(/'/g,"\"");
     sen2id = sen2id.replace(/'/g,"\"");
     ar = ar.replace(/'/g,"\"");
     sendic = sendic.replace(/'/g,"\"");
     //console.log(givevalue(ar,curryear))
-    const test1 = JSON.parse(testarti);
+    //const test1 = JSON.parse(testarti);
     const textdic = JSON.parse(sen2id);
     const arr = JSON.parse(ar);
     sendic_b2a = JSON.parse(sendic);
@@ -614,8 +615,8 @@
     
     $(document).ready(function() {
 
-        let data1 = givevalue(test1,lastyear)
-        let data2 = givevalue(test1,curryear)
+        //let data1 = givevalue(test1,lastyear)
+        //let data2 = givevalue(test1,curryear)
         //console.log(data1)
         let sen2id1 = givevalue(textdic,lastyear)
         let sen2id2 = givevalue(textdic,curryear)
@@ -641,7 +642,7 @@
         paragraph1.innerHTML = arr1
         paragraph2.innerHTML = arr2
         
-
+        //console.log(paragraph1.innerHTML)
         
         function createspan_4firstlineitem(id,text,para2){
             if (para2==1){
@@ -681,15 +682,17 @@
         for(var i=0; i<20; i++){
             id1 = company+"_"+lastyear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P_S"
             id2 = company+"_"+curryear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P_S"
+            id11 = company+"_"+lastyear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P0_S0"
+            id22 = company+"_"+curryear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P0_S0"
             //console.log(sen2id1[id1],sen2id2[id2])
             let check1 = document.getElementById(id1)
             let check2 = document.getElementById(id2)
-            /sen2id1[id1]
+            //sen2id1[id1]
             var para1 = paragraph1.innerHTML;
             var para2 = paragraph2.innerHTML;
             
-            itemdis_last.push( check1==null ? createspan_4firstlineitem(id1,sen2id1[id1],0) : para1.indexOf(sen2id1[id1]))
-            itemdis_curr.push( check2==null ? createspan_4firstlineitem(id2,sen2id2[id2],1) : para2.indexOf(sen2id2[id2]))
+            itemdis_last.push( check1==null ?  para1.indexOf(sen2id1[id11]) : para1.indexOf(sen2id1[id1]))
+            itemdis_curr.push( check2==null ?  para2.indexOf(sen2id2[id22]) : para2.indexOf(sen2id2[id2]))
             
 
             

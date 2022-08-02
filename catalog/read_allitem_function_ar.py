@@ -169,6 +169,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             #article.append("\\n")
             ar += sentence
             ar += '\\n\\n'
+            sen2id[sid] = s1
     #print(textdic[articleid[404]])
     #textdic["no item"] ==?
     
@@ -197,6 +198,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             #article.append("\\n")
             ar += sentence
             ar += '\\n\\n'
+            sen2id[sid] = s1
         else:
             a = textdic[articleid[i]].strip("\n")
             a = a.replace('"',"")
@@ -217,6 +219,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
                 #print(ar)
                 ar += sentence
                 ar += "\\n"
+                sen2id[sid1] = s1
             
 
 
