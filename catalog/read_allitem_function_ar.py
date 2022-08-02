@@ -10,16 +10,27 @@ itemlist = ["Item1","Item1A","Item1B","Item2",
             "Item10","Item11","Item12","Item13","Item14",
             "Item15"]
 itemtitle = [
-    "Item 1 - Business",
-    "Item 1A – Risk Factors",
-    "Item 1B – Unresolved Staff Comments",
-    "Item 2 – Properties"
+    "Item 1. Business",
+    "Item 1A. Risk Factors",
+    "Item 1B. Unresolved Staff Comments",
+    "Item 2. Properties",
+    "Item 3. Legal Proceedings",
+    "Item 4. Mine Safety Disclosures",
+    "Item 5. Market",
+    "Item 6. Consolidated Financial Data",
+    "Item 7. Management\&quot;s Discussion and Analysis of Financial Condition and Results of Operations",
+    "Item 7A. Quantitative and Qualitative Disclosures about Market Risks",
+    "Item 8. Financial Statements",
+    "Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure",
+    "Item 9A. Controls and Procedures",
+    "Item 9B. Other Information",
+    "Item 10. Directors, Executive Officers and Corporate Governance",
+    "Item 11. Executive Compensation",
+    "Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters",
+    "Item 13. Certain Relationships and Related Transactions, and Director Independence",
+    "Item 14. Principal Accounting Fees and Services",
+    "Item 15. Exhibits, Financial Statement Schedules Signatures"]
 
-
-
-
-
-]
 '''
 textdic = {}
 for line in data.readlines():
@@ -103,7 +114,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
     articleid = []
     article = []
     sen2id = {}
-    ar = ""
+    ar = ''
     textkeys = list(textdic.keys())
     firstidx = company+"_"+str(year).split("20")[1]+"_"+"item1".upper()+"_P"+str(0)+"_S"+str(0)
     if firstidx not in textkeys:
@@ -126,7 +137,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             idx = company+"_"+str(year).split("20")[1]+"_"+item.upper()+"_P"+str(0)+"_S"+str(0)
             if idx not in textkeys:
                 #print(idx)
-                articleid.append("no item"+"_"+item+"_"+str(year))
+                articleid.append("no item"+"_"+str(year).split("20")[1]+"_"+item)
             else:
                 for i in range(textkeys.index(idx),len(textkeys)):
                     articleid.append(textkeys[i])
@@ -137,7 +148,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
                 #print(idx)
                 #a="no item"+"_"+item+"_"+str(year)
                 #print(a.split("_"))
-                articleid.append("no item"+"_"+item+"_"+str(year))
+                articleid.append("no item"+"_"+str(year).split("20")[1]+"_"+item)
             else:
                 for i in range(textkeys.index(idx),len(textkeys)):
                     articleid.append(textkeys[i])
@@ -146,8 +157,11 @@ def read_allitem_fun(textdic,company,year,lastyear1):
     if firstline_item != itemlist[0]:
         for item in itemlist[0:itemlist.index(firstline_item)]:
             s = "There is no "+str(item)+" in "+str(year)
-            sid = company+"_"+str(year).split("20")[1]+"_"+item.upper()+"_P"+str(0)+"_S"+str(0)
-            sentence = "&lt;span id=\&quot;" + sid +"\&quot; &gt;" + s +"&lt;/span&gt;"
+            item = item.capitalize()
+            item = item[:-1] + item[-1].upper()
+            s1 = itemtitle[itemlist.index(item)]
+            sid = company+"_"+str(year).split("20")[1]+"_"+item.upper()+"_P_S"
+            sentence = "&lt;span id=\&quot;" + sid +"\&quot; style = \&quot; font-weight:750 \&quot;&gt;" + str(s1) +"&lt;/span&gt;"
             style = "\&quot;background-color:yellow\&quot;"
             #article.append(a)
             sen2id[sid] = s
@@ -157,16 +171,28 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             ar += '\\n\\n'
     #print(textdic[articleid[404]])
     #textdic["no item"] ==?
-
+    
     for i in range(0,len(articleid)):
+        #print(articleid[i])
+        #short year
+        year = articleid[i].split("_")[1]
+        item = articleid[i].split("_")[2]
+        firstsid = company+"_"+str(year)+"_"+item.upper()+"_P"+str(0)+"_S"+str(0)
+        #print(firstsid)
+        
         if articleid[i].split("_")[0] == "no item":
-            item = articleid[i].split("_")[1]
-            year = articleid[i].split("_")[2]
-            sid = company+"_"+str(year).split("20")[1]+"_"+item.upper()+"_P"+str(0)+"_S"+str(0)
-            s = "There is no "+str(item)+" in "+str(year)
-            sentence = "&lt;span id=\&quot;" + sid +"\&quot; &gt;" + s +"&lt;/span&gt;"
+            year = articleid[i].split("_")[1]
+            item = articleid[i].split("_")[2]
+            #change sid => company_year_item_P_S
+            sid = company+"_"+str(year)+"_"+item.upper()+"_P_S"
+
+            #s = "There is no "+str(item)+" in "+str(year)
+            item = item.capitalize()
+            item = item[:-1] + item[-1].upper()
+            s1 = itemtitle[itemlist.index(item)]
+            sentence = "&lt;span id=\&quot;" + sid +"\&quot; style = \&quot; font-weight:750 \&quot; &gt;" + str(s1) +"&lt;/span &gt;"
             #article.append(a)
-            sen2id[sid] = s
+            #sen2id[sid] = s
             #article.append("\\n")
             #article.append("\\n")
             ar += sentence
@@ -175,7 +201,23 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             a = textdic[articleid[i]].strip("\n")
             a = a.replace('"',"")
             a = a.replace("'","")
-
+            
+            #findfirstline
+            
+            if articleid[i] == firstsid:
+                
+                #print("here")
+                sid1 = company+"_"+str(year)+"_"+item.upper()+"_P_S"
+                item = item.capitalize()
+                item = item[:-1] + item[-1].upper()
+                #print(type(item))
+                s1 = itemtitle[itemlist.index(item)]
+                #print(articleid[i],s1)
+                sentence = "&lt;span id=\&quot;" + sid1 +"\&quot;style = \&quot; font-weight:750 \&quot; &gt;" + s1 +"&lt;/span &gt;"
+                #print(ar)
+                ar += sentence
+                ar += "\\n"
+            
 
 
             classstrr = classstr(articleid[i],lastyear1)
@@ -203,7 +245,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
                         #article.append("\\n")
                         #article.append("\\n")
                         ar += '\\n\\n'
-
+        
     return [article, sen2id, ar]
 def classstr(articleid,lastyear):
     #suppose lastyear==true find 2012's senA

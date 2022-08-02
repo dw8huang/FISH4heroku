@@ -444,7 +444,7 @@
             }
 
             
-            var idd1 = company+"_"+curryear.split("20")[1]+"_ITEM"+ele1.id.split("_")[0]            +"_P0_S0"
+            var idd1 = company+"_"+curryear.split("20")[1]+"_ITEM"+ele1.id.split("_")[0]+"_P_S"
             var firstlineb = document.getElementById(idd1)
             scrollToElm(leftreport,firstlineb,600)
         }
@@ -464,7 +464,7 @@
             }
 
             
-            var idd = company+"_"+lastyear.split("20")[1]+"_ITEM"+ele.id.split("_")[0]+"_P0_S0"
+            var idd = company+"_"+lastyear.split("20")[1]+"_ITEM"+ele.id.split("_")[0]+"_P_S"
             var firstlinea = document.getElementById(idd)
             scrollToElm(rightreport,firstlinea,600)
         }
@@ -679,8 +679,8 @@
         itembetwdis_curr = []
         itembetwdis_last = []
         for(var i=0; i<20; i++){
-            id1 = company+"_"+lastyear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P0_S0"
-            id2 = company+"_"+curryear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P0_S0"
+            id1 = company+"_"+lastyear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P_S"
+            id2 = company+"_"+curryear.split("20")[1]+"_"+vm2.$data.list[i].toUpperCase()+"_P_S"
             //console.log(sen2id1[id1],sen2id2[id2])
             let check1 = document.getElementById(id1)
             let check2 = document.getElementById(id2)
@@ -1023,8 +1023,8 @@
 
 
         //scroll to first line of item
-        let firstlineaid = company+"_"+lastyear.split("20")[1]+"_"+item.toUpperCase()+"_P0_S0"
-        let firstlinebid = company+"_"+curryear.split("20")[1]+"_"+item.toUpperCase()+"_P0_S0"
+        let firstlineaid = company+"_"+lastyear.split("20")[1]+"_"+item.toUpperCase()+"_P_S"
+        let firstlinebid = company+"_"+curryear.split("20")[1]+"_"+item.toUpperCase()+"_P_S"
         let firstlinea = document.getElementById(firstlineaid)
         let firstlineb = document.getElementById(firstlinebid)
         scrollToElm(rightreport,firstlinea,600)
