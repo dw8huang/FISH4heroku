@@ -121,16 +121,17 @@ def index(request):
 
 
 def report_revised(request):
+    #print(request.POST)
     if request.method == "POST":
         module_dir = os.path.dirname(__file__)
         company = request.POST.get("company")
-        #print(company)
-        #print(type(company))
+        
         year2 = int(request.POST.get("year"))
         year1 = year2-1
         item = request.POST.get("item")
         
-        
+        #print(company,year2,item)
+        #print(type(company))
         
         textdic = buildtextdic(company)
         cpdic = companydicfun()

@@ -52,7 +52,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <a href="/" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw; font-size:25px; font-weight: bold;" class="font-weight-bold">
+            <a href="/" id="topword" style="color:#28dd89; margin-left: 3vw;margin-top: 2vw;font-weight: bold;" class="font-weight-bold">
                 FISH   
             </a>
             
@@ -75,12 +75,15 @@
                         {% csrf_token %}
         
                             
-                        
+                            <!--
                             <select id="companylist" name="company" class="ui search dropdown" style="padding: 5px 5px;">
+                                
                                 <option value="">Company List</option>
+                                
                                 <option :value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</option>
                                 
-                            </select>    
+                                
+                            </select> 
                             <select id="yearlist" name="year" class="ui selection dropdown" style="padding: 5px 5px;">
                                 <option value="">Report Year</option>
                                 <option value="2012">2012</option>
@@ -90,12 +93,50 @@
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
-                            </select>                 
-                            
+                            </select> 
                             <select id="itemlist" name="item" class="ui selection dropdown" style="padding: 5px 5px;">
                                 <option value="">Item</option>
                                 <option :value="['Item' + item]" v-for="(item,index,key) in splitresult1">[[item]]</option>
-                            </select>
+                            </select>  
+                            -->
+                            <div id="companylist" class="ui search selection dropdown" >
+                                <input id="companyvalue" type="hidden" name="company">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Company List</div>
+                                <div class="menu">
+                                  <div class="item" :data-value="key" v-for="(item,key,index) in list">[[item.name]] ([[key]])</div>
+                                  
+                                  
+                                </div>
+                            </div>  
+                            <div id="yearlist" class="ui selection dropdown">
+                                <input id="yearvalue" type="hidden" name="year">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Report Year</div>
+                                <div class="menu">
+                                  <div class="item" data-value="2012">2012</div>
+                                  <div class="item" data-value="2013">2013</div>
+                                  <div class="item" data-value="2014">2014</div>
+                                  <div class="item" data-value="2015">2015</div>
+                                  <div class="item" data-value="2016">2016</div>
+                                  <div class="item" data-value="2017">2017</div>
+                                  <div class="item" data-value="2018">2018</div>
+                                  
+                                </div>
+                            </div>
+                            <div id="itemlist" class="ui selection dropdown">
+                                <input id="itemvalue" type="hidden" name="item">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Item</div>
+                                <div class="menu">
+                                  <div class="item" :data-value="['Item' + item]" v-for="(item,index,key) in splitresult1">[[item]]</div>
+                                  
+                                </div>
+                              </div>
+
+                                          
+                            
+                            
                             
                             <input type="submit"  id="submit1" class="ui button"  value="Anlayze" style="font-size:18px" ></button>
                         
@@ -110,7 +151,7 @@
         </div>
         <!--end selectrow-->
         <div class="row" id="companyname_typebutton">
-            <div id="companyname" style="font-size:43px"></div>
+            <div id="companyname"></div>
             
         </div>
         <div class="row" id="typebutoutline">
@@ -150,10 +191,14 @@
         </div>
 
         <div class="row" id="report_outline">
+            <hr>
             <div class="row" id="reportrow">
                 <div class="col-md" id="parent_leftreport">
-                    
+                
                     <div id="reportyear_curr"></div>
+                        
+                    
+                    
                     <div class="row" id="itemlist_leftreport">
                         
                         
@@ -270,8 +315,10 @@
                 localStorage.clear();
                 
             })
+            
 
         })
+        
         cpdic = "{{ companydic|safe }}";
         cpdic1 = cpdic.replace(/'/g,"\"");
 
@@ -441,14 +488,14 @@
             //previous page
             //console.log(document.referrer)
 
-            $("#yearlist").change(function(){
+            $("#yearvalue").change(function(){
                 saveSettings1($(this).val());
             });
-            $("#companylist").change(function(){
+            $("#companyvalue").change(function(){
                 saveSettings2($(this).val());
                 
             });
-            $("#itemlist").change(function(){
+            $("#itemvalue").change(function(){
                 saveSettings3($(this).val());
             });
             function saveSettings1(val) {
@@ -575,6 +622,7 @@
         //console.log(sen2id1["1001250_11_ITEM1_P100_S4"],result1.type1[1].senA)
         //console.log(sen2id1)
         let arr1 = givevalue(arr,lastyear)
+        //console.log(arr1)
         let arr2 = givevalue(arr,curryear)
         //console.log(Object.keys(sen2id1))
         //create_reportrow()
@@ -1028,9 +1076,9 @@
         })*/
         var count = 0;
         $('.ui.dropdown').change(function() {
-            let a = $("#yearlist").val();
-            let b = $("#companylist").val();
-            let c = $("#itemlist").val();
+            let a = $("#yearvalue").val();
+            let b = $("#companyvalue").val();
+            let c = $("#itemvalue").val();
             //count++;
             //console.log(a,b=="",c)
             if (a!="" && b!="" && c!="") {
@@ -1045,7 +1093,7 @@
     });
     window.onload = function(){
         $('.ui.dropdown').dropdown();  
-        
+
     }
     window.onunload = function(){
         alert("unload is work");

@@ -9,6 +9,17 @@ itemlist = ["Item1","Item1A","Item1B","Item2",
             "Item7A","Item8","Item9","Item9A","Item9B",
             "Item10","Item11","Item12","Item13","Item14",
             "Item15"]
+itemtitle = [
+    "Item 1 - Business",
+    "Item 1A – Risk Factors",
+    "Item 1B – Unresolved Staff Comments",
+    "Item 2 – Properties"
+
+
+
+
+
+]
 '''
 textdic = {}
 for line in data.readlines():
@@ -138,10 +149,10 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             sid = company+"_"+str(year).split("20")[1]+"_"+item.upper()+"_P"+str(0)+"_S"+str(0)
             sentence = "&lt;span id=\&quot;" + sid +"\&quot; &gt;" + s +"&lt;/span&gt;"
             style = "\&quot;background-color:yellow\&quot;"
-            article.append(a)
+            #article.append(a)
             sen2id[sid] = s
-            article.append("\\n")
-            article.append("\\n")
+            #article.append("\\n")
+            #article.append("\\n")
             ar += sentence
             ar += '\\n\\n'
     #print(textdic[articleid[404]])
@@ -154,10 +165,10 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             sid = company+"_"+str(year).split("20")[1]+"_"+item.upper()+"_P"+str(0)+"_S"+str(0)
             s = "There is no "+str(item)+" in "+str(year)
             sentence = "&lt;span id=\&quot;" + sid +"\&quot; &gt;" + s +"&lt;/span&gt;"
-            article.append(a)
+            #article.append(a)
             sen2id[sid] = s
-            article.append("\\n")
-            article.append("\\n")
+            #article.append("\\n")
+            #article.append("\\n")
             ar += sentence
             ar += '\\n\\n'
         else:
@@ -171,7 +182,7 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             sentence = "&lt;span id=\&quot;" + articleid[i] +"\&quot;"+ classstrr +"&gt;" + a +"&lt;/span&gt;"
 
             #style = "\&quot; background-color:yellow \&quot; class= \&quot; classname \&quot;"
-            article.append(a)
+            #article.append(a)
             ar += sentence + " "
             sen2id[str(articleid[i])] = a
             nowp = articleid[i].split("_")[3]
@@ -179,18 +190,18 @@ def read_allitem_fun(textdic,company,year,lastyear1):
             if (i!=(len(articleid)-1)):
                 nexti = articleid[i+1].split("_")[2]
                 if articleid[i+1].split("_")[0] == "no item":
-                    article.append("\\n")
-                    article.append("\\n")
+                    #article.append("\\n")
+                    #article.append("\\n")
                     ar += '\\n\\n'
                 elif nexti != nowi:
-                    article.append("\\n")
-                    article.append("\\n")
+                    #article.append("\\n")
+                    #article.append("\\n")
                     ar += '\\n\\n'
                 else:
                     nextp = articleid[i+1].split("_")[3]
                     if(nextp!=nowp):
-                        article.append("\\n")
-                        article.append("\\n")
+                        #article.append("\\n")
+                        #article.append("\\n")
                         ar += '\\n\\n'
 
     return [article, sen2id, ar]

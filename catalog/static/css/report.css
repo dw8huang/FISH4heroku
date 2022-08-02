@@ -126,6 +126,14 @@ body {
         left:1459px !important;
     }
 }
+
+hr{
+    width: 1000%;
+    position: relative;
+    top: 37px;
+    z-index: 3;
+}
+
 .ui.search.dropdown.selection{
     font-size:18px
 }
@@ -133,10 +141,13 @@ body {
     font-size:18px;
 }
 
-div > .item{
-    font-size:18px
+#companyname{
+    font-size:30px;
 }
-
+#topword{
+    font-size:35px;
+    font-weight: 750;
+}
 
 #topselect {
     position: relative;
@@ -184,7 +195,7 @@ div > .item{
 #report_outline{
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    
     margin-bottom: 100px;
 }
 
@@ -200,9 +211,10 @@ div > .item{
     margin-bottom:25px;
     font-size: 16px;
     margin-left:13px;
-    
-    border-bottom: 3px solid rgb(220, 220, 220);
     width: 78px
+}
+#reportyear_curr_box{
+    
 }
 #itemlist_leftreport{
     position:relative;
@@ -216,6 +228,7 @@ div > .item{
     flex-wrap: wrap;
     align-content: flex-start;
 }
+
 #leftreport {
     position: relative;
     overflow-y:auto; 
@@ -239,7 +252,7 @@ div > .item{
     margin-bottom: 25px;
     font-size: 16px;
     margin-left: 35px;
-    border-bottom: 3px solid rgb(220, 220, 220);
+   
     width: 78px
 
 }
@@ -291,7 +304,7 @@ div > .item{
 .senB:hover{
     transition-duration: 0.3s;
 
-    box-shadow:0 5px 15px 0px rgba(0,0,0,0.125);
+    box-shadow:5px 5px 10px grey;
 }
 
 /*change year form*/
