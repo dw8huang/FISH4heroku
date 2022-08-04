@@ -38,14 +38,15 @@ function intro(){
         //main function ******
         {
             element: document.getElementById("leftreport"),
-            intro: '<h3>Sentence types</h3>'+
-            '<ul><li><span style="background-color:#dfface;color:black">New segments</span><span> implies there is no similar segment in the statement from the previous year.</span></li>'+
+            intro: '<h3>Sentence types :</h3>'+
+            '<ul><li><span style="background-color:#dfface;color:black;padding:0.02em 0">New segments</span><span> implies there is no similar segment in the statement from the previous year.</span></li>'+
             '<li><span style="background-color:#f3e7ff;color:black">Highly similar segments</span><span> indicate the same information appeared in the last year.</span></li>'+
             '<li><span style="background-color:#ffbe40;color:black">Revised segments</span><span> marks those sentence with high structural similarity but share low semantic similarity.</span></li> </ul>'+
             
-            '<h3>Alignment</h3>'+
-            '<span>horizontally align the segments by clicking the segments</span>'+
-            '<h3>Word importance</h3>'+
+            '<h3>Alignment :</h3>'+
+            '<span>horizontally align the most similar segments from last year by clicking the segments</span>'+
+
+            '<h3>Fine-grained Highlighting :</h3>'+
             '<span>indicate the word importance by hovering over the </span>'+'<span style="background-color:#ffbe40;color:black">revised segments</span>',
             position: 'right'
         },
