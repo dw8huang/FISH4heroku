@@ -248,18 +248,16 @@
                 <input type="hidden" id="left_year" name="year" value=''/>
                 <input type="hidden" id="left_company" name="company" value=''/>
                 <input type="hidden" id="left_item" name="item" value=''/>
-                <div style="cursor:pointer" onclick="anchor_submit_left()">
+                <div id="leftarrow" style="cursor:pointer" onclick="anchor_submit_left()">
+                    <!--
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
                         <path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z"/>
                     </svg>
-                    <!--
-                        id="arrow_2" class="arrow-wrapper"
-                        <div class="arrow arrow--left">
-                      <span id="lastyear"></span>
-                    </div>
                     -->
+                    <i class="chevron circle left icon"></i>
                     
                 </div>
+                
                 
                 
             </form>
@@ -270,14 +268,16 @@
                 <input type="hidden" id="right_company" name="company" value=''/>
                 <input type="hidden" id="right_item" name="item" value=''/>
                 <div style="cursor:pointer" onclick="anchor_submit_right()">
+                    <!--
                     <svg width="24" height="24" fill-rule="evenodd" clip-rule="evenodd" stroke-width="3" >
                         <path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z"/>
                     </svg>
-                    <!--
+                    
                         <div class="arrow arrow--right">
                             <span id="nextyear"></span>
                         </div>
                     -->
+                    <i class="chevron circle right icon"></i>
                     
                 </div>
                 
@@ -287,9 +287,7 @@
         
         <!--last & next year buttom end-->
         
-
         
-
 
 
     </div>

@@ -4,6 +4,11 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&family=Roboto+Slab:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@600&display=swap');
 /*
 body {
     background-image: url("../pic&gif/indexhtml_background.jpg");
@@ -126,6 +131,16 @@ body {
         left:1459px !important;
     }
 }
+
+
+
+i.icon{
+    font-size:1.75em;
+}
+i.icon:hover{
+    transform: scale(1.25);
+}
+
 #introduction{
     color:#544d4d;
 }
@@ -148,6 +163,12 @@ hr{
 #companyname{
     font-size:30px;
     font-weight:600;
+    font-family: 'Hind Madurai', sans-serif;
+    /*'Noto Sans', sans-serif;
+
+    'Heebo', sans-serif
+    'Hind Madurai', sans-serif;
+    */
 }
 #topword{
     font-size:35px;
@@ -188,6 +209,7 @@ hr{
 #button1{
     font-size:16px;
 }
+
 #button2{
     font-size:16px;
 }
@@ -323,13 +345,14 @@ hr{
 
 #leftform {
     position: absolute;
-    left: 8px;
+    left: 3px;
     bottom:539px;
     z-index: 2;
 }
+
 #rightform {
     position: absolute;
-    right: 0px;
+    right: -3px;
     bottom:539px;
     z-index: 2;
 }
