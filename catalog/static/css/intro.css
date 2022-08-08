@@ -5,10 +5,13 @@
     position: relative;
     bottom: 20px;
 }
-
+#ug_pic{
+  font-size:30px;
+}
 #ug_word{
   margin-left: 3px;
-  margin-top: 2px;
+  margin-top: 4px;
+  font-size:20px;
 }
 .introjs-tooltiptext{
   font-size:18px;

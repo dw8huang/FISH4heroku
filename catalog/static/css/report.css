@@ -161,9 +161,9 @@ hr{
 }
 
 #companyname{
-    font-size:30px;
+    font-size:25px;
     font-weight:600;
-    font-family: 'Hind Madurai', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     /*'Noto Sans', sans-serif;
 
     'Heebo', sans-serif
@@ -203,7 +203,7 @@ hr{
     width: 460px;
     position: relative;
     left:1160px ;
-    
+    bottom:20px
 
 }
 #button1{

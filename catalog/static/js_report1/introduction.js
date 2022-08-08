@@ -19,13 +19,13 @@ function intro(){
         {
             element:document.getElementById("leftreport"),
             title:"Target document",
-            intro:"the contents of a financial report for the target year.",
+            intro:"the contents of a financial report for the target year",
             position:'right'
         },
         {
             element:document.getElementById("rightreport"),
             title:"Reference document",
-            intro:"the reference document for the last year with a lower opacity.",
+            intro:"the reference document for the last year with a lower opacity",
             position:'left'
         },
         //itemlist
