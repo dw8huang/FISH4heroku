@@ -25,7 +25,7 @@ function intro(){
         {
             element:document.getElementById("rightreport"),
             title:"Reference document",
-            intro:"the reference document for the last year with a lower opacity",
+            intro:"the reference document for the previous year with a lower opacity",
             position:'left'
         },
         //itemlist
@@ -39,12 +39,12 @@ function intro(){
         {
             element: document.getElementById("leftreport"),
             intro: '<h3>Sentence types :</h3>'+
-            '<ul><li><span style="background-color:#dfface;color:black;padding:0.02em 0">New segments</span><span> implies there is no similar segment in the statement from the previous year.</span></li>'+
-            '<li><span style="background-color:#f3e7ff;color:black">Highly similar segments</span><span> indicate the same information appeared in the last year.</span></li>'+
-            '<li><span style="background-color:#ffbe40;color:black">Revised segments</span><span> marks those sentence with high structural similarity but share low semantic similarity.</span></li> </ul>'+
+            '<ul><li><span style="background-color:#dfface;color:black;padding:0.02em 0">New segments</span><span> are new text segments which are syntactically distant from all of their corresponding relevant reference text segments.</span></li>'+
+            '<li><span style="background-color:#f3e7ff;color:black">Highly similar segments</span><span> are text segments possessing syntactic structures and semantic meanings that closely resemble those of the reference segments.</span></li>'+
+            '<li><span style="background-color:#ffbe40;color:black">Revised segments</span><span> include segments that are syntactically similar to the reference segments but differ semantically in meaning.</span></li> </ul>'+
             
             '<h3>Alignment :</h3>'+
-            '<span>horizontally align the most similar segments from last year by clicking the segments</span>'+
+            '<span>horizontally align the most similar segments from the previous year by clicking the segments</span>'+
 
             '<h3>Fine-grained Highlighting :</h3>'+
             '<span>indicate the word importance by hovering over the </span>'+'<span style="background-color:#ffbe40;color:black">revised segments</span>',
@@ -54,14 +54,14 @@ function intro(){
         {
             element: document.getElementById("typebutton"),
             title: "Segment types",
-            intro: 'enable/disable highlighting for each type of segment',
+            intro: 'enable/disable highlighting for each type of segments',
             position: 'bottom'
         },
         //change year
         {
             element: document.getElementById("rightform"), 
             title: "Change year",
-            intro: "switch back and forth between target years by clicking arrows",
+            intro: "switch back and forth between the target years by clicking arrows",
             position: 'left'
         }
         ]
