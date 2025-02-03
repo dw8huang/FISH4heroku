@@ -7,5 +7,5 @@ It can extract and highlight crucial textual information in financial statements
 
 ## Demo
 
-https://fish4heroku.herokuapp.com/
+https://heroku4fish-3f2318867ff6.herokuapp.com/
 ![Logo](https://i.imgur.com/KN2Bxkf.jpg)
